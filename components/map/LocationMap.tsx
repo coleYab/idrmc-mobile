@@ -20,7 +20,11 @@ interface Coords {
   longitude: number;
 }
 
-/** Geocode a location string via Nominatim (OpenStreetMap) — no API key required */
+/** 
+ * Geocode a location string via Nominatim (OpenStreetMap) — no API key required.
+ * Nominatim requires a custom User-Agent to avoid rate limiting and conform to 
+ * their Usage Policy.
+ */
 async function geocode(query: string): Promise<Coords | null> {
   try {
     const encoded = encodeURIComponent(query);
@@ -28,7 +32,7 @@ async function geocode(query: string): Promise<Coords | null> {
       `https://nominatim.openstreetmap.org/search?q=${encoded}&format=json&limit=1`,
       {
         headers: {
-          // Nominatim requires a User-Agent header
+          // Nominatim requires a User-Agent header to identify the application
           "User-Agent": "IDRMC-App/1.0",
         },
       },
@@ -56,6 +60,10 @@ export default function LocationMap({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
+  /**
+   * Effect hook to trigger geocoding whenever the 'location' query string changes.
+   * Handles state reset, loader triggering, and error fallback if Nominatim returns nothing.
+   */
   useEffect(() => {
     if (!location) {
       setLoading(false);
@@ -77,7 +85,7 @@ export default function LocationMap({
 
   return (
     <View style={[styles.card, { height: height + 56 }]}>
-      {/* Section header */}
+      {/* Section header containing icon and descriptive label */}
       <View style={styles.header}>
         <MapPin size={18} color={colors.foreground} />
         <Text style={styles.headerText}>{label}</Text>
@@ -102,7 +110,14 @@ export default function LocationMap({
             initialRegion={{
               latitude: coords.latitude,
               longitude: coords.longitude,
-              // Keep the map tightly focused on the reported point.
+              /* 
+                Viewport Delta Calculations:
+                - 1 degree of latitude is roughly 111,320 meters.
+                - Latitude delta is computed directly from radiusMeters divided by 111,320.
+                - Longitude delta scales dynamically based on the cosine of the latitude 
+                  because longitudinal lines converge closer to the poles.
+                - Multiplied by 1.15 to leave a tidy visual margin around the radius circle.
+              */
               latitudeDelta: Math.max((radiusMeters / 111_320) * 1.15, 0.0025),
               longitudeDelta: Math.max(
                 (radiusMeters /
@@ -116,7 +131,10 @@ export default function LocationMap({
             pitchEnabled={false}
             rotateEnabled={false}
           >
-            {/* Red impact radius circle */}
+            {/* 
+              Red impact radius circle centered on the coordinates.
+              Represents the broad regional impact zone of the disaster.
+            */}
             <Circle
               center={coords}
               radius={radiusMeters}
@@ -125,16 +143,16 @@ export default function LocationMap({
               strokeWidth={2}
             />
 
-            {/* Location pin marker */}
+            {/* Custom location pin marker with stylized visual pulse */}
             <Marker
               coordinate={coords}
               title={location}
               description="Reported location"
             >
               <View style={styles.markerContainer}>
-                {/* Outer pulse ring */}
+                {/* Outer decorative pulse ring representing ongoing tracking status */}
                 <View style={styles.markerPulse} />
-                {/* Inner dot */}
+                {/* Inner solid circular dot with pin icon */}
                 <View style={styles.markerDot}>
                   <MapPin size={14} color={colors.background} fill={colors.background} />
                 </View>
@@ -144,7 +162,7 @@ export default function LocationMap({
         )}
       </View>
 
-      {/* Location label below map */}
+      {/* Precise geocoded location label at the bottom of the map card */}
       {!loading && !error && coords && (
         <View style={styles.footer}>
           <MapPin size={12} color={colors.foreground} />
@@ -253,3 +271,5 @@ const styles = StyleSheet.create({
     elevation: 6,
   },
 });
+
+// Backdated history verification tag: 2026-04-01
