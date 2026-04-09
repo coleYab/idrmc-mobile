@@ -1,102 +1,50 @@
-# React Native Starter App
+# Welcome to your Expo app 👋
 
-Welcome to the React Native Starter App! This project serves as a template for creating new React Native applications using React Native CLI. It includes essential features like React Navigation, Redux Toolkit, RTK Query, AsyncStorage for authentication persistence, and handling private and public routes.
+This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
-## Prerequisites
+## Get started
 
-Before you begin, ensure you have met the following requirements:
-
-- You have installed [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) (or [Yarn](https://yarnpkg.com/)).
-- You have installed [React Native CLI](https://reactnative.dev/docs/environment-setup).
-- You have set up the development environment for [iOS](https://reactnative.dev/docs/environment-setup#ios-development-environment) and/or [Android](https://reactnative.dev/docs/environment-setup#android-development-environment) as per the official React Native documentation.
-
-## Project Structure
-
-Here is an overview of the project structure:
-
-```plaintext
-react-native-starter-app
-├── android/                # Native Android code
-├── ios/                    # Native iOS code
-├── src/                    # Source code for the React Native app
-│   ├── assets/             # Asset files (images, fonts, etc.)
-│   ├── components/         # Reusable components
-│   ├── navigation/         # Navigation configuration
-│   ├── screens/            # Screen components
-│   ├── store/              # Manage state using Redux Toolkit and API Service using RTK Query
-│   ├── utils/              # Styling files
-│   └── hooks               # Entry point of the application
-├── .gitignore              # Git ignore file
-├── App.js                  # Entry point for the React Native app
-├── app.json                # Configuration file for the app
-├── babel.config.js         # Babel configuration
-├── index.js                # Entry point for the React Native app
-├── metro.config.js         # Metro bundler configuration
-├── package.json            # NPM dependencies and scripts
-├── README.md               # Project documentation
-└── yarn.lock               # Yarn lock file
-```
-
-## Installation
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/apelmahmudDev/react-native-starter
-   ```
-
-2. Navigate to the project directory:
-
-   ```bash
-   cd react-native-starter
-   ```
-
-3. Install the dependencies:
-
-   If you are using npm:
+1. Install dependencies
 
    ```bash
    npm install
    ```
 
-   If you are using Yarn:
+2. Start the app
 
    ```bash
-   yarn install
+   npx expo start
    ```
 
-## Running the App
+In the output, you'll find options to open the app in a
 
-### iOS
+- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
+- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
+- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
+- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
-1. Navigate to the `ios` directory and install the CocoaPods dependencies:
+You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-   ```bash
-   cd ios
-   pod install
-   cd ..
-   ```
+## Get a fresh project
 
-2. Run the app:
+When you're ready, run:
 
-   ```bash
-   npx react-native run-ios
-   ```
+```bash
+npm run reset-project
+```
 
-### Android
+This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-1. Start the Android emulator or connect your Android device.
+## Learn more
 
-2. Run the app:
+To learn more about developing your project with Expo, look at the following resources:
 
-   ```bash
-   npx react-native run-android
-   ```
+- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
+- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
 
-## Contributing
+## Join the community
 
-Contributions are always welcome! Please follow the [contribution guidelines](CONTRIBUTING.md).
+Join our community of developers creating universal apps.
 
----
-
-Thank you for using the React Native Starter App! If you have any questions or need further assistance, feel free to open an issue on GitHub. Happy coding!
+- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
+- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
