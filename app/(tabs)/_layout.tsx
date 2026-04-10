@@ -29,9 +29,9 @@ const TabLayout = () => {
     return null;
   }
 
-  // Redirect to sign-in if user is not authenticated
+  // Redirect to onboarding if user is not authenticated
   if (!isSignedIn) {
-    return <Redirect href="/(auth)/sign-in" />;
+    return <Redirect href="/onboarding" />;
   }
 
   return (
