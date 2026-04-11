@@ -1,20 +1,25 @@
 import SubscriptionCard from "@/components/SubscriptionCard";
 import { HOME_SUBSCRIPTIONS } from "@/constants/data";
+import { icons } from "@/constants/icons";
+import { useUser } from "@clerk/expo";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import dayjs from "dayjs";
 import { styled } from "nativewind";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
-    FlatList,
-    Modal,
-    Pressable,
-    ScrollView,
-    Text,
-    TextInput,
-    View,
+  FlatList,
+  Modal,
+  Pressable,
+  ScrollView,
+  Text,
+  TextInput,
+  View,
 } from "react-native";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 
 const SafeAreaView = styled(RNSafeAreaView);
+
+const STORAGE_KEY_PREFIX = "recurrly:user-subscriptions";
 
 const statusOptions = ["all", "active", "paused", "cancelled"] as const;
 const billingOptions = ["all", "Monthly", "Yearly"] as const;
@@ -26,13 +31,41 @@ const sortOptions = [
   "name",
 ] as const;
 
+type StoredSubscription = Omit<Subscription, "icon">;
+
+const sortLabels: Record<(typeof sortOptions)[number], string> = {
+  renewalSoonest: "Renewal Soonest",
+  renewalLatest: "Renewal Latest",
+  priceLow: "Price Low to High",
+  priceHigh: "Price High to Low",
+  name: "Name",
+};
+
 const formatFilterLabel = (value: string) => {
   if (value === "all") return "All";
   return value.charAt(0).toUpperCase() + value.slice(1);
 };
 
+const formatSortLabel = (value: (typeof sortOptions)[number]) =>
+  sortLabels[value] ?? value;
+
+const isValidStoredSubscription = (
+  subscription: Partial<StoredSubscription>,
+): subscription is StoredSubscription => {
+  return Boolean(
+    subscription.id &&
+    subscription.name &&
+    typeof subscription.price === "number" &&
+    subscription.billing,
+  );
+};
+
 const Subscriptions = () => {
+  const { user, isLoaded } = useUser();
   const [searchQuery, setSearchQuery] = useState("");
+  const [customSubscriptions, setCustomSubscriptions] = useState<
+    Subscription[]
+  >([]);
   const [expandedSubscriptionId, setExpandedSubscriptionId] = useState<
     string | null
   >(null);
@@ -47,24 +80,75 @@ const Subscriptions = () => {
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
 
+  const storageKey = `${STORAGE_KEY_PREFIX}:${user?.id ?? "guest"}`;
+
+  const allSubscriptions = useMemo(
+    () => [...customSubscriptions, ...HOME_SUBSCRIPTIONS],
+    [customSubscriptions],
+  );
+
+  useEffect(() => {
+    if (!isLoaded) {
+      return;
+    }
+
+    let isMounted = true;
+
+    const loadCustomSubscriptions = async () => {
+      try {
+        const raw = await AsyncStorage.getItem(storageKey);
+
+        if (!raw) {
+          if (isMounted) {
+            setCustomSubscriptions([]);
+          }
+          return;
+        }
+
+        const parsed = JSON.parse(raw) as Partial<StoredSubscription>[];
+        const hydrated = parsed
+          .filter(isValidStoredSubscription)
+          .map((subscription) => ({
+            ...subscription,
+            icon: icons.plus,
+          }));
+
+        if (isMounted) {
+          setCustomSubscriptions(hydrated);
+        }
+      } catch (error) {
+        console.error("Failed to load subscriptions:", error);
+        if (isMounted) {
+          setCustomSubscriptions([]);
+        }
+      }
+    };
+
+    loadCustomSubscriptions();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [isLoaded, storageKey]);
+
   const categories = useMemo(() => {
-    const values = HOME_SUBSCRIPTIONS.map((subscription) =>
-      subscription.category?.trim(),
-    ).filter(Boolean) as string[];
+    const values = allSubscriptions
+      .map((subscription) => subscription.category?.trim())
+      .filter(Boolean) as string[];
     return [
       "all",
       ...Array.from(new Set(values)).sort((left, right) =>
         left.localeCompare(right),
       ),
     ];
-  }, []);
+  }, [allSubscriptions]);
 
   const filteredSubscriptions = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
     const parsedMinPrice = minPrice ? Number(minPrice) : null;
     const parsedMaxPrice = maxPrice ? Number(maxPrice) : null;
 
-    return [...HOME_SUBSCRIPTIONS]
+    return [...allSubscriptions]
       .filter((subscription) => {
         const haystack = [
           subscription.name,
@@ -149,6 +233,7 @@ const Subscriptions = () => {
     searchQuery,
     sortBy,
     statusFilter,
+    allSubscriptions,
   ]);
 
   const activeFilterCount = [
@@ -173,6 +258,7 @@ const Subscriptions = () => {
 
   const renderFilterChip = (
     value: string,
+    label: string,
     selectedValue: string,
     onPress: (value: string) => void,
   ) => {
@@ -181,16 +267,10 @@ const Subscriptions = () => {
     return (
       <Pressable
         key={value}
-        className={`rounded-full border-2 px-4 py-2 ${
-          isSelected
-            ? "border-primary bg-accent"
-            : "border-border bg-background"
-        }`}
+        className={`subscriptions-chip ${isSelected ? "subscriptions-chip-active" : ""}`}
         onPress={() => onPress(value)}
       >
-        <Text className="text-sm font-sans-semibold text-primary">
-          {formatFilterLabel(value)}
-        </Text>
+        <Text className="subscriptions-chip-text">{label}</Text>
       </Pressable>
     );
   };
@@ -217,10 +297,12 @@ const Subscriptions = () => {
                 </Text>
               </View>
 
-              <View className="flex-row gap-3">
+              <View className="subscriptions-action-row">
                 <Pressable
                   className="list-action"
                   onPress={() => setIsFilterModalVisible(true)}
+                  accessibilityRole="button"
+                  accessibilityLabel="Open subscription filters"
                 >
                   <Text className="list-action-text">
                     Filter{activeFilterCount ? ` (${activeFilterCount})` : ""}
@@ -236,11 +318,10 @@ const Subscriptions = () => {
                 value={searchQuery}
                 onChangeText={setSearchQuery}
                 placeholder="Search subscriptions"
-                placeholderTextColor="rgba(0, 0, 0, 0.4)"
                 autoCapitalize="none"
               />
 
-              <View className="mt-3 flex-row gap-3">
+              <View className="subscriptions-inline-row">
                 <Pressable
                   className="auth-secondary-button flex-1"
                   onPress={() => setIsFilterModalVisible(true)}
@@ -275,7 +356,7 @@ const Subscriptions = () => {
               No subscriptions match your filters.
             </Text>
             <Text className="mt-2 text-sm font-sans-medium text-muted-foreground">
-              Try clearing search or adjusting the filter modal.
+              Try clearing search or adjusting your filters.
             </Text>
           </View>
         }
@@ -293,24 +374,23 @@ const Subscriptions = () => {
       />
 
       <Modal
+        presentationStyle="overFullScreen"
         animationType="slide"
         transparent
         visible={isFilterModalVisible}
         onRequestClose={() => setIsFilterModalVisible(false)}
       >
-        <View className="flex-1 justify-end bg-primary/45">
+        <View className="sheet-backdrop">
           <Pressable
             className="absolute inset-0"
             onPress={() => setIsFilterModalVisible(false)}
           />
 
-          <View className="rounded-t-3xl bg-background px-5 pb-8 pt-5">
-            <View className="flex-row items-center justify-between">
+          <View className="sheet-panel">
+            <View className="sheet-header">
               <View>
-                <Text className="text-2xl font-sans-bold text-primary">
-                  Filters
-                </Text>
-                <Text className="mt-1 text-sm font-sans-medium text-muted-foreground">
+                <Text className="sheet-title">Filters</Text>
+                <Text className="sheet-subtitle">
                   Filter by status, billing, category, and price.
                 </Text>
               </View>
@@ -320,7 +400,11 @@ const Subscriptions = () => {
               </Pressable>
             </View>
 
-            <ScrollView className="mt-5" showsVerticalScrollIndicator={false}>
+            <ScrollView
+              className="sheet-scroll"
+              keyboardShouldPersistTaps="handled"
+              showsVerticalScrollIndicator={false}
+            >
               <View className="auth-card mt-0">
                 <Text className="auth-label">Status</Text>
                 <ScrollView
@@ -330,7 +414,15 @@ const Subscriptions = () => {
                 >
                   <View className="flex-row gap-3 pr-2">
                     {statusOptions.map((value) =>
-                      renderFilterChip(value, statusFilter, setStatusFilter),
+                      renderFilterChip(
+                        value,
+                        formatFilterLabel(value),
+                        statusFilter,
+                        (nextValue) =>
+                          setStatusFilter(
+                            nextValue as (typeof statusOptions)[number],
+                          ),
+                      ),
                     )}
                   </View>
                 </ScrollView>
@@ -340,7 +432,11 @@ const Subscriptions = () => {
                 <Text className="auth-label">Billing</Text>
                 <View className="mt-3 flex-row flex-wrap gap-3">
                   {billingOptions.map((value) =>
-                    renderFilterChip(value, billingFilter, setBillingFilter),
+                    renderFilterChip(value, value, billingFilter, (nextValue) =>
+                      setBillingFilter(
+                        nextValue as (typeof billingOptions)[number],
+                      ),
+                    ),
                   )}
                 </View>
               </View>
@@ -356,6 +452,7 @@ const Subscriptions = () => {
                     {categories.map((value) =>
                       renderFilterChip(
                         value,
+                        formatFilterLabel(value),
                         categoryFilter,
                         setCategoryFilter,
                       ),
@@ -373,7 +470,13 @@ const Subscriptions = () => {
                 >
                   <View className="flex-row gap-3 pr-2">
                     {sortOptions.map((value) =>
-                      renderFilterChip(value, sortBy, setSortBy),
+                      renderFilterChip(
+                        value,
+                        formatSortLabel(value),
+                        sortBy,
+                        (nextValue) =>
+                          setSortBy(nextValue as (typeof sortOptions)[number]),
+                      ),
                     )}
                   </View>
                 </ScrollView>
@@ -387,7 +490,6 @@ const Subscriptions = () => {
                     value={minPrice}
                     onChangeText={setMinPrice}
                     placeholder="Min"
-                    placeholderTextColor="rgba(0, 0, 0, 0.4)"
                     keyboardType="decimal-pad"
                   />
                   <TextInput
@@ -395,13 +497,12 @@ const Subscriptions = () => {
                     value={maxPrice}
                     onChangeText={setMaxPrice}
                     placeholder="Max"
-                    placeholderTextColor="rgba(0, 0, 0, 0.4)"
                     keyboardType="decimal-pad"
                   />
                 </View>
               </View>
 
-              <View className="mt-2 flex-row gap-3">
+              <View className="sheet-actions-row">
                 <Pressable
                   className="auth-button flex-1"
                   onPress={() => setIsFilterModalVisible(false)}

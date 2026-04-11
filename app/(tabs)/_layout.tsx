@@ -1,6 +1,7 @@
 import { tabs } from "@/constants/data";
 import { colors, components } from "@/constants/theme";
 import { useAuth } from "@clerk/expo";
+// eslint-disable-next-line import/no-named-as-default
 import clsx from "clsx";
 import { Redirect, Tabs } from "expo-router";
 import { useColorScheme } from "nativewind";

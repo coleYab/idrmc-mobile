@@ -535,4 +535,60 @@
   .insights-list-value {
     @apply shrink-0 text-sm font-sans-bold text-primary;
   }
+
+  .subscriptions-action-row {
+    @apply flex-row gap-3;
+  }
+
+  .subscriptions-inline-row {
+    @apply mt-3 flex-row gap-3;
+  }
+
+  .subscriptions-chip {
+    @apply rounded-full border-2 border-border bg-background px-4 py-2;
+  }
+
+  .subscriptions-chip-active {
+    @apply border-primary bg-accent;
+  }
+
+  .subscriptions-chip-text {
+    @apply text-sm font-sans-semibold text-primary;
+  }
+
+  .subscriptions-error-box {
+    @apply rounded-xl border-2 border-destructive bg-destructive/10 px-4 py-3;
+  }
+
+  .subscriptions-error-text {
+    @apply text-sm font-sans-semibold text-destructive;
+  }
+
+  .sheet-backdrop {
+    @apply flex-1 justify-end bg-primary/45;
+  }
+
+  .sheet-panel {
+    @apply max-h-[88%] rounded-t-3xl bg-background px-5 pb-8 pt-5;
+  }
+
+  .sheet-header {
+    @apply flex-row items-center justify-between;
+  }
+
+  .sheet-title {
+    @apply text-2xl font-sans-bold text-primary;
+  }
+
+  .sheet-subtitle {
+    @apply mt-1 text-sm font-sans-medium text-muted-foreground;
+  }
+
+  .sheet-scroll {
+    @apply mt-5;
+  }
+
+  .sheet-actions-row {
+    @apply mt-2 flex-row gap-3;
+  }
 }
