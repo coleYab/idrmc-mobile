@@ -1,12 +1,10 @@
-import SubscriptionCard from "@/components/SubscriptionCard";
-import { HOME_SUBSCRIPTIONS } from "@/constants/data";
-import { icons } from "@/constants/icons";
+import IncidentCard from "@/components/IncidentCard";
+import { useIncidents } from "@/hooks/queries/useIncidents";
 import { useUser } from "@clerk/expo";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import dayjs from "dayjs";
 import { styled } from "nativewind";
 import { useEffect, useMemo, useState } from "react";
 import {
+  ActivityIndicator,
   FlatList,
   Modal,
   Pressable,
@@ -19,241 +17,115 @@ import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 
 const SafeAreaView = styled(RNSafeAreaView);
 
-const STORAGE_KEY_PREFIX = "recurrly:user-subscriptions";
+const statusOptions = ["ALL", "PENDING", "VERIFIED", "ACTIVE", "RESOLVED", "REPEATED", "FALSE_ALARM", "REJECTED"];
+const typeOptions = ["ALL", "FLOOD", "DROUGHT", "LANDSLIDE", "LOCUST", "CONFLICT", "FIRE"];
+const severityOptions = ["ALL", "LOW", "MEDIUM", "HIGH", "CRITICAL"];
 
-const statusOptions = ["all", "active", "paused", "cancelled"] as const;
-const billingOptions = ["all", "Monthly", "Yearly"] as const;
-const sortOptions = [
-  "renewalSoonest",
-  "renewalLatest",
-  "priceLow",
-  "priceHigh",
-  "name",
-] as const;
+const sortOptions = ["newest", "oldest", "highestSeverity", "lowestSeverity"] as const;
 
-type StoredSubscription = Omit<Subscription, "icon">;
-
-const sortLabels: Record<(typeof sortOptions)[number], string> = {
-  renewalSoonest: "Renewal Soonest",
-  renewalLatest: "Renewal Latest",
-  priceLow: "Price Low to High",
-  priceHigh: "Price High to Low",
-  name: "Name",
+const sortLabels: Record<string, string> = {
+  newest: "Newest First",
+  oldest: "Oldest First",
+  highestSeverity: "Highest Severity",
+  lowestSeverity: "Lowest Severity",
 };
 
-const formatFilterLabel = (value: string) => {
-  if (value === "all") return "All";
-  return value.charAt(0).toUpperCase() + value.slice(1);
-};
+const formatLabel = (val: string) => {
+  if (val === "ALL") return "All";
+  return val.replace(/_/g, " ").charAt(0) + val.replace(/_/g, " ").slice(1).toLowerCase();
+}
 
-const formatSortLabel = (value: (typeof sortOptions)[number]) =>
-  sortLabels[value] ?? value;
+const severityValue = (severity: string) => {
+  switch (severity?.toUpperCase()) {
+    case 'CRITICAL': return 4;
+    case 'HIGH': return 3;
+    case 'MEDIUM': return 2;
+    case 'LOW': return 1;
+    default: return 0;
+  }
+}
 
-const isValidStoredSubscription = (
-  subscription: Partial<StoredSubscription>,
-): subscription is StoredSubscription => {
-  return Boolean(
-    subscription.id &&
-    subscription.name &&
-    typeof subscription.price === "number" &&
-    subscription.billing,
-  );
-};
+const ITEMS_PER_PAGE = 4;
 
-const Subscriptions = () => {
-  const { user, isLoaded } = useUser();
+const IncidentsTab = () => {
+  const { user } = useUser();
   const [searchQuery, setSearchQuery] = useState("");
-  const [customSubscriptions, setCustomSubscriptions] = useState<
-    Subscription[]
-  >([]);
-  const [expandedSubscriptionId, setExpandedSubscriptionId] = useState<
-    string | null
-  >(null);
+  const [expandedIncidentId, setExpandedIncidentId] = useState<string | null>(null);
+
   const [isFilterModalVisible, setIsFilterModalVisible] = useState(false);
-  const [statusFilter, setStatusFilter] =
-    useState<(typeof statusOptions)[number]>("all");
-  const [billingFilter, setBillingFilter] =
-    useState<(typeof billingOptions)[number]>("all");
-  const [categoryFilter, setCategoryFilter] = useState("all");
-  const [sortBy, setSortBy] =
-    useState<(typeof sortOptions)[number]>("renewalSoonest");
-  const [minPrice, setMinPrice] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
+  const [statusFilter, setStatusFilter] = useState("ALL");
+  const [typeFilter, setTypeFilter] = useState("ALL");
+  const [severityFilter, setSeverityFilter] = useState("ALL");
+  const [sortBy, setSortBy] = useState<(typeof sortOptions)[number]>("newest");
 
-  const storageKey = `${STORAGE_KEY_PREFIX}:${user?.id ?? "guest"}`;
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const allSubscriptions = useMemo(
-    () => [...customSubscriptions, ...HOME_SUBSCRIPTIONS],
-    [customSubscriptions],
-  );
+  const { data: incidentsData = [], isLoading } = useIncidents();
+  console.log('incidentsData length:', incidentsData.length);
 
-  useEffect(() => {
-    if (!isLoaded) {
-      return;
-    }
-
-    let isMounted = true;
-
-    const loadCustomSubscriptions = async () => {
-      try {
-        const raw = await AsyncStorage.getItem(storageKey);
-
-        if (!raw) {
-          if (isMounted) {
-            setCustomSubscriptions([]);
-          }
-          return;
-        }
-
-        const parsed = JSON.parse(raw) as Partial<StoredSubscription>[];
-        const hydrated = parsed
-          .filter(isValidStoredSubscription)
-          .map((subscription) => ({
-            ...subscription,
-            icon: icons.plus,
-          }));
-
-        if (isMounted) {
-          setCustomSubscriptions(hydrated);
-        }
-      } catch (error) {
-        console.error("Failed to load subscriptions:", error);
-        if (isMounted) {
-          setCustomSubscriptions([]);
-        }
-      }
-    };
-
-    loadCustomSubscriptions();
-
-    return () => {
-      isMounted = false;
-    };
-  }, [isLoaded, storageKey]);
-
-  const categories = useMemo(() => {
-    const values = allSubscriptions
-      .map((subscription) => subscription.category?.trim())
-      .filter(Boolean) as string[];
-    return [
-      "all",
-      ...Array.from(new Set(values)).sort((left, right) =>
-        left.localeCompare(right),
-      ),
-    ];
-  }, [allSubscriptions]);
-
-  const filteredSubscriptions = useMemo(() => {
+  const filteredIncidents = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
-    const parsedMinPrice = minPrice ? Number(minPrice) : null;
-    const parsedMaxPrice = maxPrice ? Number(maxPrice) : null;
 
-    return [...allSubscriptions]
-      .filter((subscription) => {
+    return incidentsData
+      .filter((incident: any) => {
         const haystack = [
-          subscription.name,
-          subscription.plan,
-          subscription.category,
-          subscription.paymentMethod,
-          subscription.status,
-          subscription.billing,
+          incident.title,
+          incident.description,
+          incident.location,
+          incident.incidentType,
+          incident.status,
+          incident.severity,
         ]
           .filter(Boolean)
           .join(" ")
           .toLowerCase();
 
-        if (query && !haystack.includes(query)) {
-          return false;
-        }
+        if (query && !haystack.includes(query)) return false;
 
-        if (statusFilter !== "all" && subscription.status !== statusFilter) {
-          return false;
-        }
-
-        if (billingFilter !== "all" && subscription.billing !== billingFilter) {
-          return false;
-        }
-
-        if (
-          categoryFilter !== "all" &&
-          subscription.category?.trim() !== categoryFilter
-        ) {
-          return false;
-        }
-
-        if (
-          parsedMinPrice !== null &&
-          !Number.isNaN(parsedMinPrice) &&
-          subscription.price < parsedMinPrice
-        ) {
-          return false;
-        }
-
-        if (
-          parsedMaxPrice !== null &&
-          !Number.isNaN(parsedMaxPrice) &&
-          subscription.price > parsedMaxPrice
-        ) {
-          return false;
-        }
+        // Use case-insensitive checks
+        if (statusFilter !== "ALL" && incident.status?.toUpperCase() !== statusFilter) return false;
+        if (typeFilter !== "ALL" && incident.incidentType?.toUpperCase() !== typeFilter) return false;
+        if (severityFilter !== "ALL" && incident.severity?.toUpperCase() !== severityFilter) return false;
 
         return true;
       })
-      .sort((left, right) => {
-        if (sortBy === "name") {
-          return left.name.localeCompare(right.name);
-        }
+      .sort((a: any, b: any) => {
+        if (sortBy === "highestSeverity") return severityValue(b.severity) - severityValue(a.severity);
+        if (sortBy === "lowestSeverity") return severityValue(a.severity) - severityValue(b.severity);
 
-        if (sortBy === "priceLow") {
-          return left.price - right.price;
-        }
-
-        if (sortBy === "priceHigh") {
-          return right.price - left.price;
-        }
-
-        const leftRenewal = left.renewalDate
-          ? dayjs(left.renewalDate).valueOf()
-          : Number.POSITIVE_INFINITY;
-        const rightRenewal = right.renewalDate
-          ? dayjs(right.renewalDate).valueOf()
-          : Number.POSITIVE_INFINITY;
-
-        if (sortBy === "renewalLatest") {
-          return rightRenewal - leftRenewal;
-        }
-
-        return leftRenewal - rightRenewal;
+        const aDate = new Date(a.createdAt).getTime();
+        const bDate = new Date(b.createdAt).getTime();
+        if (sortBy === "oldest") return aDate - bDate;
+        return bDate - aDate; // newest
       });
-  }, [
-    billingFilter,
-    categoryFilter,
-    maxPrice,
-    minPrice,
-    searchQuery,
-    sortBy,
-    statusFilter,
-    allSubscriptions,
-  ]);
+  }, [searchQuery, statusFilter, typeFilter, severityFilter, sortBy, incidentsData]);
+  const totalPages = Math.max(1, Math.ceil(filteredIncidents.length / ITEMS_PER_PAGE));
+
+  // Handlers for pagination when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, statusFilter, typeFilter, severityFilter, sortBy]);
+
+  const paginatedIncidents = useMemo(() => {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    return filteredIncidents.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  }, [filteredIncidents, currentPage]);
 
   const activeFilterCount = [
     searchQuery.trim(),
-    statusFilter !== "all",
-    billingFilter !== "all",
-    categoryFilter !== "all",
-    minPrice.trim(),
-    maxPrice.trim(),
-    sortBy !== "renewalSoonest",
+    statusFilter !== "ALL",
+    typeFilter !== "ALL",
+    severityFilter !== "ALL",
+    sortBy !== "newest",
   ].filter(Boolean).length;
 
   const resetFilters = () => {
     setSearchQuery("");
-    setStatusFilter("all");
-    setBillingFilter("all");
-    setCategoryFilter("all");
-    setSortBy("renewalSoonest");
-    setMinPrice("");
-    setMaxPrice("");
+    setStatusFilter("ALL");
+    setTypeFilter("ALL");
+    setSeverityFilter("ALL");
+    setSortBy("newest");
+    setCurrentPage(1);
   };
 
   const renderFilterChip = (
@@ -263,7 +135,6 @@ const Subscriptions = () => {
     onPress: (value: string) => void,
   ) => {
     const isSelected = selectedValue === value;
-
     return (
       <Pressable
         key={value}
@@ -277,251 +148,211 @@ const Subscriptions = () => {
 
   return (
     <SafeAreaView className="flex-1 bg-background p-5">
-      <FlatList
-        data={filteredSubscriptions}
-        keyExtractor={(item) => item.id}
-        keyboardShouldPersistTaps="handled"
-        showsVerticalScrollIndicator={false}
-        contentContainerClassName="pb-30"
-        ItemSeparatorComponent={() => <View className="h-4" />}
-        ListHeaderComponent={
-          <View>
-            <View className="home-header">
+      {isLoading ? (
+        <View className="flex-1 items-center justify-center">
+          <ActivityIndicator size="large" color="#081126" />
+          <Text className="mt-4 font-sans-medium text-muted-foreground text-base">Loading incidents...</Text>
+        </View>
+      ) : (
+        <>
+          <FlatList
+            data={paginatedIncidents}
+            keyExtractor={(item) => item.id}
+            keyboardShouldPersistTaps="handled"
+            showsVerticalScrollIndicator={false}
+            contentContainerClassName="pb-30"
+            ItemSeparatorComponent={() => <View className="h-4" />}
+            ListHeaderComponent={
               <View>
-                <Text className="text-2xl font-sans-bold text-primary">
-                  Subscriptions
+                <View className="home-header">
+                  <View>
+                    <Text className="text-2xl font-sans-bold text-primary">
+                      All Incidents
+                    </Text>
+                    <Text className="mt-1 text-sm font-sans-medium text-muted-foreground">
+                      {filteredIncidents.length} total result{filteredIncidents.length === 1 ? "" : "s"}
+                    </Text>
+                  </View>
+
+                  <View className="subscriptions-action-row">
+                    <Pressable
+                      className="list-action"
+                      onPress={() => setIsFilterModalVisible(true)}
+                    >
+                      <Text className="list-action-text">
+                        Filter{activeFilterCount ? ` (${activeFilterCount})` : ""}
+                      </Text>
+                    </Pressable>
+                  </View>
+                </View>
+
+                <View className="auth-card mt-4 mb-4">
+                  <Text className="auth-label">Search Reports</Text>
+                  <TextInput
+                    className="auth-input mt-2"
+                    value={searchQuery}
+                    onChangeText={setSearchQuery}
+                    placeholder="Search by title, location, etc."
+                    autoCapitalize="none"
+                  />
+
+                  <View className="subscriptions-inline-row">
+                    <Pressable
+                      className="auth-secondary-button flex-1"
+                      onPress={() => setIsFilterModalVisible(true)}
+                    >
+                      <Text className="auth-secondary-button-text">Open Filters</Text>
+                    </Pressable>
+
+                    <Pressable
+                      className="auth-secondary-button flex-1"
+                      onPress={resetFilters}
+                    >
+                      <Text className="auth-secondary-button-text">Clear All</Text>
+                    </Pressable>
+                  </View>
+                </View>
+              </View>
+            }
+            ListEmptyComponent={
+              <View className="auth-card mt-5">
+                <Text className="text-base font-sans-bold text-primary">
+                  No incidents match your filters.
                 </Text>
-                <Text className="mt-1 text-sm font-sans-medium text-muted-foreground">
-                  {filteredSubscriptions.length} result
-                  {filteredSubscriptions.length === 1 ? "" : "s"}
+                <Text className="mt-2 text-sm font-sans-medium text-muted-foreground">
+                  Try clearing search or adjusting your filters.
                 </Text>
               </View>
-
-              <View className="subscriptions-action-row">
-                <Pressable
-                  className="list-action"
-                  onPress={() => setIsFilterModalVisible(true)}
-                  accessibilityRole="button"
-                  accessibilityLabel="Open subscription filters"
-                >
-                  <Text className="list-action-text">
-                    Filter{activeFilterCount ? ` (${activeFilterCount})` : ""}
-                  </Text>
-                </Pressable>
-              </View>
-            </View>
-
-            <View className="auth-card mt-4">
-              <Text className="auth-label">Search</Text>
-              <TextInput
-                className="auth-input mt-2"
-                value={searchQuery}
-                onChangeText={setSearchQuery}
-                placeholder="Search subscriptions"
-                autoCapitalize="none"
+            }
+            renderItem={({ item }) => (
+              <IncidentCard
+                {...item}
+                expanded={expandedIncidentId === item.id}
+                onPress={() =>
+                  setExpandedIncidentId((currentId) =>
+                    currentId === item.id ? null : item.id,
+                  )
+                }
+                onViewDetails={() => console.log(`Viewing details of ${item.id}`)}
               />
-
-              <View className="subscriptions-inline-row">
-                <Pressable
-                  className="auth-secondary-button flex-1"
-                  onPress={() => setIsFilterModalVisible(true)}
-                >
-                  <Text className="auth-secondary-button-text">
-                    Open Filters
+            )}
+            ListFooterComponent={
+              filteredIncidents.length > 0 ? (
+                <View className="flex-row items-center justify-between mt-6 pt-4 border-t border-black/10">
+                  <Pressable
+                    className={`px-4 py-2 rounded-xl border border-border ${currentPage === 1 ? 'opacity-50' : 'bg-white'}`}
+                    disabled={currentPage === 1}
+                    onPress={() => setCurrentPage(p => Math.max(1, p - 1))}
+                  >
+                    <Text className="font-sans-bold text-primary">Previous</Text>
+                  </Pressable>
+                  <Text className="font-sans-medium text-muted-foreground">
+                    Page {currentPage} of {totalPages}
                   </Text>
-                </Pressable>
-
-                <Pressable
-                  className="auth-secondary-button flex-1"
-                  onPress={resetFilters}
-                >
-                  <Text className="auth-secondary-button-text">Clear</Text>
-                </Pressable>
-              </View>
-            </View>
-
-            <View className="my-5">
-              <Text className="text-xl font-sans-bold text-primary">
-                All Subscriptions
-              </Text>
-              <Text className="mt-1 text-sm font-sans-medium text-muted-foreground">
-                Tap a card to expand details.
-              </Text>
-            </View>
-          </View>
-        }
-        ListEmptyComponent={
-          <View className="auth-card mt-5">
-            <Text className="text-base font-sans-bold text-primary">
-              No subscriptions match your filters.
-            </Text>
-            <Text className="mt-2 text-sm font-sans-medium text-muted-foreground">
-              Try clearing search or adjusting your filters.
-            </Text>
-          </View>
-        }
-        renderItem={({ item }) => (
-          <SubscriptionCard
-            {...item}
-            expanded={expandedSubscriptionId === item.id}
-            onPress={() =>
-              setExpandedSubscriptionId((currentId) =>
-                currentId === item.id ? null : item.id,
-              )
+                  <Pressable
+                    className={`px-4 py-2 rounded-xl border border-border ${currentPage === totalPages ? 'opacity-50' : 'bg-white'}`}
+                    disabled={currentPage === totalPages}
+                    onPress={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                  >
+                    <Text className="font-sans-bold text-primary">Next</Text>
+                  </Pressable>
+                </View>
+              ) : null
             }
           />
-        )}
-      />
 
-      <Modal
-        presentationStyle="overFullScreen"
-        animationType="slide"
-        transparent
-        visible={isFilterModalVisible}
-        onRequestClose={() => setIsFilterModalVisible(false)}
-      >
-        <View className="sheet-backdrop">
-          <Pressable
-            className="absolute inset-0"
-            onPress={() => setIsFilterModalVisible(false)}
-          />
+          <Modal
+            presentationStyle="overFullScreen"
+            animationType="slide"
+            transparent
+            visible={isFilterModalVisible}
+            onRequestClose={() => setIsFilterModalVisible(false)}
+          >
+            <View className="sheet-backdrop">
+              <Pressable
+                className="absolute inset-0"
+                onPress={() => setIsFilterModalVisible(false)}
+              />
 
-          <View className="sheet-panel">
-            <View className="sheet-header">
-              <View>
-                <Text className="sheet-title">Filters</Text>
-                <Text className="sheet-subtitle">
-                  Filter by status, billing, category, and price.
-                </Text>
+              <View className="sheet-panel">
+                <View className="sheet-header">
+                  <View>
+                    <Text className="sheet-title">Filters</Text>
+                    <Text className="sheet-subtitle">
+                      Refine the incident reports
+                    </Text>
+                  </View>
+
+                  <Pressable className="list-action" onPress={resetFilters}>
+                    <Text className="list-action-text">Reset</Text>
+                  </Pressable>
+                </View>
+
+                <ScrollView
+                  className="sheet-scroll"
+                  keyboardShouldPersistTaps="handled"
+                  showsVerticalScrollIndicator={false}
+                >
+                  <View className="auth-card mt-0">
+                    <Text className="auth-label">Status</Text>
+                    <ScrollView horizontal showsHorizontalScrollIndicator={false} className="mt-3">
+                      <View className="flex-row gap-3 pr-2">
+                        {statusOptions.map((value) =>
+                          renderFilterChip(value, formatLabel(value), statusFilter, setStatusFilter)
+                        )}
+                      </View>
+                    </ScrollView>
+                  </View>
+
+                  <View className="auth-card">
+                    <Text className="auth-label">Type</Text>
+                    <ScrollView horizontal showsHorizontalScrollIndicator={false} className="mt-3">
+                      <View className="flex-row gap-3 pr-2">
+                        {typeOptions.map((value) =>
+                          renderFilterChip(value, formatLabel(value), typeFilter, setTypeFilter)
+                        )}
+                      </View>
+                    </ScrollView>
+                  </View>
+
+                  <View className="auth-card">
+                    <Text className="auth-label">Severity</Text>
+                    <ScrollView horizontal showsHorizontalScrollIndicator={false} className="mt-3">
+                      <View className="flex-row gap-3 pr-2">
+                        {severityOptions.map((value) =>
+                          renderFilterChip(value, formatLabel(value), severityFilter, setSeverityFilter)
+                        )}
+                      </View>
+                    </ScrollView>
+                  </View>
+
+                  <View className="auth-card">
+                    <Text className="auth-label">Sort By</Text>
+                    <ScrollView horizontal showsHorizontalScrollIndicator={false} className="mt-3">
+                      <View className="flex-row gap-3 pr-2">
+                        {sortOptions.map((value) =>
+                          renderFilterChip(value, sortLabels[value], sortBy, (v) => setSortBy(v as any))
+                        )}
+                      </View>
+                    </ScrollView>
+                  </View>
+
+                  <View className="sheet-actions-row">
+                    <Pressable
+                      className="auth-button flex-1"
+                      onPress={() => setIsFilterModalVisible(false)}
+                    >
+                      <Text className="auth-button-text">Apply</Text>
+                    </Pressable>
+                  </View>
+                </ScrollView>
               </View>
-
-              <Pressable className="list-action" onPress={resetFilters}>
-                <Text className="list-action-text">Reset</Text>
-              </Pressable>
             </View>
-
-            <ScrollView
-              className="sheet-scroll"
-              keyboardShouldPersistTaps="handled"
-              showsVerticalScrollIndicator={false}
-            >
-              <View className="auth-card mt-0">
-                <Text className="auth-label">Status</Text>
-                <ScrollView
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                  className="mt-3"
-                >
-                  <View className="flex-row gap-3 pr-2">
-                    {statusOptions.map((value) =>
-                      renderFilterChip(
-                        value,
-                        formatFilterLabel(value),
-                        statusFilter,
-                        (nextValue) =>
-                          setStatusFilter(
-                            nextValue as (typeof statusOptions)[number],
-                          ),
-                      ),
-                    )}
-                  </View>
-                </ScrollView>
-              </View>
-
-              <View className="auth-card">
-                <Text className="auth-label">Billing</Text>
-                <View className="mt-3 flex-row flex-wrap gap-3">
-                  {billingOptions.map((value) =>
-                    renderFilterChip(value, value, billingFilter, (nextValue) =>
-                      setBillingFilter(
-                        nextValue as (typeof billingOptions)[number],
-                      ),
-                    ),
-                  )}
-                </View>
-              </View>
-
-              <View className="auth-card">
-                <Text className="auth-label">Category</Text>
-                <ScrollView
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                  className="mt-3"
-                >
-                  <View className="flex-row gap-3 pr-2">
-                    {categories.map((value) =>
-                      renderFilterChip(
-                        value,
-                        formatFilterLabel(value),
-                        categoryFilter,
-                        setCategoryFilter,
-                      ),
-                    )}
-                  </View>
-                </ScrollView>
-              </View>
-
-              <View className="auth-card">
-                <Text className="auth-label">Sort By</Text>
-                <ScrollView
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                  className="mt-3"
-                >
-                  <View className="flex-row gap-3 pr-2">
-                    {sortOptions.map((value) =>
-                      renderFilterChip(
-                        value,
-                        formatSortLabel(value),
-                        sortBy,
-                        (nextValue) =>
-                          setSortBy(nextValue as (typeof sortOptions)[number]),
-                      ),
-                    )}
-                  </View>
-                </ScrollView>
-              </View>
-
-              <View className="auth-card">
-                <Text className="auth-label">Price Range</Text>
-                <View className="mt-3 flex-row gap-3">
-                  <TextInput
-                    className="auth-input flex-1"
-                    value={minPrice}
-                    onChangeText={setMinPrice}
-                    placeholder="Min"
-                    keyboardType="decimal-pad"
-                  />
-                  <TextInput
-                    className="auth-input flex-1"
-                    value={maxPrice}
-                    onChangeText={setMaxPrice}
-                    placeholder="Max"
-                    keyboardType="decimal-pad"
-                  />
-                </View>
-              </View>
-
-              <View className="sheet-actions-row">
-                <Pressable
-                  className="auth-button flex-1"
-                  onPress={() => setIsFilterModalVisible(false)}
-                >
-                  <Text className="auth-button-text">Done</Text>
-                </Pressable>
-                <Pressable
-                  className="auth-button flex-1"
-                  onPress={resetFilters}
-                >
-                  <Text className="auth-button-text">Clear All</Text>
-                </Pressable>
-              </View>
-            </ScrollView>
-          </View>
-        </View>
-      </Modal>
+          </Modal>
+        </>
+      )}
     </SafeAreaView>
   );
 };
 
-export default Subscriptions;
+export default IncidentsTab;

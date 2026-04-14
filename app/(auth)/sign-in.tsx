@@ -1,8 +1,10 @@
+import images from "@/constants/images";
 import { useSignIn } from "@clerk/expo";
 import { Link, useRouter, type Href } from "expo-router";
 import { styled } from "nativewind";
 import { useState } from "react";
 import {
+  Image,
   KeyboardAvoidingView,
   Platform,
   Pressable,
@@ -117,12 +119,13 @@ const SignIn = () => {
               {/* Branding */}
               <View className="auth-brand-block">
                 <View className="auth-logo-wrap">
-                  <View className="auth-logo-mark">
-                    <Text className="auth-logo-mark-text">R</Text>
-                  </View>
+                  <Image
+                    source={images.idrmcLogo}
+                    className="auth-logo-image"
+                  />
                   <View>
-                    <Text className="auth-wordmark">Recurrly</Text>
-                    <Text className="auth-wordmark-sub">SUBSCRIPTIONS</Text>
+                    <Text className="auth-wordmark">IDRMC</Text>
+                    <Text className="auth-wordmark-sub">USERS APPLICATION</Text>
                   </View>
                 </View>
                 <Text className="auth-title">Verify your identity</Text>
@@ -207,17 +210,15 @@ const SignIn = () => {
             {/* Branding */}
             <View className="auth-brand-block">
               <View className="auth-logo-wrap">
-                <View className="auth-logo-mark">
-                  <Text className="auth-logo-mark-text">R</Text>
-                </View>
+                <Image source={images.idrmcLogo} className="auth-logo-image" />
                 <View>
-                  <Text className="auth-wordmark">Recurrly</Text>
-                  <Text className="auth-wordmark-sub">SUBSCRIPTIONS</Text>
+                  <Text className="auth-wordmark">IDRMC</Text>
+                  <Text className="auth-wordmark-sub">USERS APPLICATION</Text>
                 </View>
               </View>
               <Text className="auth-title">Welcome back</Text>
               <Text className="auth-subtitle">
-                Sign in to continue managing your subscriptions
+                Sign in to continue managing your IDRMC account and renewals
               </Text>
             </View>
 
@@ -269,6 +270,14 @@ const SignIn = () => {
                       {errors.fields.password.message}
                     </Text>
                   )}
+                </View>
+
+                <View className="flex-row justify-end -mt-2 mb-2">
+                  <Link href={"/(auth)/forgot-password" as any} asChild>
+                    <Pressable>
+                      <Text className="text-secondary font-medium" style={{ color: '#0a7ea4' }}>Forgot Password?</Text>
+                    </Pressable>
+                  </Link>
                 </View>
 
                 <Pressable

@@ -1,16 +1,16 @@
 {
   "expo": {
-    "name": "react_native-recurrly",
-    "slug": "react_native-recurrly",
+    "name": "IDRMC",
+    "slug": "idrmc-users-application",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "scheme": "reactnativerecurrly",
-    "userInterfaceStyle": "automatic",
+    "icon": "./assets/images/idrmc-logo.png",
+    "scheme": "idrmcportal",
+    "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.nba-yeabisra.recurrly"
+      "bundleIdentifier": "com.nba-yeabisra.idrmc"
     },
     "android": {
       "adaptiveIcon": {
@@ -21,7 +21,7 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.nba_yeabisra.recurrly"
+      "package": "com.nba_yeabisra.idrmc"
     },
     "web": {
       "output": "static",
@@ -32,7 +32,7 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/idrmc-logo.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff",

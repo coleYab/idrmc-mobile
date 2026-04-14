@@ -280,6 +280,10 @@
     @apply mb-7 flex-row items-center gap-3;
   }
 
+  .auth-logo-image {
+    @apply size-14 rounded-xl;
+  }
+
   .auth-logo-mark {
     @apply relative size-14 items-center justify-center rounded-xl border-2 border-primary bg-accent;
   }
@@ -590,5 +594,49 @@
 
   .sheet-actions-row {
     @apply mt-2 flex-row gap-3;
+  }
+
+  .tag-grid {
+    @apply flex-row flex-wrap gap-2 mt-1 w-full;
+  }
+
+  .tag-chip {
+    @apply rounded-xl border border-border bg-card px-3 py-1.5;
+  }
+
+  .tag-chip-text {
+    @apply text-xs font-sans-bold text-primary;
+  }
+
+  .dropdown-btn {
+    @apply mt-2 flex-row items-center justify-between rounded-xl border-2 border-border bg-background px-5 py-4;
+  }
+
+  .dropdown-btn-text {
+    @apply text-base font-sans-medium text-primary;
+  }
+
+  .dropdown-value {
+    @apply text-base font-sans-bold text-primary;
+  }
+
+  .dropdown-placeholder {
+    @apply text-base font-sans-medium text-muted-foreground;
+  }
+
+  .dropdown-option {
+    @apply py-4 border-b border-border items-center;
+  }
+
+  .dropdown-option-text {
+    @apply text-lg font-sans-medium text-primary;
+  }
+
+  .dropdown-modal-backdrop {
+    @apply flex-1 justify-end bg-primary/45;
+  }
+
+  .dropdown-modal-content {
+    @apply bg-background rounded-t-3xl pt-5 pb-8 px-5 max-h-[70%];
   }
 }

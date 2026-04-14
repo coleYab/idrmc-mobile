@@ -35,18 +35,19 @@ const Onboarding = () => {
       >
         <View className="mt-2 overflow-hidden rounded-[26px]">
           <Image
-            source={images.splashPattern}
-            className="h-[420px] w-full"
-            resizeMode="cover"
+            source={images.idrmcLogo}
+            className="h-64 w-full"
+            resizeMode="contain"
           />
         </View>
 
-        <View className="my-8">
-          <Text className="text-5xl font-sans-bold text-background">
-            Gain Financial Clarity
+        <View className="mb-8">
+          <Text className="text-5xl font-sans-bold text-background text-center">
+            Welcome to IDRMC
           </Text>
           <Text className="mt-3 text-center text-lg font-sans-medium text-background/90">
-            Track, analyze and cancel with ease
+            our real-time lifeline for swift disaster coordination and a more
+            resilient community.
           </Text>
         </View>
 

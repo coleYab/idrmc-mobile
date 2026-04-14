@@ -1,0 +1,3 @@
+cp idrmc-logo.png android-icon-background.png
+cp idrmc-logo.png android-icon-foreground.png
+cp idrmc-logo.png android-icon-monochrome.png

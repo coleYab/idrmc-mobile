@@ -17,6 +17,10 @@ import setting from "@/assets/icons/setting.png";
 import spotify from "@/assets/icons/spotify.png";
 import wallet from "@/assets/icons/wallet.png";
 
+import app from "@/assets/icons/notifications/app.png";
+import gmail from "@/assets/icons/notifications/gmail.png";
+import sms from "@/assets/icons/notifications/sms.png";
+
 export const icons = {
     home,
     wallet,
@@ -36,6 +40,9 @@ export const icons = {
     github,
     claude,
     canva,
+    gmail,
+    app,
+    sms
 } as const;
 
 export type IconKey = keyof typeof icons;
