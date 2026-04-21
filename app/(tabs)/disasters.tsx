@@ -1,6 +1,7 @@
 import DisasterCard from "@/components/DisasterCard";
 import { useDisasters } from "@/hooks/queries/useDisasters";
 import { useUser } from "@clerk/expo";
+import { router } from "expo-router";
 import { styled } from "nativewind";
 import { useEffect, useMemo, useState } from "react";
 import {
@@ -231,7 +232,7 @@ const DisastersTab = () => {
                     currentId === item.id ? null : item.id,
                   )
                 }
-                onViewDetails={() => console.log(`Viewing details of ${item.id}`)}
+                onViewDetails={() => router.push(`/disaster/${item.id}`)}
               />
             )}
             ListFooterComponent={

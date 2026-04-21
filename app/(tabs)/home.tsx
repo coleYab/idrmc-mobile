@@ -5,10 +5,13 @@ import ListHeading from "@/components/ListHeading";
 import { icons } from "@/constants/icons";
 import images from "@/constants/images";
 import "@/global.css";
-import { MOCK_DISASTERS, MOCK_INCIDENTS, MOCK_NOTIFICATIONS } from "@/lib/mockData";
+import { MOCK_NOTIFICATIONS } from "@/lib/mockData";
 import { useUser } from "@clerk/expo";
+import { useRouter } from "expo-router";
 import { styled } from "nativewind";
 import { useState } from "react";
+import { useIncidents } from "@/hooks/queries/useIncidents";
+import { useDisasters } from "@/hooks/queries/useDisasters";
 import {
   FlatList,
   Image,
@@ -16,6 +19,7 @@ import {
   ScrollView,
   Text,
   View,
+  ActivityIndicator,
 } from "react-native";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 
@@ -23,6 +27,7 @@ const SafeAreaView = styled(RNSafeAreaView);
 
 export default function App() {
   const { user } = useUser();
+  const router = useRouter();
   const [expandedIncidentId, setExpandedIncidentId] = useState<string | null>(null);
   const [expandedDisasterId, setExpandedDisasterId] = useState<string | null>(null);
 
@@ -32,7 +37,11 @@ export default function App() {
     user?.emailAddresses[0]?.emailAddress ||
     "User";
 
-  const recentIncidents = MOCK_INCIDENTS.slice(0, 3);
+  const { data: incidentsData, isLoading: incidentsLoading } = useIncidents();
+  const { data: disastersData, isLoading: disastersLoading } = useDisasters();
+
+  const recentIncidents = incidentsData ? incidentsData.slice(0, 3) : [];
+  const disasters = disastersData || [];
 
   return (
     <SafeAreaView className="flex-1 bg-background p-5">
@@ -89,12 +98,14 @@ export default function App() {
         <View className="mb-5">
           <ListHeading title="Incident Reports" />
           <View style={{ marginTop: 16 }}>
-            {recentIncidents.length > 0 ? (
+            {incidentsLoading ? (
+              <ActivityIndicator size="small" className="py-4 text-primary" />
+            ) : recentIncidents.length > 0 ? (
               recentIncidents.map((incident) => (
                 <View key={incident.id} style={{ marginBottom: 16 }}>
                   <IncidentCard
                     onViewDetails={() => {
-                      console.log(`Seeing details of ${incident.id}`)
+                      router.push(`/incidents/${incident.id}`);
                     }}
                     {...incident}
                     expanded={expandedIncidentId === incident.id}
@@ -115,12 +126,14 @@ export default function App() {
         <View>
           <ListHeading title="Disasters" />
           <View style={{ marginTop: 16 }}>
-            {MOCK_DISASTERS.length > 0 ? (
-              MOCK_DISASTERS.map((disaster) => (
+            {disastersLoading ? (
+              <ActivityIndicator size="small" className="py-4 text-primary" />
+            ) : disasters.length > 0 ? (
+              disasters.map((disaster) => (
                 <View key={disaster.id} style={{ marginBottom: 16 }}>
                   <DisasterCard
                     onViewDetails={() => {
-                      console.log(`Viewing details of disaster ${disaster.id}`)
+                      router.push(`/disaster/${disaster.id}`);
                     }}
                     {...disaster}
                     expanded={expandedDisasterId === disaster.id}

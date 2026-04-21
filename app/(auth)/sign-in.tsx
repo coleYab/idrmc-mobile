@@ -4,14 +4,14 @@ import { Link, useRouter, type Href } from "expo-router";
 import { styled } from "nativewind";
 import { useState } from "react";
 import {
-  Image,
-  KeyboardAvoidingView,
-  Platform,
-  Pressable,
-  ScrollView,
-  Text,
-  TextInput,
-  View,
+    Image,
+    KeyboardAvoidingView,
+    Platform,
+    Pressable,
+    ScrollView,
+    Text,
+    TextInput,
+    View,
 } from "react-native";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 
@@ -49,7 +49,7 @@ const SignIn = () => {
           return;
         }
 
-        const url = decorateUrl("/(tabs)");
+        const url = decorateUrl("/home");
         if (url.startsWith("http")) {
           window.location.href = url;
         } else {
@@ -273,9 +273,14 @@ const SignIn = () => {
                 </View>
 
                 <View className="flex-row justify-end -mt-2 mb-2">
-                  <Link href={"/(auth)/forgot-password" as any} asChild>
+                  <Link href="/forgot-password" asChild>
                     <Pressable>
-                      <Text className="text-secondary font-medium" style={{ color: '#0a7ea4' }}>Forgot Password?</Text>
+                      <Text
+                        className="text-secondary font-medium"
+                        style={{ color: "#0a7ea4" }}
+                      >
+                        Forgot Password?
+                      </Text>
                     </Pressable>
                   </Link>
                 </View>
@@ -297,7 +302,7 @@ const SignIn = () => {
               <Text className="auth-link-copy">
                 Don&apos;t have an account?
               </Text>
-              <Link href="/(auth)/sign-up" asChild>
+              <Link href="/sign-up" asChild>
                 <Pressable>
                   <Text className="auth-link">Create Account</Text>
                 </Pressable>

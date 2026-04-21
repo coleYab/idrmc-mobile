@@ -1,15 +1,18 @@
 import type { ImageSourcePropType } from "react-native";
+import type { LucideIcon } from "lucide-react-native";
 
 declare global {
     interface AppTab {
         name: string;
         title: string;
-        icon: ImageSourcePropType;
+        icon?: ImageSourcePropType;
+        iconType?: "plus" | "list" | "home" | "alertTriangle" | "settings";
     }
 
     interface TabIconProps {
         focused: boolean;
-        icon: ImageSourcePropType;
+        icon?: ImageSourcePropType;
+        iconType?: "plus" | "list" | "home" | "alertTriangle" | "settings";
     }
 
     interface Subscription {

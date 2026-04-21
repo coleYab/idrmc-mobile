@@ -4,14 +4,14 @@ import { Link, useRouter, type Href } from "expo-router";
 import { styled } from "nativewind";
 import { useState } from "react";
 import {
-    Image,
-    KeyboardAvoidingView,
-    Platform,
-    Pressable,
-    ScrollView,
-    Text,
-    TextInput,
-    View,
+  Image,
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  ScrollView,
+  Text,
+  TextInput,
+  View,
 } from "react-native";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 
@@ -37,7 +37,11 @@ const SignUp = () => {
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailAddress);
   const passwordValid = password.length === 0 || password.length >= 8;
   const formValid =
-    emailAddress.length > 0 && password.length >= 8 && emailValid && firstName.length > 0 && lastName.length > 0;
+    emailAddress.length > 0 &&
+    password.length >= 8 &&
+    emailValid &&
+    firstName.length > 0 &&
+    lastName.length > 0;
 
   const handleSubmit = async () => {
     if (!formValid) return;
@@ -72,7 +76,7 @@ const SignUp = () => {
             return;
           }
 
-          const url = decorateUrl("/(tabs)");
+          const url = decorateUrl("/home");
           if (url.startsWith("http")) {
             window.location.href = url;
           } else {
@@ -302,7 +306,7 @@ const SignUp = () => {
             {/* Sign-In Link */}
             <View className="auth-link-row">
               <Text className="auth-link-copy">Already have an account?</Text>
-              <Link href="/(auth)/sign-in" asChild>
+              <Link href="/sign-in" asChild>
                 <Pressable>
                   <Text className="auth-link">Sign In</Text>
                 </Pressable>

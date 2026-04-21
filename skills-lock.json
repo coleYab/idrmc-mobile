@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "architecture": {
+      "source": "nativewind/nativewind",
+      "sourceType": "github",
+      "computedHash": "5a424353c9e4f3444a85970c5d5ea4477ad8c012c3a2f5fab84858e67d439c8e"
+    }
+  }
+}

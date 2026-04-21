@@ -9,7 +9,7 @@ const Index = () => {
   }
 
   if (isSignedIn) {
-    return <Redirect href="/(tabs)" />;
+    return <Redirect href="/home" />;
   }
 
   return <Redirect href="/onboarding" />;

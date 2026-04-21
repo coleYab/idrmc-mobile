@@ -35,21 +35,28 @@ export default function ForgotPassword() {
       });
       if (createError) {
         console.error(JSON.stringify(createError, null, 2));
-        setErrorMessage(createError.errors?.[0]?.message || "An error occurred");
+        setErrorMessage(
+          createError.errors?.[0]?.message || "An error occurred",
+        );
         return;
       }
-      
-      const { error: sendCodeError } = await signIn.resetPasswordEmailCode.sendCode();
+
+      const { error: sendCodeError } =
+        await signIn.resetPasswordEmailCode.sendCode();
       if (sendCodeError) {
         console.error(JSON.stringify(sendCodeError, null, 2));
-        setErrorMessage(sendCodeError.errors?.[0]?.message || "An error occurred");
+        setErrorMessage(
+          sendCodeError.errors?.[0]?.message || "An error occurred",
+        );
         return;
       }
-      
+
       setCodeSent(true);
     } catch (err: any) {
       console.error(err);
-      setErrorMessage(err.errors?.[0]?.message || err.message || "An error occurred");
+      setErrorMessage(
+        err.errors?.[0]?.message || err.message || "An error occurred",
+      );
     }
   };
 
@@ -66,7 +73,9 @@ export default function ForgotPassword() {
       }
     } catch (err: any) {
       console.error(err);
-      setErrorMessage(err.errors?.[0]?.message || err.message || "An error occurred");
+      setErrorMessage(
+        err.errors?.[0]?.message || err.message || "An error occurred",
+      );
     }
   };
 
@@ -90,7 +99,7 @@ export default function ForgotPassword() {
               return;
             }
 
-            const url = decorateUrl("/(tabs)");
+            const url = decorateUrl("/home");
             if (url.startsWith("http")) {
               window.location.href = url;
             } else {
@@ -103,7 +112,9 @@ export default function ForgotPassword() {
       }
     } catch (err: any) {
       console.error(err);
-      setErrorMessage(err.errors?.[0]?.message || err.message || "An error occurred");
+      setErrorMessage(
+        err.errors?.[0]?.message || err.message || "An error occurred",
+      );
     }
   };
 
@@ -133,8 +144,8 @@ export default function ForgotPassword() {
                 {!codeSent
                   ? "Enter your email address to reset your password"
                   : signIn?.status !== "needs_new_password"
-                  ? "Enter the code sent to your email"
-                  : "Enter your new password"}
+                    ? "Enter the code sent to your email"
+                    : "Enter your new password"}
               </Text>
             </View>
 
@@ -204,7 +215,9 @@ export default function ForgotPassword() {
                       disabled={!code || fetchStatus === "fetching"}
                     >
                       <Text className="auth-button-text">
-                        {fetchStatus === "fetching" ? "Verifying..." : "Verify Code"}
+                        {fetchStatus === "fetching"
+                          ? "Verifying..."
+                          : "Verify Code"}
                       </Text>
                     </Pressable>
                   </>
@@ -248,7 +261,7 @@ export default function ForgotPassword() {
             </View>
 
             <View className="auth-link-row">
-              <Link href="/(auth)/sign-in" asChild>
+              <Link href="/sign-in" asChild>
                 <Pressable>
                   <Text className="auth-link">Back to Sign In</Text>
                 </Pressable>

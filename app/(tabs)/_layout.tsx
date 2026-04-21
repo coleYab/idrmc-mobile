@@ -1,20 +1,22 @@
 import { tabs } from "@/constants/data";
 import { colors, components } from "@/constants/theme";
 import { useAuth } from "@clerk/expo";
+import { lucideIcons } from "@/constants/icons";
 // eslint-disable-next-line import/no-named-as-default
 import clsx from "clsx";
 import { Redirect, Tabs } from "expo-router";
 import { useColorScheme } from "nativewind";
-import { Image, View } from "react-native";
+import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const tabBar = components.tabBar;
 
-const TabIcon = ({ focused, icon }: TabIconProps) => {
+const TabIcon = ({ focused, iconType }: TabIconProps) => {
+  const IconComponent = lucideIcons[iconType === "plus" ? "Plus" : iconType === "list" ? "List" : iconType === "home" ? "Home" : iconType === "alertTriangle" ? "AlertTriangle" : iconType === "settings" ? "Settings" : "Home"];
   return (
     <View className="tabs-icon">
       <View className={clsx("tabs-pill", focused && "tabs-active")}>
-        <Image source={icon} resizeMode="contain" className="tabs-glyph" />
+        {IconComponent && <IconComponent size={24} color="white" />}
       </View>
     </View>
   );
@@ -67,7 +69,7 @@ const TabLayout = () => {
           options={{
             title: tab.title,
             tabBarIcon: ({ focused }) => (
-              <TabIcon focused={focused} icon={tab.icon} />
+              <TabIcon focused={focused} iconType={tab.iconType} />
             ),
           }}
         />

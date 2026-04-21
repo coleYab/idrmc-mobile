@@ -13,7 +13,7 @@ const Onboarding = () => {
   }
 
   if (isSignedIn) {
-    return <Redirect href="/(tabs)" />;
+    return <Redirect href="/home" />;
   }
 
   return (
@@ -53,7 +53,7 @@ const Onboarding = () => {
 
         {/* mt-auto relies on flexGrow: 1 in the ScrollView to push this to the bottom */}
         <Pressable
-          onPress={() => router.push("/(auth)/sign-up")}
+          onPress={() => router.push("/sign-up")}
           className="mt-auto items-center rounded-full bg-white py-5"
         >
           <Text className="text-lg font-sans-bold text-primary">

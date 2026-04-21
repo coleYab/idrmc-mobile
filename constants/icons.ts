@@ -1,3 +1,14 @@
+import { Home, Settings, Plus, Menu, List, AlertTriangle } from "lucide-react-native";
+
+export const lucideIcons = {
+    Home,
+    Settings,
+    Plus,
+    Menu,
+    List,
+    AlertTriangle,
+} as const;
+
 import activity from "@/assets/icons/activity.png";
 import add from "@/assets/icons/add.png";
 import adobe from "@/assets/icons/adobe.png";

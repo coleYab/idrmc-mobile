@@ -1,11 +1,11 @@
-import { icons } from "./icons";
+import { icons, lucideIcons } from "./icons";
 
 export const tabs: AppTab[] = [
-    { name: "create", title: "Create", icon: icons.add },
-    { name: "subscriptions", title: "Incidents", icon: icons.menu },
-    { name: "index", title: "Home", icon: icons.home },
-    { name: "insights", title: "Disasters", icon: icons.activity },
-    { name: "settings", title: "Settings", icon: icons.setting },
+    { name: "add", title: "Create", iconType: "plus" },
+    { name: "incidents", title: "Incidents", iconType: "list" },
+    { name: "home", title: "Home", iconType: "home" },
+    { name: "disasters", title: "Disasters", iconType: "alertTriangle" },
+    { name: "settings", title: "Settings", iconType: "settings" },
 ];
 
 export const HOME_USER = {
