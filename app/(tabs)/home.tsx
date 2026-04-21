@@ -2,16 +2,17 @@ import DisasterCard from "@/components/DisasterCard";
 import IncidentCard from "@/components/IncidentCard";
 import LatestNotificationCard from "@/components/LatestNotificationCard";
 import ListHeading from "@/components/ListHeading";
+import Skeleton from "@/components/Skeleton";
 import { icons } from "@/constants/icons";
 import images from "@/constants/images";
 import "@/global.css";
+import { useDisasters } from "@/hooks/queries/useDisasters";
+import { useIncidents } from "@/hooks/queries/useIncidents";
 import { MOCK_NOTIFICATIONS } from "@/lib/mockData";
 import { useUser } from "@clerk/expo";
 import { useRouter } from "expo-router";
 import { styled } from "nativewind";
 import { useState } from "react";
-import { useIncidents } from "@/hooks/queries/useIncidents";
-import { useDisasters } from "@/hooks/queries/useDisasters";
 import {
   FlatList,
   Image,
@@ -19,7 +20,6 @@ import {
   ScrollView,
   Text,
   View,
-  ActivityIndicator,
 } from "react-native";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 
@@ -28,8 +28,12 @@ const SafeAreaView = styled(RNSafeAreaView);
 export default function App() {
   const { user } = useUser();
   const router = useRouter();
-  const [expandedIncidentId, setExpandedIncidentId] = useState<string | null>(null);
-  const [expandedDisasterId, setExpandedDisasterId] = useState<string | null>(null);
+  const [expandedIncidentId, setExpandedIncidentId] = useState<string | null>(
+    null,
+  );
+  const [expandedDisasterId, setExpandedDisasterId] = useState<string | null>(
+    null,
+  );
 
   const displayName =
     user?.firstName ||
@@ -45,13 +49,14 @@ export default function App() {
 
   return (
     <SafeAreaView className="flex-1 bg-background p-5">
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerClassName="pb-16">
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerClassName="pb-16"
+      >
         <View className="home-header">
           <View className="home-user">
             <Image
-              source={
-                user?.imageUrl ? { uri: user.imageUrl } : images.avatar
-              }
+              source={user?.imageUrl ? { uri: user.imageUrl } : images.avatar}
               className="home-avatar"
             />
             <Text className="home-user-name">{displayName}</Text>
@@ -70,7 +75,10 @@ export default function App() {
           <Text className="home-balance-label">Quick Action</Text>
 
           <View className="home-balance-row" style={{ marginTop: 8 }}>
-            <Text className="home-balance-amount" style={{ fontSize: 24, paddingBottom: 4 }}>
+            <Text
+              className="home-balance-amount"
+              style={{ fontSize: 24, paddingBottom: 4 }}
+            >
               Submit an Incident Report
             </Text>
           </View>
@@ -81,16 +89,12 @@ export default function App() {
 
           <FlatList
             data={MOCK_NOTIFICATIONS}
-            renderItem={({ item }) => (
-              <LatestNotificationCard {...item} />
-            )}
+            renderItem={({ item }) => <LatestNotificationCard {...item} />}
             keyExtractor={(item) => item.id}
             horizontal
             showsHorizontalScrollIndicator={false}
             ListEmptyComponent={
-              <Text className="home-empty-state">
-                No notifications yet.
-              </Text>
+              <Text className="home-empty-state">No notifications yet.</Text>
             }
           />
         </View>
@@ -99,7 +103,14 @@ export default function App() {
           <ListHeading title="Incident Reports" />
           <View style={{ marginTop: 16 }}>
             {incidentsLoading ? (
-              <ActivityIndicator size="small" className="py-4 text-primary" />
+              Array.from({ length: 3 }).map((_, index) => (
+                <View
+                  key={`incident-skeleton-${index}`}
+                  style={{ marginBottom: 16 }}
+                >
+                  <Skeleton height={138} borderRadius={20} />
+                </View>
+              ))
             ) : recentIncidents.length > 0 ? (
               recentIncidents.map((incident) => (
                 <View key={incident.id} style={{ marginBottom: 16 }}>
@@ -111,14 +122,16 @@ export default function App() {
                     expanded={expandedIncidentId === incident.id}
                     onPress={() =>
                       setExpandedIncidentId((currentId) =>
-                        currentId === incident.id ? null : incident.id
+                        currentId === incident.id ? null : incident.id,
                       )
                     }
                   />
                 </View>
               ))
             ) : (
-              <Text className="home-empty-state">No incidents reported yet.</Text>
+              <Text className="home-empty-state">
+                No incidents reported yet.
+              </Text>
             )}
           </View>
         </View>
@@ -127,7 +140,14 @@ export default function App() {
           <ListHeading title="Disasters" />
           <View style={{ marginTop: 16 }}>
             {disastersLoading ? (
-              <ActivityIndicator size="small" className="py-4 text-primary" />
+              Array.from({ length: 3 }).map((_, index) => (
+                <View
+                  key={`disaster-skeleton-${index}`}
+                  style={{ marginBottom: 16 }}
+                >
+                  <Skeleton height={138} borderRadius={20} />
+                </View>
+              ))
             ) : disasters.length > 0 ? (
               disasters.map((disaster) => (
                 <View key={disaster.id} style={{ marginBottom: 16 }}>
@@ -139,7 +159,7 @@ export default function App() {
                     expanded={expandedDisasterId === disaster.id}
                     onPress={() =>
                       setExpandedDisasterId((currentId) =>
-                        currentId === disaster.id ? null : disaster.id
+                        currentId === disaster.id ? null : disaster.id,
                       )
                     }
                   />
@@ -150,7 +170,6 @@ export default function App() {
             )}
           </View>
         </View>
-
       </ScrollView>
     </SafeAreaView>
   );

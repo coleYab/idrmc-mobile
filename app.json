@@ -33,12 +33,9 @@
         "expo-splash-screen",
         {
           "image": "./assets/images/idrmc-logo.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff",
-          "dark": {
-            "backgroundColor": "#000000"
-          }
+          "imageWidth": 400,
+          "resizeMode": "fit",
+          "backgroundColor": "transparent"
         }
       ],
       [

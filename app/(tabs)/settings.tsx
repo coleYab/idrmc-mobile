@@ -1,3 +1,4 @@
+import Skeleton from "@/components/Skeleton";
 import images from "@/constants/images";
 import { useClerk, useUser } from "@clerk/expo";
 import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
@@ -19,7 +20,7 @@ const SafeAreaView = styled(RNSafeAreaView);
 
 const Settings = () => {
   const { signOut } = useClerk();
-  const { user } = useUser();
+  const { user, isLoaded } = useUser();
   const { colorScheme, setColorScheme } = useColorScheme();
   const tabBarHeight = useBottomTabBarHeight();
 
@@ -49,6 +50,53 @@ const Settings = () => {
     "User";
   const isDark = colorScheme === "dark";
   const email = user?.emailAddresses[0]?.emailAddress;
+
+  if (!isLoaded) {
+    return (
+      <SafeAreaView className="flex-1 bg-background p-5">
+        <ScrollView
+          className="flex-1"
+          contentContainerStyle={{ paddingBottom: tabBarHeight + 24 }}
+          showsVerticalScrollIndicator={false}
+        >
+          <Skeleton
+            height={34}
+            width={170}
+            borderRadius={10}
+            style={{ marginBottom: 24 }}
+          />
+
+          <View className="auth-card mb-5">
+            <View className="flex-row items-center gap-4 mb-4">
+              <Skeleton height={64} width={64} borderRadius={32} />
+              <View className="flex-1 gap-2">
+                <Skeleton height={18} width="70%" borderRadius={8} />
+                <Skeleton height={14} width="50%" borderRadius={8} />
+              </View>
+            </View>
+            <Skeleton height={52} borderRadius={16} />
+          </View>
+
+          <View className="auth-card mb-5 gap-3">
+            <Skeleton height={20} width={100} borderRadius={8} />
+            <Skeleton height={18} borderRadius={8} />
+            <Skeleton height={18} borderRadius={8} />
+          </View>
+
+          <View className="auth-card mb-5 gap-3">
+            <Skeleton height={20} width={120} borderRadius={8} />
+            <Skeleton height={54} borderRadius={16} />
+            <View className="flex-row gap-3">
+              <Skeleton height={48} width="48%" borderRadius={14} />
+              <Skeleton height={48} width="48%" borderRadius={14} />
+            </View>
+          </View>
+
+          <Skeleton height={54} borderRadius={16} />
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
 
   const openEditModal = () => {
     setFirstName(user?.firstName ?? "");
