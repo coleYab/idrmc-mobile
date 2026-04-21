@@ -14,10 +14,10 @@
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/android-icon-foreground.png",
-        "backgroundImage": "./assets/images/android-icon-background.png",
-        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+        "backgroundColor": "#ffffff",
+        "foregroundImage": "./assets/images/idrmc-logo.png",
+        "backgroundImage": "./assets/images/idrmc-logo.png",
+        "monochromeImage": "./assets/images/idrmc-logo.png"
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
@@ -34,7 +34,7 @@
         {
           "image": "./assets/images/idrmc-logo.png",
           "imageWidth": 400,
-          "resizeMode": "fit",
+          "resizeMode": "contain",
           "backgroundColor": "transparent"
         }
       ],

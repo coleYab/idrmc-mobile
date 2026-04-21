@@ -63,7 +63,7 @@ export default function App() {
           </View>
 
           <Pressable
-            onPress={() => console.log("Submit incident placeholder")}
+            onPress={() => router.push("/(tabs)/add")}
             accessibilityRole="button"
             accessibilityLabel="Submit an Incident Report"
           >
@@ -85,7 +85,12 @@ export default function App() {
         </View>
 
         <View className="mb-5 mt-5">
-          <ListHeading title="Notifications" />
+          <ListHeading
+            title="Notifications"
+            redirect={() => {
+              router.push("/(tabs)/settings");
+            }}
+          />
 
           <FlatList
             data={MOCK_NOTIFICATIONS}
@@ -100,7 +105,12 @@ export default function App() {
         </View>
 
         <View className="mb-5">
-          <ListHeading title="Incident Reports" />
+          <ListHeading
+            title="Incident Reports"
+            redirect={() => {
+              router.push("/(tabs)/incidents");
+            }}
+          />
           <View style={{ marginTop: 16 }}>
             {incidentsLoading ? (
               Array.from({ length: 3 }).map((_, index) => (
@@ -137,7 +147,12 @@ export default function App() {
         </View>
 
         <View>
-          <ListHeading title="Disasters" />
+          <ListHeading
+            title="Disasters"
+            redirect={() => {
+              router.push("/(tabs)/disasters");
+            }}
+          />
           <View style={{ marginTop: 16 }}>
             {disastersLoading ? (
               Array.from({ length: 3 }).map((_, index) => (
