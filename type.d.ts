@@ -49,7 +49,7 @@ declare global {
   interface UpcomingSubscriptionCardProps extends Omit<
     UpcomingSubscription,
     "id"
-  > {}
+  > { }
 
   interface ListHeadingProps {
     title: string;
@@ -197,6 +197,16 @@ declare global {
     affectedPopulationCount: number;
     requiresUrgentMedical: boolean;
     infrastructureDamage: string[]; // example: ['Bridge', 'Health center'],
+  }
+
+  interface Comment {
+    id: string;
+    disasterId: string;
+    authorId: string;
+    content: string;
+    attachments: string[];
+    createdAt: Date;
+    updatedAt: Date;
   }
 }
 
