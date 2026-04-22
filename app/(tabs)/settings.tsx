@@ -5,14 +5,14 @@ import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { styled, useColorScheme } from "nativewind";
 import { useState } from "react";
 import {
-    Image,
-    Modal,
-    Pressable,
-    ScrollView,
-    Switch,
-    Text,
-    TextInput,
-    View,
+  Image,
+  Modal,
+  Pressable,
+  ScrollView,
+  Switch,
+  Text,
+  TextInput,
+  View,
 } from "react-native";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 
@@ -147,13 +147,13 @@ const Settings = () => {
         contentContainerStyle={{ paddingBottom: tabBarHeight + 24 }}
         showsVerticalScrollIndicator={false}
       >
-        <Text className="text-2xl font-sans-bold text-primary mb-6">
+        <Text className="text-2xl font-sans-bold text-primary mb-5">
           Settings
         </Text>
 
         {/* User Profile Section */}
-        <View className="auth-card mb-5">
-          <View className="flex-row items-center gap-4 mb-4">
+        <View className="auth-card mb-3">
+          <View className="flex-row items-center gap-4 mb-2">
             <Image
               source={
                 resolvedAvatarUrl ? { uri: resolvedAvatarUrl } : images.avatar
@@ -178,7 +178,7 @@ const Settings = () => {
         </View>
 
         {/* Account Section */}
-        <View className="auth-card mb-5">
+        <View className="auth-card mb-3">
           <Text className="text-base font-sans-semibold text-primary mb-3">
             Account
           </Text>
@@ -209,7 +209,7 @@ const Settings = () => {
         </View>
 
         {/* Theme Section */}
-        <View className="auth-card mb-5">
+        <View className="auth-card mb-3">
           <Text className="text-base font-sans-semibold text-primary mb-3">
             Appearance
           </Text>
