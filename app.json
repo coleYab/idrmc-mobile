@@ -35,7 +35,7 @@
           "image": "./assets/images/idrmc-logo.png",
           "imageWidth": 400,
           "resizeMode": "contain",
-          "backgroundColor": "transparent"
+          "backgroundColor": "#ffffff"
         }
       ],
       [
@@ -52,7 +52,8 @@
         }
       ],
       "@clerk/expo",
-      "expo-secure-store"
+      "expo-secure-store",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true,
