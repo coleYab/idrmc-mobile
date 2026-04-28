@@ -1,3 +1,4 @@
+import LocationMap from "@/components/map/LocationMap";
 import { useIncidentById } from "@/hooks/queries/useIncidents";
 import { getStatusColor } from "@/lib/mockData";
 import { formatStatusLabel, formatSubscriptionDateTime } from "@/lib/utils";
@@ -189,7 +190,12 @@ export default function IncidentDetails() {
           </ScrollView>
         )}
 
-        <View className="px-5 pt-6">
+        {/* Location Map */}
+        <View className="px-5 pt-4">
+          <LocationMap location={location} radiusMeters={3000} height={220} label="Reported Location" />
+        </View>
+
+        <View className="px-5 pt-2">
           {requiresUrgentMedical && (
             <View className="bg-destructive/10 px-3 py-2 rounded-lg mb-4 flex-row items-center">
               <AlertTriangle size={16} color="#dc2626" />

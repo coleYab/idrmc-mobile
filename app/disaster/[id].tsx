@@ -1,4 +1,5 @@
 import CommentModal from "@/components/comment/CreateComment";
+import LocationMap from "@/components/map/LocationMap";
 import { icons } from "@/constants/icons";
 import { useDisasterById } from "@/hooks/queries/useDisasters";
 import { getStatusColor } from "@/lib/mockData";
@@ -422,7 +423,12 @@ export default function DisasterDetails() {
           )}
         </View> */}
 
-        <View className="px-5 pt-6">
+        {/* Location Map */}
+        <View className="px-5 pt-4">
+          <LocationMap location={location} radiusMeters={5000} height={220} label="Affected Area" />
+        </View>
+
+        <View className="px-5 pt-2">
           {requiresUrgentMedical && (
             <View className="bg-destructive/10 px-3 py-2 rounded-lg mb-4 flex-row items-center">
               <Heart size={16} color="#dc2626" fill="#dc2626" />
