@@ -5,15 +5,15 @@ import { useRouter } from "expo-router";
 import { styled } from "nativewind";
 import { useState } from "react";
 import {
-    ActivityIndicator,
-    Image,
-    Modal,
-    Pressable,
-    ScrollView,
-    Switch,
-    Text,
-    TextInput,
-    View,
+  ActivityIndicator,
+  Image,
+  Modal,
+  Pressable,
+  ScrollView,
+  Switch,
+  Text,
+  TextInput,
+  View,
 } from "react-native";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 
@@ -61,7 +61,7 @@ export default function CreateReport() {
   const [dropdownTitle, setDropdownTitle] = useState("");
   const [onSelectDropdown, setOnSelectDropdown] = useState<
     (val: string) => void
-  >(() => () => {});
+  >(() => () => { });
 
   const openDropdown = (
     title: string,

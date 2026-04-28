@@ -9,7 +9,9 @@ import {
   CheckCircle2,
   ExternalLink,
   Heart,
+  MapPin,
   MessageSquareIcon,
+  Package,
   X,
 } from "lucide-react-native";
 import React, { useEffect, useRef, useState } from "react";
@@ -22,6 +24,7 @@ import {
   Modal,
   Platform,
   Pressable,
+  RefreshControl,
   ScrollView,
   Text,
   TextInput,
@@ -64,6 +67,8 @@ export default function DisasterDetails() {
 
   // --- State ---
   const [isCommenting, setIsCommenting] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const { refetch } = useDisasterById(id as string);
   const [comments, setComments] = useState<DisasterComment[]>([
     {
       id: "1",
@@ -118,6 +123,12 @@ export default function DisasterDetails() {
   };
 
   // --- Handlers ---
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await refetch();
+    setRefreshing(false);
+  };
+
   const showSuccessToast = (title: string, message: string) => {
     if (toastTimerRef.current) {
       clearTimeout(toastTimerRef.current);
@@ -314,28 +325,54 @@ export default function DisasterDetails() {
         </Animated.View>
       )}
 
-      <ScrollView
-        bounces={false}
-        showsVerticalScrollIndicator={false}
-        contentContainerClassName="pb-10"
-      >
-        {/* Header Title & Image */}
+       <ScrollView
+         bounces={true}
+         showsVerticalScrollIndicator={false}
+         contentContainerClassName="pb-10"
+         refreshControl={
+           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+         }
+       >
+        {/* Header Section */}
         <View className="px-5 pt-6">
-          <Text className="text-3xl font-sans-extrabold text-primary w-full text-center mb-3 leading-tight">
+          <View className="flex-row items-center mb-2">
+            <View
+              style={{ backgroundColor: color }}
+              className="px-3 py-1 rounded-full"
+            >
+              <Text className="text-white font-sans-bold text-xs">
+                {status ? formatStatusLabel(status) : "Unknown"}
+              </Text>
+            </View>
+            <View className="bg-destructive/10 px-3 py-1 rounded-full ml-2">
+              <Text className="text-destructive font-sans-bold text-xs">
+                {severity} Severity
+              </Text>
+            </View>
+          </View>
+
+          <Text className="text-3xl font-sans-extrabold text-primary w-full mb-3 leading-tight">
             {title}
           </Text>
+
+          <View className="flex-row items-center mb-4">
+            <MapPin size={18} color="#666" />
+            <Text className="text-base font-sans-medium text-muted-foreground ml-2">
+              {location}
+            </Text>
+          </View>
         </View>
 
-        {/* Header Image */}
-        <View className="w-full h-80 relative px-5 rounded-full">
+        {/* Hero Image */}
+        <View className="w-full h-72 px-5 mb-4">
           {selectedImage ? (
             <Image
               source={{ uri: selectedImage }}
-              className="w-full h-full rounded-xl"
+              className="w-full h-full rounded-2xl"
               resizeMode="cover"
             />
           ) : (
-            <View className="w-full h-full bg-muted justify-center items-center">
+            <View className="w-full h-full bg-muted justify-center items-center rounded-2xl">
               <Image source={icons.activity} className="w-20 h-20 opacity-40" />
             </View>
           )}
@@ -353,7 +390,7 @@ export default function DisasterDetails() {
               <Pressable
                 key={idx}
                 onPress={() => setSelectedImage(uri)}
-                className={`w-16 h-16 rounded-lg overflow-hidden border ${selectedImage === uri ? "border-accent" : "border-border"}`}
+                className={`w-16 h-16 rounded-lg overflow-hidden border-2 ${selectedImage === uri ? "border-accent" : "border-border"}`}
               >
                 <Image
                   source={{ uri }}
@@ -363,7 +400,7 @@ export default function DisasterDetails() {
               </Pressable>
             ))}
             {attachmentCount > 5 && (
-              <View className="w-16 h-16 rounded-lg bg-muted justify-center items-center">
+              <View className="w-16 h-16 rounded-lg bg-muted justify-center items-center border border-border">
                 <Text className="text-sm font-sans-medium text-muted-foreground">
                   +{attachmentCount - 5}
                 </Text>
@@ -386,140 +423,145 @@ export default function DisasterDetails() {
         </View> */}
 
         <View className="px-5 pt-6">
-          {/* Tags */}
-          <View className="flex-row items-center gap-3 mb-4 flex-wrap">
-            <View
-              style={{ backgroundColor: color }}
-              className="px-3 py-1 rounded-full"
-            >
-              <Text className="text-white font-sans-bold text-xs">
-                {status ? formatStatusLabel(status) : "Unknown"}
+          {requiresUrgentMedical && (
+            <View className="bg-destructive/10 px-3 py-2 rounded-lg mb-4 flex-row items-center">
+              <Heart size={16} color="#dc2626" fill="#dc2626" />
+              <Text className="text-destructive font-sans-bold text-sm ml-2">
+                Medical Emergency - Urgent assistance required
               </Text>
             </View>
-            <View className="bg-destructive/10 px-3 py-1 rounded-full">
-              <Text className="text-destructive font-sans-bold text-xs">
-                {severity} Severity
-              </Text>
-            </View>
-            <View className="bg-muted px-3 py-1 rounded-full border border-border">
+          )}
+
+          <View className="flex-row items-center gap-2 mb-4 flex-wrap">
+            <View className="bg-muted px-3 py-1.5 rounded-full border border-border">
               <Text className="text-primary font-sans-bold text-xs">
                 {type}
               </Text>
             </View>
-            {requiresUrgentMedical && (
-              <View className="bg-destructive px-3 py-1 rounded-full">
-                <Text className="text-white font-sans-bold text-xs">
-                  Medical Emergency
-                </Text>
-              </View>
-            )}
           </View>
 
-          <View className="flex-row items-center mb-6">
-            <Image
-              source={icons.activity}
-              className="w-5 h-5 mr-2 opacity-50"
-              style={{ tintColor: "gray" }}
-            />
-            <Text className="text-base font-sans-medium text-muted-foreground">
-              {location}
-            </Text>
-          </View>
-
-          <Text className="text-base font-sans-regular text-primary mb-8 leading-relaxed opacity-80">
+          <Text className="text-base font-sans-regular text-primary mb-6 leading-relaxed">
             {description}
           </Text>
 
-          {/* Economy & Budget */}
-          <View className="flex-row gap-1 mb-3">
-            <View className="flex-1 basis-[48%] bg-card border-2 border-border rounded-xl p-4">
-              <Text className="text-xs font-sans-semibold uppercase tracking-[1px] text-muted-foreground mb-1">
-                Econ. Loss (ETB)
+          {/* Stats Grid */}
+          <View className="flex-row gap-3 mb-6">
+            <View className="flex-1 bg-card border border-border rounded-xl p-4">
+              <Text className="text-xs font-sans-semibold uppercase tracking-wider text-muted-foreground mb-1">
+                Economic Loss
               </Text>
               <Text className="text-xl font-sans-extrabold text-primary">
-                {estimatedEconomicLoss}
+                ETB {estimatedEconomicLoss?.toLocaleString() || "0"}
               </Text>
             </View>
-            <View className="flex-1 basis-[48%] bg-card border-2 border-border rounded-xl p-4">
-              <Text className="text-xs font-sans-semibold uppercase tracking-[1px] text-muted-foreground mb-1">
-                Budget (ETB)
+            <View className="flex-1 bg-card border border-border rounded-xl p-4">
+              <Text className="text-xs font-sans-semibold uppercase tracking-wider text-muted-foreground mb-1">
+                Budget Allocated
               </Text>
               <Text className="text-xl font-sans-extrabold text-primary">
-                {budgetAllocated}
+                ETB {budgetAllocated?.toLocaleString() || "0"}
+              </Text>
+            </View>
+          </View>
+
+          <View className="flex-row gap-3 mb-6">
+            <View className="flex-1 bg-card border border-border rounded-xl p-4">
+              <Text className="text-xs font-sans-semibold uppercase tracking-wider text-muted-foreground mb-1">
+                Affected Population
+              </Text>
+              <Text className="text-xl font-sans-extrabold text-primary">
+                {totalAffectedPopulation?.toLocaleString() || "0"}
+              </Text>
+            </View>
+            <View className="flex-1 bg-card border border-border rounded-xl p-4">
+              <Text className="text-xs font-sans-semibold uppercase tracking-wider text-muted-foreground mb-1">
+                Declared By
+              </Text>
+              <Text className="text-sm font-sans-bold text-primary" numberOfLines={1}>
+                {declaredBy?.slice(0, 10) || "N/A"}...
               </Text>
             </View>
           </View>
 
           {/* DONATION CAMPAIGN CARD */}
-          <View className="insights-card mb-3 border border-accent/20 bg-accent/5">
-            <View className="flex-row justify-between items-center my-3">
-              <Text className="text-lg font-sans-extrabold text-primary">
-                Relief Fund
-              </Text>
-              <Heart color="#e11d48" size={20} fill="#e11d48" />
+          <View className="bg-white rounded-2xl p-5 mb-6 shadow-sm border border-accent/20">
+            <View className="flex-row justify-between items-center mb-4">
+              <View>
+                <Text className="text-xl font-sans-extrabold text-primary">
+                  Relief Fund
+                </Text>
+                <Text className="text-sm font-sans-medium text-muted-foreground mt-1">
+                  {mockCampaign.donationCount} donors • {mockCampaign.progressPercentage}% funded
+                </Text>
+              </View>
+              <View className="w-12 h-12 bg-red-50 rounded-full items-center justify-center">
+                <Heart color="#e11d48" size={24} fill="#e11d48" />
+              </View>
             </View>
 
-            <Text className="text-md font-sans-medium text-primary mb-5 opacity-80 leading-5">
+            <Text className="text-base font-sans-regular text-primary mb-5 leading-relaxed">
               {mockCampaign.description}
             </Text>
 
+            {/* Progress Section */}
             <View className="mb-5">
-              <View className="flex-row justify-between mb-1.5 items-end">
-                <Text className="text-primary font-sans-extrabold text-lg">
+              <View className="flex-row justify-between mb-2">
+                <Text className="text-2xl font-sans-extrabold text-primary">
                   {mockCampaign.currentAmount.toLocaleString()}{" "}
-                  {mockCampaign.currency}
+                  <Text className="text-lg">{mockCampaign.currency}</Text>
                 </Text>
-                <Text className="text-xs font-sans-semibold text-muted-foreground">
-                  of {mockCampaign.goalAmount.toLocaleString()}{" "}
-                  {mockCampaign.currency} goal
+                <Text className="text-sm font-sans-semibold text-muted-foreground self-end">
+                  Goal: {mockCampaign.goalAmount.toLocaleString()}
                 </Text>
               </View>
 
               {/* Progress Bar */}
-              <View className="w-full h-3 bg-muted rounded-full overflow-hidden">
+              <View className="w-full h-4 bg-muted rounded-full overflow-hidden">
                 <View
-                  className="h-full bg-accent"
+                  className="h-full bg-accent rounded-full"
                   style={{ width: `${mockCampaign.progressPercentage}%` }}
                 />
               </View>
-
-              <Text className="text-xs text-muted-foreground mt-2 font-sans-medium">
-                {mockCampaign.donationCount} people have donated
-              </Text>
             </View>
 
             <Pressable
               onPress={() => setIsDonating(true)}
-              className="bg-accent py-4 rounded-xl items-center justify-center shadow-sm flex-row gap-2"
+              className="bg-accent py-4 rounded-xl items-center justify-center shadow-sm active:opacity-90"
             >
-              <Heart color="white" size={18} />
-              <Text className="text-white font-sans-bold text-base">
-                Donate Now
-              </Text>
+              <View className="flex-row items-center gap-2">
+                <Heart color="white" size={20} fill="white" />
+                <Text className="text-white font-sans-bold text-base">
+                  Donate Now
+                </Text>
+              </View>
             </Pressable>
           </View>
 
           {/* Disaster Details */}
-          <View className="insights-card mb-3">
-            <Text className="insights-card-title mb-4">Disaster Details</Text>
-            <View className="gap-3">
-              <View className="flex-row justify-between items-center py-2 border-b border-border">
+          <View className="bg-card rounded-2xl p-5 mb-6 border border-border">
+            <Text className="text-lg font-sans-extrabold text-primary mb-4">
+              Disaster Details
+            </Text>
+            <View className="gap-4">
+              <View className="flex-row justify-between items-center">
                 <Text className="text-sm font-sans-medium text-muted-foreground">
                   Affected Population
                 </Text>
                 <Text className="text-base font-sans-bold text-primary">
-                  {totalAffectedPopulation?.toLocaleString()}
+                  {totalAffectedPopulation?.toLocaleString() || "0"}
                 </Text>
               </View>
-              <View className="flex-row justify-between items-center py-2 border-b border-border">
+              <View className="h-[1px] bg-border" />
+              <View className="flex-row justify-between items-center">
                 <Text className="text-sm font-sans-medium text-muted-foreground">
                   Declared By
                 </Text>
-                <Text className="text-base font-sans-bold text-primary">
-                  {declaredBy.slice(0, 5)} ...
+                <Text className="text-base font-sans-bold text-primary" numberOfLines={1}>
+                  {declaredBy || "N/A"}
                 </Text>
               </View>
-              <View className="flex-row justify-between items-center py-2 border-b border-border">
+              <View className="h-[1px] bg-border" />
+              <View className="flex-row justify-between items-center">
                 <Text className="text-sm font-sans-medium text-muted-foreground">
                   Declared On
                 </Text>
@@ -533,14 +575,17 @@ export default function DisasterDetails() {
           </View>
 
           {infrastructureDamage && infrastructureDamage.length > 0 && (
-            <View className="insights-card">
-              <Text className="insights-card-title mb-3">
-                Infrastructure Damage
-              </Text>
-              <View className="tag-grid">
+            <View className="bg-card rounded-2xl p-5 mb-6 border border-border">
+              <View className="flex-row items-center mb-4">
+                <Package size={20} color="#666" />
+                <Text className="text-lg font-sans-extrabold text-primary ml-2">
+                  Infrastructure Damage
+                </Text>
+              </View>
+              <View className="flex-row flex-wrap gap-2">
                 {infrastructureDamage.map((item, idx) => (
-                  <View key={idx} className="tag-chip">
-                    <Text className="tag-chip-text">{item}</Text>
+                  <View key={idx} className="bg-muted px-4 py-2 rounded-full border border-border">
+                    <Text className="text-sm font-sans-medium text-primary">{item}</Text>
                   </View>
                 ))}
               </View>
@@ -548,19 +593,31 @@ export default function DisasterDetails() {
           )}
 
           {linkedIncidentIds && linkedIncidentIds.length > 0 && (
-            <View className="insights-card mt-3">
-              <Text className="insights-card-title mb-3">Linked Incidents</Text>
-              <View className="tag-grid">
+            <View className="bg-card rounded-2xl p-5 mb-6 border border-border">
+              <Text className="text-lg font-sans-extrabold text-primary mb-4">
+                Linked Incidents
+              </Text>
+              <View className="gap-3">
                 {linkedIncidentIds.map((item, idx) => (
                   <Pressable
                     onPress={() => router.push(`/incidents/${item}`)}
                     key={idx}
-                    className="bg-accent/20 flex-row items-center justify-between w-full gap-2 py-3 px-3 rounded-xl"
+                    className="bg-accent/10 flex-row items-center justify-between py-4 px-4 rounded-xl active:opacity-80"
                   >
-                    <Text className="tag-chip-text text-accent">
-                      Incident - {item.slice(0, 6)} ...
-                    </Text>
-                    <ExternalLink size={20} />
+                    <View className="flex-row items-center flex-1">
+                      <View className="w-10 h-10 bg-accent/20 rounded-full items-center justify-center mr-3">
+                        <Package size={18} color="#e11d48" />
+                      </View>
+                      <View>
+                        <Text className="font-sans-bold text-primary">
+                          Incident
+                        </Text>
+                        <Text className="text-xs font-sans-medium text-muted-foreground">
+                          ID: {item.slice(0, 8)}...
+                        </Text>
+                      </View>
+                    </View>
+                    <ExternalLink size={20} color="#666" />
                   </Pressable>
                 ))}
               </View>
@@ -568,41 +625,55 @@ export default function DisasterDetails() {
           )}
 
           {comments.length > 0 && (
-            <View className="insights-card mt-3">
-              <Text className="insights-card-title mb-3">Comments</Text>
-
-              <Pressable
-                onPress={() => setIsCommenting(true)}
-                className="bg-accent p-4 rounded-xl mb-4 flex-row items-center justify-between"
-              >
-                <Text className="text-white font-sans-bold">
-                  Write a Comment
-                </Text>
-                <MessageSquareIcon color="white" />
-              </Pressable>
+            <View className="bg-card rounded-2xl p-5 mb-6 border border-border">
+              <View className="flex-row items-center justify-between mb-4">
+                <View className="flex-row items-center">
+                  <MessageSquareIcon size={20} color="#666" />
+                  <Text className="text-lg font-sans-extrabold text-primary ml-2">
+                    Comments ({comments.length})
+                  </Text>
+                </View>
+                <Pressable
+                  onPress={() => setIsCommenting(true)}
+                  className="bg-accent px-4 py-2 rounded-lg active:opacity-80"
+                >
+                  <Text className="text-white font-sans-bold text-sm">
+                    Add Comment
+                  </Text>
+                </Pressable>
+              </View>
 
               {comments.map((comment, index) => (
-                <View key={index} className="bg-accent/10 p-4 rounded-xl mb-4">
-                  <Text
-                    numberOfLines={3}
-                    className="text-primary font-sans-medium"
-                  >
+                <View key={index} className="bg-background p-4 rounded-xl mb-3 border border-border">
+                  <View className="flex-row items-center mb-2">
+                    <View className="w-8 h-8 bg-accent/20 rounded-full items-center justify-center mr-3">
+                      <Text className="text-accent font-sans-bold text-sm">
+                        {comment.authorId.charAt(0)}
+                      </Text>
+                    </View>
+                    <View className="flex-1">
+                      <Text className="font-sans-bold text-primary text-sm">
+                        {comment.authorId}
+                      </Text>
+                      <Text className="text-xs text-muted-foreground font-sans-medium">
+                        {formatSubscriptionDateTime(comment.createdAt.toString())}
+                      </Text>
+                    </View>
+                  </View>
+                  <Text className="text-primary font-sans-medium leading-relaxed">
                     {comment.content}
                   </Text>
                   {comment.attachments && comment.attachments.length > 0 && (
-                    <View className="flex-row gap-2 mt-3">
+                    <ScrollView horizontal showsHorizontalScrollIndicator={false} className="mt-3">
                       {comment.attachments.slice(0, 3).map((image, idx) => (
                         <Image
                           source={{ uri: image }}
                           key={idx}
-                          className="w-16 h-16 rounded-xl"
+                          className="w-20 h-20 rounded-xl mr-2"
                         />
                       ))}
-                    </View>
+                    </ScrollView>
                   )}
-                  <Text className="mt-3 text-xs text-muted-foreground font-sans-semibold">
-                    By {comment.authorId}
-                  </Text>
                 </View>
               ))}
             </View>

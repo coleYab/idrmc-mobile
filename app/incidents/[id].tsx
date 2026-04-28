@@ -1,13 +1,21 @@
-import { icons } from "@/constants/icons";
 import { useIncidentById } from "@/hooks/queries/useIncidents";
 import { getStatusColor } from "@/lib/mockData";
 import { formatStatusLabel, formatSubscriptionDateTime } from "@/lib/utils";
 import { useLocalSearchParams, useRouter } from "expo-router";
+import {
+  AlertTriangle,
+  CheckCircle2,
+  Clock,
+  MapPin,
+  Package,
+  UserCircle
+} from "lucide-react-native";
 import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Image,
   Pressable,
+  RefreshControl,
   ScrollView,
   Text,
   View,
@@ -18,8 +26,15 @@ export default function IncidentDetails() {
   const { id } = useLocalSearchParams();
   const router = useRouter();
 
-  const { data: incident, isLoading, isError } = useIncidentById(id as string);
+  const { data: incident, isLoading, isError, refetch } = useIncidentById(id as string);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await refetch();
+    setRefreshing(false);
+  };
 
   useEffect(() => {
     const attachmentList = incident?.attachments ?? [];
@@ -85,26 +100,61 @@ export default function IncidentDetails() {
   return (
     <SafeAreaView className="flex-1 bg-background">
       <ScrollView
-        bounces={false}
+        bounces={true}
         showsVerticalScrollIndicator={false}
         contentContainerClassName="pb-10"
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       >
+        {/* Header Section */}
         <View className="px-5 pt-6">
-          <Text className="text-3xl font-sans-extrabold text-primary w-full text-center mb-3 leading-tight">
+          <View className="flex-row items-center mb-2 gap-2 flex-wrap">
+            <View
+              style={{ backgroundColor: color }}
+              className="px-3 py-1 rounded-full"
+            >
+              <Text className="text-white font-sans-bold text-xs">
+                {status ? formatStatusLabel(status) : "Unknown"}
+              </Text>
+            </View>
+            <View className="bg-destructive/10 px-3 py-1 rounded-full">
+              <Text className="text-destructive font-sans-bold text-xs">
+                {severity} Severity
+              </Text>
+            </View>
+            {requiresUrgentMedical && (
+              <View className="bg-destructive px-3 py-1 rounded-full">
+                <Text className="text-white font-sans-bold text-xs">
+                  Medical Emergency
+                </Text>
+              </View>
+            )}
+          </View>
+
+          <Text className="text-3xl font-sans-extrabold text-primary w-full mb-3 leading-tight">
             {title}
           </Text>
+
+          <View className="flex-row items-center mb-4">
+            <MapPin size={18} color="#666" />
+            <Text className="text-base font-sans-medium text-muted-foreground ml-2">
+              {location}
+            </Text>
+          </View>
         </View>
 
-        <View className="w-full px-5 h-80 relative">
+        {/* Hero Image */}
+        <View className="w-full px-5 h-72 mb-4">
           {selectedImage ? (
             <Image
               source={{ uri: selectedImage }}
-              className="w-full h-full rounded-xl"
+              className="w-full h-full rounded-2xl"
               resizeMode="cover"
             />
           ) : (
-            <View className="w-full h-full bg-muted justify-center items-center">
-              <Image source={icons.activity} className="w-20 h-20 opacity-40" />
+            <View className="w-full h-full bg-muted justify-center items-center rounded-2xl">
+              <AlertTriangle size={48} color="#999" />
             </View>
           )}
         </View>
@@ -120,7 +170,7 @@ export default function IncidentDetails() {
               <Pressable
                 key={idx}
                 onPress={() => setSelectedImage(uri)}
-                className={`w-16 h-16 rounded-lg overflow-hidden border ${selectedImage === uri ? "border-accent" : "border-border"}`}
+                className={`w-16 h-16 rounded-lg overflow-hidden border-2 ${selectedImage === uri ? "border-accent" : "border-border"}`}
               >
                 <Image
                   source={{ uri }}
@@ -130,7 +180,7 @@ export default function IncidentDetails() {
               </Pressable>
             ))}
             {attachmentCount > 5 && (
-              <View className="w-16 h-16 rounded-lg bg-muted justify-center items-center">
+              <View className="w-16 h-16 rounded-lg bg-muted justify-center items-center border border-border">
                 <Text className="text-sm font-sans-medium text-muted-foreground">
                   +{attachmentCount - 5}
                 </Text>
@@ -140,65 +190,39 @@ export default function IncidentDetails() {
         )}
 
         <View className="px-5 pt-6">
-          <View className="flex-row items-center gap-3 mb-4 flex-wrap">
-            <View
-              style={{ backgroundColor: color }}
-              className="px-3 py-1.5 rounded-full"
-            >
-              <Text className="text-white font-sans-bold text-xs">
-                {status ? formatStatusLabel(status) : "Unknown"}
+          {requiresUrgentMedical && (
+            <View className="bg-destructive/10 px-3 py-2 rounded-lg mb-4 flex-row items-center">
+              <AlertTriangle size={16} color="#dc2626" />
+              <Text className="text-destructive font-sans-bold text-sm ml-2">
+                Medical Emergency - Urgent assistance required
               </Text>
             </View>
-            <View className="bg-destructive/10 px-3 py-1.5 rounded-full">
-              <Text className="text-destructive font-sans-bold text-xs">
-                {severity} Severity
-              </Text>
-            </View>
+          )}
+
+          <View className="flex-row items-center gap-2 mb-4 flex-wrap">
             <View className="bg-muted px-3 py-1.5 rounded-full border border-border">
               <Text className="text-primary font-sans-bold text-xs">
                 {incidentType}
               </Text>
             </View>
-            {requiresUrgentMedical && (
-              <View className="bg-destructive px-3 py-1.5 rounded-full">
-                <Text className="text-white font-sans-bold text-xs">
-                  Medical Emergency
-                </Text>
-              </View>
-            )}
           </View>
 
-          {/* <Text className="text-3xl font-sans-extrabold text-primary mb-3 leading-tight">
-            {title}
-          </Text> */}
-
-          <View className="flex-row items-center mb-6">
-            <Image
-              source={icons.activity}
-              className="w-5 h-5 mr-2 opacity-50"
-              style={{ tintColor: "gray" }}
-            />
-            <Text className="text-base font-sans-medium text-muted-foreground">
-              {location}
-            </Text>
-          </View>
-
-          <Text className="text-base font-sans-regular text-primary mb-8 leading-relaxed opacity-80">
+          <Text className="text-base font-sans-regular text-primary mb-6 leading-relaxed">
             {description}
           </Text>
 
           {/* Stats Cards */}
-          <View className="flex-row gap-2 mb-6">
-            <View className="w-25/51 bg-card border-2 border-border rounded-xl p-4">
-              <Text className="text-xs font-sans-semibold uppercase tracking-[1px] text-muted-foreground mb-1">
-                Affected Pop.
+          <View className="flex-row gap-3 mb-6">
+            <View className="flex-1 bg-card border border-border rounded-xl p-4">
+              <Text className="text-xs font-sans-semibold uppercase tracking-wider text-muted-foreground mb-1">
+                Affected Population
               </Text>
               <Text className="text-2xl font-sans-extrabold text-primary">
                 {affectedPopulationCount?.toLocaleString() || "0"}
               </Text>
             </View>
-            <View className="w-24/51 bg-card border-2 border-border rounded-xl p-4">
-              <Text className="text-xs font-sans-semibold uppercase tracking-[1px] text-muted-foreground mb-1">
+            <View className="flex-1 bg-card border border-border rounded-xl p-4">
+              <Text className="text-xs font-sans-semibold uppercase tracking-wider text-muted-foreground mb-1">
                 Photos
               </Text>
               <Text className="text-2xl font-sans-extrabold text-primary">
@@ -207,37 +231,49 @@ export default function IncidentDetails() {
             </View>
           </View>
 
-          <View className="insights-card mb-6">
-            <Text className="insights-card-title mb-4">Incident Details</Text>
+          <View className="bg-card rounded-2xl p-5 mb-6 border border-border">
+            <Text className="text-lg font-sans-extrabold text-primary mb-4">
+              Incident Details
+            </Text>
 
-            <View className="gap-3">
-              <View className="flex-row justify-between items-center py-2 border-b border-border">
-                <Text className="text-sm font-sans-medium text-muted-foreground">
-                  Reported By
-                </Text>
-                <Text
-                  numberOfLines={1}
-                  className="text-base font-sans-bold text-primary"
-                >
-                  {reportedBy.slice(0, 5)} ...
-                </Text>
+            <View className="gap-4">
+              <View className="flex-row justify-between items-center">
+                <View className="flex-row items-center flex-1">
+                  <UserCircle size={18} color="#666" />
+                  <View className="flex-1 flex-row justify-between">
+                    <Text className="text-sm font-sans-medium text-muted-foreground ml-2">
+                      Reported By
+                    </Text>
+                    <Text className="text-base font-sans-bold text-primary" numberOfLines={1}>
+                      {reportedBy.slice(0, 10) + "..." || "N/A"}
+                    </Text>
+                  </View>
+                </View>
               </View>
+              <View className="h-[1px] bg-border" />
 
-              <View className="flex-row justify-between items-center py-2 border-b border-border">
-                <Text className="text-sm font-sans-medium text-muted-foreground">
-                  Reported On
-                </Text>
+              <View className="flex-row justify-between items-center">
+                <View className="flex-row items-center">
+                  <Clock size={18} color="#666" />
+                  <Text className="text-sm font-sans-medium text-muted-foreground ml-2">
+                    Reported On
+                  </Text>
+                </View>
                 <Text className="text-base font-sans-bold text-primary">
                   {createdAt
                     ? formatSubscriptionDateTime(createdAt.toString())
                     : "N/A"}
                 </Text>
               </View>
+              <View className="h-[1px] bg-border" />
 
-              <View className="flex-row justify-between items-center py-2 border-b border-border">
-                <Text className="text-sm font-sans-medium text-muted-foreground">
-                  Last Updated
-                </Text>
+              <View className="flex-row justify-between items-center">
+                <View className="flex-row items-center">
+                  <Clock size={18} color="#666" />
+                  <Text className="text-sm font-sans-medium text-muted-foreground ml-2">
+                    Last Updated
+                  </Text>
+                </View>
                 <Text className="text-base font-sans-bold text-primary">
                   {updatedAt
                     ? formatSubscriptionDateTime(updatedAt.toString())
@@ -246,38 +282,53 @@ export default function IncidentDetails() {
               </View>
 
               {resolvedBy && (
-                <View className="flex-row justify-between items-center py-2 border-b border-border">
-                  <Text className="text-sm font-sans-medium text-muted-foreground">
-                    Resolved By
-                  </Text>
-                  <Text className="text-base font-sans-bold text-primary">
-                    {resolvedBy}
-                  </Text>
-                </View>
+                <>
+                  <View className="h-[1px] bg-border" />
+                  <View className="flex-row justify-between items-center">
+                    <View className="flex-row items-center">
+                      <CheckCircle2 size={18} color="#16a34a" />
+                      <Text className="text-sm font-sans-medium text-muted-foreground ml-2">
+                        Resolved By
+                      </Text>
+                    </View>
+                    <Text className="text-base font-sans-bold text-primary">
+                      {resolvedBy}
+                    </Text>
+                  </View>
+                </>
               )}
 
               {resolvedAt && (
-                <View className="flex-row justify-between items-center py-2">
-                  <Text className="text-sm font-sans-medium text-muted-foreground">
-                    Resolved On
-                  </Text>
-                  <Text className="text-base font-sans-bold text-primary">
-                    {formatSubscriptionDateTime(resolvedAt.toString())}
-                  </Text>
-                </View>
+                <>
+                  <View className="h-[1px] bg-border" />
+                  <View className="flex-row justify-between items-center">
+                    <View className="flex-row items-center">
+                      <CheckCircle2 size={18} color="#16a34a" />
+                      <Text className="text-sm font-sans-medium text-muted-foreground ml-2">
+                        Resolved On
+                      </Text>
+                    </View>
+                    <Text className="text-base font-sans-bold text-primary">
+                      {formatSubscriptionDateTime(resolvedAt.toString())}
+                    </Text>
+                  </View>
+                </>
               )}
             </View>
           </View>
 
           {infrastructureDamage && infrastructureDamage.length > 0 && (
-            <View className="insights-card mb-6">
-              <Text className="insights-card-title mb-3">
-                Infrastructure Damage
-              </Text>
-              <View className="tag-grid">
+            <View className="bg-card rounded-2xl p-5 mb-6 border border-border">
+              <View className="flex-row items-center mb-4">
+                <Package size={20} color="#666" />
+                <Text className="text-lg font-sans-extrabold text-primary ml-2">
+                  Infrastructure Damage
+                </Text>
+              </View>
+              <View className="flex-row flex-wrap gap-2">
                 {infrastructureDamage.map((item, idx) => (
-                  <View key={idx} className="tag-chip">
-                    <Text className="tag-chip-text">{item}</Text>
+                  <View key={idx} className="bg-muted px-4 py-2 rounded-full border border-border">
+                    <Text className="text-sm font-sans-medium text-primary">{item}</Text>
                   </View>
                 ))}
               </View>

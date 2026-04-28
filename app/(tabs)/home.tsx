@@ -111,19 +111,19 @@ export default function App() {
               router.push("/(tabs)/incidents");
             }}
           />
-          <View style={{ marginTop: 16 }}>
+          <View style={{ marginTop: 10 }}>
             {incidentsLoading ? (
               Array.from({ length: 3 }).map((_, index) => (
                 <View
                   key={`incident-skeleton-${index}`}
-                  style={{ marginBottom: 16 }}
+                  style={{ marginBottom: 10 }}
                 >
                   <Skeleton height={138} borderRadius={20} />
                 </View>
               ))
             ) : recentIncidents.length > 0 ? (
               recentIncidents.map((incident) => (
-                <View key={incident.id} style={{ marginBottom: 16 }}>
+                <View key={incident.id} style={{ marginBottom: 10 }}>
                   <IncidentCard
                     onViewDetails={() => {
                       router.push(`/incidents/${incident.id}`);
@@ -153,19 +153,19 @@ export default function App() {
               router.push("/(tabs)/disasters");
             }}
           />
-          <View style={{ marginTop: 16 }}>
+          <View style={{ marginTop: 10 }}>
             {disastersLoading ? (
               Array.from({ length: 3 }).map((_, index) => (
                 <View
                   key={`disaster-skeleton-${index}`}
-                  style={{ marginBottom: 16 }}
+                  style={{ marginBottom: 10 }}
                 >
                   <Skeleton height={138} borderRadius={20} />
                 </View>
               ))
             ) : disasters.length > 0 ? (
-              disasters.map((disaster) => (
-                <View key={disaster.id} style={{ marginBottom: 16 }}>
+              disasters.slice(0, 3).map((disaster) => (
+                <View key={disaster.id} style={{ marginBottom: 10 }}>
                   <DisasterCard
                     onViewDetails={() => {
                       router.push(`/disaster/${disaster.id}`);
