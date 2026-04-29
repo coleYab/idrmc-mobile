@@ -1,7 +1,7 @@
 import { MapPin } from "lucide-react-native";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
-import MapView, { Circle, Marker, PROVIDER_DEFAULT } from "react-native-maps";
+import MapView, { Circle, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 
 interface LocationMapProps {
   /** Free-text location string, e.g. "Addis Ababa, Ethiopia" */
@@ -96,17 +96,17 @@ export default function LocationMap({
           </View>
         ) : (
           <MapView
-            provider={PROVIDER_DEFAULT}
+            provider={PROVIDER_GOOGLE}
             style={StyleSheet.absoluteFillObject}
             initialRegion={{
               latitude: coords.latitude,
               longitude: coords.longitude,
-              // Zoom to fit the circle roughly
-              latitudeDelta: (radiusMeters / 111_320) * 4,
+              // Zoom to fit the full circle with comfortable padding
+              latitudeDelta: (radiusMeters / 111_320) * 2.5,
               longitudeDelta:
                 (radiusMeters /
                   (111_320 * Math.cos((coords.latitude * Math.PI) / 180))) *
-                4,
+                2.5,
             }}
             scrollEnabled={false}
             zoomEnabled={false}
@@ -186,6 +186,7 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#e8f0f7",
     overflow: "hidden",
+    position: "relative",
   },
   center: {
     flex: 1,
