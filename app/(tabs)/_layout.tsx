@@ -12,7 +12,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 const tabBar = components.tabBar;
 
 const TabIcon = ({ focused, iconType }: TabIconProps) => {
-  const IconComponent = lucideIcons[iconType === "plus" ? "Plus" : iconType === "list" ? "List" : iconType === "home" ? "Home" : iconType === "alertTriangle" ? "AlertTriangle" : iconType === "settings" ? "Settings" : "Home"];
+  const IconComponent = lucideIcons[iconType === "plus" ? "Plus" : iconType === "list" ? "List" : iconType === "home" ? "Home" : iconType === "alertTriangle" ? "AlertTriangle" : iconType === "settings" ? "Settings" : iconType === "bell" ? "Bell" : "Home"];
   return (
     <View className="tabs-icon">
       <View className={clsx("tabs-pill", focused && "tabs-active")}>

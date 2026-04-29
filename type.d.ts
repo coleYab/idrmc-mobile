@@ -5,13 +5,13 @@ declare global {
     name: string;
     title: string;
     icon?: ImageSourcePropType;
-    iconType?: "plus" | "list" | "home" | "alertTriangle" | "settings";
+    iconType?: "plus" | "list" | "home" | "alertTriangle" | "settings" | "bell";
   }
 
   interface TabIconProps {
     focused: boolean;
     icon?: ImageSourcePropType;
-    iconType?: "plus" | "list" | "home" | "alertTriangle" | "settings";
+    iconType?: "plus" | "list" | "home" | "alertTriangle" | "settings" | "bell";
   }
 
   interface Subscription {

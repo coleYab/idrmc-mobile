@@ -1,4 +1,4 @@
-import { Home, Settings, Plus, Menu, List, AlertTriangle } from "lucide-react-native";
+import { Home, Settings, Plus, Menu, List, AlertTriangle, Bell } from "lucide-react-native";
 
 export const lucideIcons = {
     Home,
@@ -7,6 +7,7 @@ export const lucideIcons = {
     Menu,
     List,
     AlertTriangle,
+    Bell,
 } as const;
 
 import activity from "@/assets/icons/activity.png";

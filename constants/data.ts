@@ -4,8 +4,9 @@ export const tabs: AppTab[] = [
     { name: "add", title: "Create", iconType: "plus" },
     { name: "incidents", title: "Incidents", iconType: "list" },
     { name: "home", title: "Home", iconType: "home" },
+    { name: "notifications", title: "Notifications", iconType: "bell" },
     { name: "disasters", title: "Disasters", iconType: "alertTriangle" },
-    { name: "settings", title: "Settings", iconType: "settings" },
+    // { name: "settings", title: "Settings", iconType: "settings" },
 ];
 
 export const HOME_USER = {
