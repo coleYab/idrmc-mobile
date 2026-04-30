@@ -277,7 +277,7 @@ const SignIn = () => {
                     <Pressable>
                       <Text
                         className="text-secondary font-medium"
-                        style={{ color: "#0a7ea4" }}
+                        style={{ color: "#847e89" }}
                       >
                         Forgot Password?
                       </Text>

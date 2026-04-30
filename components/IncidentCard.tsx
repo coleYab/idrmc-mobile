@@ -29,7 +29,9 @@ const IncidentCard = ({
   onPress,
 }: IncidentCardProps) => {
   const color = getStatusColor(status);
-  const imageSource = attachments?.[0] ? { uri: attachments[0] } : icons.activity;
+  const imageSource = attachments?.[0]
+    ? { uri: attachments[0] }
+    : icons.activity;
 
   return (
     <Pressable
@@ -45,12 +47,11 @@ const IncidentCard = ({
               {title}
             </Text>
             <Text numberOfLines={1} ellipsizeMode="tail" className="sub-meta">
-              {incidentType?.trim() ||
-                location?.trim()}
+              {incidentType?.trim() || location?.trim()}
             </Text>
           </View>
         </View>
-      </View >
+      </View>
 
       {expanded && (
         <View className="sub-body">
@@ -119,19 +120,17 @@ const IncidentCard = ({
             </View>
           </View>
 
-
           <Pressable
             onPress={onViewDetails}
-            className="mt-5 bg-blue-600 py-3 rounded-xl shadow-sm"
+            className="mt-5 bg-accent py-3 rounded-xl shadow-sm"
           >
-            <Text className="text-white text-center font-semibold text-base">
+            <Text className="text-background text-center font-semibold text-base">
               View Details
             </Text>
           </Pressable>
         </View>
-
       )}
-    </Pressable >
+    </Pressable>
   );
 };
 

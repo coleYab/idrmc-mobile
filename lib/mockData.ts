@@ -2,10 +2,11 @@ export const MOCK_INCIDENTS: Incident[] = [
   {
     id: "inc-001",
     title: "Heavy Rainfall in Awash",
-    description: "Continuous heavy rainfall causing water levels to rise rapidly.",
-    incidentType: 'FLOOD',
-    status: 'ACTIVE',
-    severity: 'HIGH',
+    description:
+      "Continuous heavy rainfall causing water levels to rise rapidly.",
+    incidentType: "FLOOD",
+    status: "ACTIVE",
+    severity: "HIGH",
     location: "Awash Basin",
     attachments: [
       "https://images.unsplash.com/photo-1428592953211-077101b2021b?auto=format&fit=crop&q=80&w=400",
@@ -21,9 +22,9 @@ export const MOCK_INCIDENTS: Incident[] = [
     id: "inc-002",
     title: "Localized Locust Swarm",
     description: "Small swarm detected resting in crops near Dire Dawa.",
-    incidentType: 'LOCUST',
-    status: 'PENDING',
-    severity: 'MEDIUM',
+    incidentType: "LOCUST",
+    status: "PENDING",
+    severity: "MEDIUM",
     location: "Dire Dawa outskirts",
     attachments: [
       "https://images.unsplash.com/photo-1542614761-124b81bcafab?auto=format&fit=crop&q=80&w=400",
@@ -39,9 +40,9 @@ export const MOCK_INCIDENTS: Incident[] = [
     id: "inc-003",
     title: "Forest Fire - Bale Mountains",
     description: "Smoke spotted deep within the national park.",
-    incidentType: 'FIRE',
-    status: 'VERIFIED',
-    severity: 'CRITICAL',
+    incidentType: "FIRE",
+    status: "VERIFIED",
+    severity: "CRITICAL",
     location: "Bale Mountains National Park",
     attachments: [
       "https://images.unsplash.com/photo-1605806616949-1e87b487cb2a?auto=format&fit=crop&q=80&w=400",
@@ -57,9 +58,9 @@ export const MOCK_INCIDENTS: Incident[] = [
     id: "inc-004",
     title: "Suspicious Soil Movement",
     description: "Minor landslide blocking local unpaved road.",
-    incidentType: 'LANDSLIDE',
-    status: 'RESOLVED',
-    severity: 'LOW',
+    incidentType: "LANDSLIDE",
+    status: "RESOLVED",
+    severity: "LOW",
     location: "Dessie Zuria",
     attachments: [
       "https://images.unsplash.com/photo-1601007823528-6612e6bf5632?auto=format&fit=crop&q=80&w=400",
@@ -77,9 +78,9 @@ export const MOCK_INCIDENTS: Incident[] = [
     id: "inc-005",
     title: "Prolonged Dry Spells",
     description: "Wells drying up completely in the pastoral region.",
-    incidentType: 'DROUGHT',
-    status: 'ACTIVE',
-    severity: 'HIGH',
+    incidentType: "DROUGHT",
+    status: "ACTIVE",
+    severity: "HIGH",
     location: "Somali Region - Warder",
     attachments: [
       "https://images.unsplash.com/photo-1510255479038-038e2ec647f1?auto=format&fit=crop&q=80&w=400",
@@ -97,10 +98,11 @@ export const MOCK_DISASTERS: Disaster[] = [
   {
     id: "dis-001",
     title: "National Awash Flooding 2026",
-    description: "Major disaster declaration due to overflowing Awash river displacing thousands.",
-    type: 'FLOOD',
-    status: 'ACTIVE',
-    severity: 'CRITICAL',
+    description:
+      "Major disaster declaration due to overflowing Awash river displacing thousands.",
+    type: "FLOOD",
+    status: "ACTIVE",
+    severity: "CRITICAL",
     location: "Awash River Basin (Afar, Oromia, Amhara)",
     totalAffectedPopulation: 125000,
     requiresUrgentMedical: true,
@@ -120,9 +122,9 @@ export const MOCK_DISASTERS: Disaster[] = [
     id: "dis-002",
     title: "Eastern Region Drought",
     description: "Severe drought progressing rapidly across multiple woredas.",
-    type: 'DROUGHT',
-    status: 'VERIFIED',
-    severity: 'HIGH',
+    type: "DROUGHT",
+    status: "VERIFIED",
+    severity: "HIGH",
     location: "Somali & Oromia Regions",
     totalAffectedPopulation: 340000,
     requiresUrgentMedical: true,
@@ -143,10 +145,11 @@ export const MOCK_NOTIFICATIONS: Notificaion[] = [
   {
     id: "notif-001",
     title: "New Disaster Declared",
-    message: "National Awash Flooding 2026 has been declared a critical disaster.",
+    message:
+      "National Awash Flooding 2026 has been declared a critical disaster.",
     recipient: "user_123",
-    type: 'in_app' as NotificationType,
-    status: 'read' as NotificationStatus,
+    type: "in_app" as NotificationType,
+    status: "read" as NotificationStatus,
     createdAt: new Date("2026-04-13T03:00:00Z"),
     updatedAt: new Date("2026-04-13T03:05:00Z"),
   },
@@ -155,8 +158,8 @@ export const MOCK_NOTIFICATIONS: Notificaion[] = [
     title: "Incident Verified",
     message: "Forest Fire - Bale Mountains is verified.",
     recipient: "user_123",
-    type: 'sms' as NotificationType,
-    status: 'sent' as NotificationStatus,
+    type: "sms" as NotificationType,
+    status: "sent" as NotificationStatus,
     createdAt: new Date("2026-04-12T10:00:00Z"),
     updatedAt: new Date("2026-04-12T10:00:00Z"),
   },
@@ -165,29 +168,31 @@ export const MOCK_NOTIFICATIONS: Notificaion[] = [
     title: "Update on Drought",
     message: "Additional budget allocated to Eastern Region Drought.",
     recipient: "user_123",
-    type: 'email' as NotificationType,
-    status: 'pending' as NotificationStatus,
+    type: "email" as NotificationType,
+    status: "pending" as NotificationStatus,
     createdAt: new Date("2026-04-14T08:00:00Z"),
     updatedAt: new Date("2026-04-14T08:00:00Z"),
-  }
+  },
 ];
 
-export const getStatusColor = (status: IncidentStatus | DisasterStatus): string => {
+export const getStatusColor = (
+  status: IncidentStatus | DisasterStatus,
+): string => {
   switch (status) {
-    case 'PENDING':
-      return "#F59E0B"; // Amber
-    case 'VERIFIED':
-      return "#3B82F6"; // Blue
-    case 'ACTIVE':
-      return "#EF4444"; // Red
-    case 'RESOLVED':
-      return "#10B981"; // Green
-    case 'REPEATED':
-      return "#8B5CF6"; // Purple
-    case 'FALSE_ALARM':
-    case 'REJECTED':
-      return "#6B7280"; // Gray
+    case "PENDING":
+      return "#9fa4a9";
+    case "VERIFIED":
+      return "#afbfc0";
+    case "ACTIVE":
+      return "#56494c";
+    case "RESOLVED":
+      return "#847e89";
+    case "REPEATED":
+      return "#847e89";
+    case "FALSE_ALARM":
+    case "REJECTED":
+      return "#56494c";
     default:
-      return "#efcb83ff"; // Slatess
+      return "#9fa4a9";
   }
 };

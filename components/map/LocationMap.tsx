@@ -30,7 +30,7 @@ async function geocode(query: string): Promise<Coords | null> {
           // Nominatim requires a User-Agent header
           "User-Agent": "IDRMC-App/1.0",
         },
-      }
+      },
     );
     const results = await response.json();
     if (results && results.length > 0) {
@@ -78,19 +78,19 @@ export default function LocationMap({
     <View style={[styles.card, { height: height + 56 }]}>
       {/* Section header */}
       <View style={styles.header}>
-        <MapPin size={18} color="#e11d48" />
+        <MapPin size={18} color="#56494c" />
         <Text style={styles.headerText}>{label}</Text>
       </View>
 
       <View style={[styles.mapContainer, { height }]}>
         {loading ? (
           <View style={styles.center}>
-            <ActivityIndicator size="small" color="#e11d48" />
+            <ActivityIndicator size="small" color="#56494c" />
             <Text style={styles.statusText}>Locating on map…</Text>
           </View>
         ) : error || !coords ? (
           <View style={styles.center}>
-            <MapPin size={32} color="#aaa" />
+            <MapPin size={32} color="#9fa4a9" />
             <Text style={styles.statusText}>Location unavailable</Text>
             <Text style={styles.subText}>{location}</Text>
           </View>
@@ -117,8 +117,8 @@ export default function LocationMap({
             <Circle
               center={coords}
               radius={radiusMeters}
-              fillColor="rgba(225,29,72,0.18)"
-              strokeColor="rgba(225,29,72,0.7)"
+              fillColor="rgba(86,73,76,0.18)"
+              strokeColor="rgba(86,73,76,0.7)"
               strokeWidth={2}
             />
 
@@ -133,7 +133,7 @@ export default function LocationMap({
                 <View style={styles.markerPulse} />
                 {/* Inner dot */}
                 <View style={styles.markerDot}>
-                  <MapPin size={14} color="#fff" fill="#fff" />
+                  <MapPin size={14} color="#c2d3cd" fill="#c2d3cd" />
                 </View>
               </View>
             </Marker>
@@ -144,7 +144,7 @@ export default function LocationMap({
       {/* Location label below map */}
       {!loading && !error && coords && (
         <View style={styles.footer}>
-          <MapPin size={12} color="#e11d48" />
+          <MapPin size={12} color="#56494c" />
           <Text style={styles.footerText} numberOfLines={1}>
             {location}
           </Text>
@@ -159,10 +159,10 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     overflow: "hidden",
     borderWidth: 1,
-    borderColor: "rgba(0,0,0,0.08)",
-    backgroundColor: "#fff",
+    borderColor: "rgba(159,164,169,0.8)",
+    backgroundColor: "#afbfc0",
     marginBottom: 24,
-    shadowColor: "#000",
+    shadowColor: "#56494c",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.07,
     shadowRadius: 8,
@@ -174,17 +174,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 10,
     gap: 6,
-    backgroundColor: "#fff",
+    backgroundColor: "#c2d3cd",
   },
   headerText: {
     fontSize: 15,
     fontWeight: "700",
-    color: "#111",
+    color: "#56494c",
     letterSpacing: 0.1,
   },
   mapContainer: {
     width: "100%",
-    backgroundColor: "#e8f0f7",
+    backgroundColor: "#9fa4a9",
     overflow: "hidden",
     position: "relative",
   },
@@ -197,12 +197,12 @@ const styles = StyleSheet.create({
   statusText: {
     fontSize: 13,
     fontWeight: "600",
-    color: "#666",
+    color: "#847e89",
     marginTop: 4,
   },
   subText: {
     fontSize: 12,
-    color: "#999",
+    color: "#847e89",
     textAlign: "center",
     paddingHorizontal: 12,
   },
@@ -213,11 +213,11 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     gap: 5,
     borderTopWidth: 1,
-    borderTopColor: "rgba(0,0,0,0.06)",
+    borderTopColor: "rgba(159,164,169,0.8)",
   },
   footerText: {
     fontSize: 12,
-    color: "#666",
+    color: "#847e89",
     fontWeight: "500",
     flex: 1,
   },
@@ -232,18 +232,18 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: "rgba(225,29,72,0.25)",
+    backgroundColor: "rgba(86,73,76,0.25)",
     borderWidth: 1.5,
-    borderColor: "rgba(225,29,72,0.5)",
+    borderColor: "rgba(86,73,76,0.5)",
   },
   markerDot: {
     width: 26,
     height: 26,
     borderRadius: 13,
-    backgroundColor: "#e11d48",
+    backgroundColor: "#56494c",
     alignItems: "center",
     justifyContent: "center",
-    shadowColor: "#e11d48",
+    shadowColor: "#56494c",
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.5,
     shadowRadius: 6,

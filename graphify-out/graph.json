@@ -481,12 +481,30 @@
       "norm_label": "disasters.ts"
     },
     {
+      "label": "notifications.tsx",
+      "file_type": "code",
+      "source_file": "/home/nba/Programming/IDRMC/app/notifications.tsx",
+      "source_location": "L1",
+      "id": "home_nba_programming_idrmc_app_notifications_tsx",
+      "community": 17,
+      "norm_label": "notifications.tsx"
+    },
+    {
+      "label": "formatLabel()",
+      "file_type": "code",
+      "source_file": "/home/nba/Programming/IDRMC/app/notifications.tsx",
+      "source_location": "L45",
+      "id": "notifications_formatlabel",
+      "community": 17,
+      "norm_label": "formatlabel()"
+    },
+    {
       "label": "onboarding.tsx",
       "file_type": "code",
       "source_file": "/home/nba/Programming/IDRMC/app/onboarding.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_app_onboarding_tsx",
-      "community": 17,
+      "community": 18,
       "norm_label": "onboarding.tsx"
     },
     {
@@ -495,7 +513,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/onboarding.tsx",
       "source_location": "L7",
       "id": "onboarding_onboarding",
-      "community": 17,
+      "community": 18,
       "norm_label": "onboarding()"
     },
     {
@@ -504,7 +522,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/_layout.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_app_layout_tsx",
-      "community": 18,
+      "community": 19,
       "norm_label": "_layout.tsx"
     },
     {
@@ -513,7 +531,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/_layout.tsx",
       "source_location": "L19",
       "id": "layout_rootlayout",
-      "community": 18,
+      "community": 19,
       "norm_label": "rootlayout()"
     },
     {
@@ -522,7 +540,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/index.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_app_index_tsx",
-      "community": 19,
+      "community": 20,
       "norm_label": "index.tsx"
     },
     {
@@ -531,26 +549,8 @@
       "source_file": "/home/nba/Programming/IDRMC/app/index.tsx",
       "source_location": "L4",
       "id": "index_index",
-      "community": 19,
+      "community": 20,
       "norm_label": "index()"
-    },
-    {
-      "label": "notifications.tsx",
-      "file_type": "code",
-      "source_file": "/home/nba/Programming/IDRMC/app/(tabs)/notifications.tsx",
-      "source_location": "L1",
-      "id": "home_nba_programming_idrmc_app_tabs_notifications_tsx",
-      "community": 20,
-      "norm_label": "notifications.tsx"
-    },
-    {
-      "label": "formatLabel()",
-      "file_type": "code",
-      "source_file": "/home/nba/Programming/IDRMC/app/(tabs)/notifications.tsx",
-      "source_location": "L45",
-      "id": "notifications_formatlabel",
-      "community": 20,
-      "norm_label": "formatlabel()"
     },
     {
       "label": "home.tsx",
@@ -844,7 +844,7 @@
       "label": "IncidentDetails()",
       "file_type": "code",
       "source_file": "/home/nba/Programming/IDRMC/app/incidents/[id].tsx",
-      "source_location": "L32",
+      "source_location": "L26",
       "id": "id_incidentdetails",
       "community": 2,
       "norm_label": "incidentdetails()"
@@ -1166,6 +1166,18 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "/home/nba/Programming/IDRMC/app/notifications.tsx",
+      "source_location": "L45",
+      "weight": 1.0,
+      "_src": "home_nba_programming_idrmc_app_notifications_tsx",
+      "_tgt": "notifications_formatlabel",
+      "source": "home_nba_programming_idrmc_app_notifications_tsx",
+      "target": "notifications_formatlabel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "/home/nba/Programming/IDRMC/app/onboarding.tsx",
       "source_location": "L7",
       "weight": 1.0,
@@ -1197,18 +1209,6 @@
       "_tgt": "index_index",
       "source": "home_nba_programming_idrmc_app_index_tsx",
       "target": "index_index",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "contains",
-      "confidence": "EXTRACTED",
-      "source_file": "/home/nba/Programming/IDRMC/app/(tabs)/notifications.tsx",
-      "source_location": "L45",
-      "weight": 1.0,
-      "_src": "home_nba_programming_idrmc_app_tabs_notifications_tsx",
-      "_tgt": "notifications_formatlabel",
-      "source": "home_nba_programming_idrmc_app_tabs_notifications_tsx",
-      "target": "notifications_formatlabel",
       "confidence_score": 1.0
     },
     {
@@ -1503,7 +1503,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/nba/Programming/IDRMC/app/incidents/[id].tsx",
-      "source_location": "L32",
+      "source_location": "L26",
       "weight": 1.0,
       "_src": "home_nba_programming_idrmc_app_incidents_id_tsx",
       "_tgt": "id_incidentdetails",

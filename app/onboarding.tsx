@@ -19,7 +19,7 @@ const Onboarding = () => {
   return (
     <SafeAreaView
       className="flex-1"
-      style={{ flex: 1, backgroundColor: "#ff6303" }}
+      style={{ flex: 1, backgroundColor: "#847e89" }}
     >
       {/* Replaced View with ScrollView. 
         Using contentContainerClassName for the padding and flex-grow 
@@ -54,7 +54,7 @@ const Onboarding = () => {
         {/* mt-auto relies on flexGrow: 1 in the ScrollView to push this to the bottom */}
         <Pressable
           onPress={() => router.push("/sign-up")}
-          className="mt-auto items-center rounded-full bg-white py-5"
+          className="mt-auto items-center rounded-full bg-card py-5"
         >
           <Text className="text-lg font-sans-bold text-primary">
             Get Started

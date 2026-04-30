@@ -1,7 +1,7 @@
-# Graph Report - /home/nba/Programming/IDRMC  (2026-04-29)
+# Graph Report - /home/nba/Programming/IDRMC  (2026-04-30)
 
 ## Corpus Check
-- 46 files · ~144,729 words
+- 46 files · ~144,163 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -263,13 +263,13 @@ Nodes (0):
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 - **Thin community `Community 16`** (2 nodes): `LocationMap.tsx`, `geocode()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 17`** (2 nodes): `onboarding.tsx`, `Onboarding()`
+- **Thin community `Community 17`** (2 nodes): `notifications.tsx`, `formatLabel()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 18`** (2 nodes): `_layout.tsx`, `RootLayout()`
+- **Thin community `Community 18`** (2 nodes): `onboarding.tsx`, `Onboarding()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 19`** (2 nodes): `index.tsx`, `Index()`
+- **Thin community `Community 19`** (2 nodes): `_layout.tsx`, `RootLayout()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 20`** (2 nodes): `notifications.tsx`, `formatLabel()`
+- **Thin community `Community 20`** (2 nodes): `index.tsx`, `Index()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 - **Thin community `Community 21`** (2 nodes): `_layout.tsx`, `TabIcon()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.

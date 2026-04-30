@@ -7,30 +7,30 @@ import { formatStatusLabel, formatSubscriptionDateTime } from "@/lib/utils";
 import * as ImagePicker from "expo-image-picker";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import {
-  CheckCircle2,
-  ExternalLink,
-  Heart,
-  MapPin,
-  MessageSquareIcon,
-  Package,
-  X,
+    CheckCircle2,
+    ExternalLink,
+    Heart,
+    MapPin,
+    MessageSquareIcon,
+    Package,
+    X,
 } from "lucide-react-native";
 import React, { useEffect, useRef, useState } from "react";
 import {
-  ActivityIndicator,
-  Animated,
-  Image,
-  Keyboard,
-  KeyboardAvoidingView,
-  Modal,
-  Platform,
-  Pressable,
-  RefreshControl,
-  ScrollView,
-  Text,
-  TextInput,
-  TouchableWithoutFeedback,
-  View,
+    ActivityIndicator,
+    Animated,
+    Image,
+    Keyboard,
+    KeyboardAvoidingView,
+    Modal,
+    Platform,
+    Pressable,
+    RefreshControl,
+    ScrollView,
+    Text,
+    TextInput,
+    TouchableWithoutFeedback,
+    View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -273,7 +273,7 @@ export default function DisasterDetails() {
           onPress={() => router.back()}
           className="mt-4 px-6 py-3 bg-accent rounded-xl"
         >
-          <Text className="text-white font-sans-bold">Go Back</Text>
+          <Text className="text-background font-sans-bold">Go Back</Text>
         </Pressable>
       </SafeAreaView>
     );
@@ -310,15 +310,15 @@ export default function DisasterDetails() {
           }}
           className="absolute top-4 left-4 right-4 z-50"
         >
-          <View className="bg-emerald-600 rounded-2xl px-4 py-3.5 shadow-xl border border-emerald-400/30 flex-row items-center">
-            <View className="w-9 h-9 rounded-full bg-white/20 items-center justify-center mr-3">
-              <CheckCircle2 color="white" size={18} />
+          <View className="bg-accent rounded-2xl px-4 py-3.5 shadow-xl border border-border/60 flex-row items-center">
+            <View className="w-9 h-9 rounded-full bg-background/20 items-center justify-center mr-3">
+              <CheckCircle2 color="#c2d3cd" size={18} />
             </View>
             <View className="flex-1">
-              <Text className="text-white font-sans-bold text-sm">
+              <Text className="text-background font-sans-bold text-sm">
                 {toast.title}
               </Text>
-              <Text className="text-white/90 font-sans-medium text-xs mt-0.5">
+              <Text className="text-background/90 font-sans-medium text-xs mt-0.5">
                 {toast.message}
               </Text>
             </View>
@@ -326,14 +326,14 @@ export default function DisasterDetails() {
         </Animated.View>
       )}
 
-       <ScrollView
-         bounces={true}
-         showsVerticalScrollIndicator={false}
-         contentContainerClassName="pb-10"
-         refreshControl={
-           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-         }
-       >
+      <ScrollView
+        bounces={true}
+        showsVerticalScrollIndicator={false}
+        contentContainerClassName="pb-10"
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
         {/* Header Section */}
         <View className="px-5 pt-6">
           <View className="flex-row items-center mb-2">
@@ -341,7 +341,7 @@ export default function DisasterDetails() {
               style={{ backgroundColor: color }}
               className="px-3 py-1 rounded-full"
             >
-              <Text className="text-white font-sans-bold text-xs">
+              <Text className="text-background font-sans-bold text-xs">
                 {status ? formatStatusLabel(status) : "Unknown"}
               </Text>
             </View>
@@ -357,7 +357,7 @@ export default function DisasterDetails() {
           </Text>
 
           <View className="flex-row items-center mb-4">
-            <MapPin size={18} color="#666" />
+            <MapPin size={18} color="#847e89" />
             <Text className="text-base font-sans-medium text-muted-foreground ml-2">
               {location}
             </Text>
@@ -425,13 +425,18 @@ export default function DisasterDetails() {
 
         {/* Location Map */}
         <View className="px-5 pt-4">
-          <LocationMap location={location} radiusMeters={5000} height={220} label="Affected Area" />
+          <LocationMap
+            location={location}
+            radiusMeters={5000}
+            height={220}
+            label="Affected Area"
+          />
         </View>
 
         <View className="px-5 pt-2">
           {requiresUrgentMedical && (
             <View className="bg-destructive/10 px-3 py-2 rounded-lg mb-4 flex-row items-center">
-              <Heart size={16} color="#dc2626" fill="#dc2626" />
+              <Heart size={16} color="#56494c" fill="#56494c" />
               <Text className="text-destructive font-sans-bold text-sm ml-2">
                 Medical Emergency - Urgent assistance required
               </Text>
@@ -483,25 +488,29 @@ export default function DisasterDetails() {
               <Text className="text-xs font-sans-semibold uppercase tracking-wider text-muted-foreground mb-1">
                 Declared By
               </Text>
-              <Text className="text-sm font-sans-bold text-primary" numberOfLines={1}>
+              <Text
+                className="text-sm font-sans-bold text-primary"
+                numberOfLines={1}
+              >
                 {declaredBy?.slice(0, 10) || "N/A"}...
               </Text>
             </View>
           </View>
 
           {/* DONATION CAMPAIGN CARD */}
-          <View className="bg-white rounded-2xl p-5 mb-6 shadow-sm border border-accent/20">
+          <View className="bg-card rounded-2xl p-5 mb-6 shadow-sm border border-accent/20">
             <View className="flex-row justify-between items-center mb-4">
               <View>
                 <Text className="text-xl font-sans-extrabold text-primary">
                   Relief Fund
                 </Text>
                 <Text className="text-sm font-sans-medium text-muted-foreground mt-1">
-                  {mockCampaign.donationCount} donors • {mockCampaign.progressPercentage}% funded
+                  {mockCampaign.donationCount} donors •{" "}
+                  {mockCampaign.progressPercentage}% funded
                 </Text>
               </View>
-              <View className="w-12 h-12 bg-red-50 rounded-full items-center justify-center">
-                <Heart color="#e11d48" size={24} fill="#e11d48" />
+              <View className="w-12 h-12 bg-accent/20 rounded-full items-center justify-center">
+                <Heart color="#56494c" size={24} fill="#56494c" />
               </View>
             </View>
 
@@ -535,8 +544,8 @@ export default function DisasterDetails() {
               className="bg-accent py-4 rounded-xl items-center justify-center shadow-sm active:opacity-90"
             >
               <View className="flex-row items-center gap-2">
-                <Heart color="white" size={20} fill="white" />
-                <Text className="text-white font-sans-bold text-base">
+                <Heart color="#c2d3cd" size={20} fill="#c2d3cd" />
+                <Text className="text-background font-sans-bold text-base">
                   Donate Now
                 </Text>
               </View>
@@ -562,7 +571,10 @@ export default function DisasterDetails() {
                 <Text className="text-sm font-sans-medium text-muted-foreground">
                   Declared By
                 </Text>
-                <Text className="text-base font-sans-bold text-primary" numberOfLines={1}>
+                <Text
+                  className="text-base font-sans-bold text-primary"
+                  numberOfLines={1}
+                >
                   {declaredBy || "N/A"}
                 </Text>
               </View>
@@ -583,15 +595,20 @@ export default function DisasterDetails() {
           {infrastructureDamage && infrastructureDamage.length > 0 && (
             <View className="bg-card rounded-2xl p-5 mb-6 border border-border">
               <View className="flex-row items-center mb-4">
-                <Package size={20} color="#666" />
+                <Package size={20} color="#847e89" />
                 <Text className="text-lg font-sans-extrabold text-primary ml-2">
                   Infrastructure Damage
                 </Text>
               </View>
               <View className="flex-row flex-wrap gap-2">
                 {infrastructureDamage.map((item, idx) => (
-                  <View key={idx} className="bg-muted px-4 py-2 rounded-full border border-border">
-                    <Text className="text-sm font-sans-medium text-primary">{item}</Text>
+                  <View
+                    key={idx}
+                    className="bg-muted px-4 py-2 rounded-full border border-border"
+                  >
+                    <Text className="text-sm font-sans-medium text-primary">
+                      {item}
+                    </Text>
                   </View>
                 ))}
               </View>
@@ -612,7 +629,7 @@ export default function DisasterDetails() {
                   >
                     <View className="flex-row items-center flex-1">
                       <View className="w-10 h-10 bg-accent/20 rounded-full items-center justify-center mr-3">
-                        <Package size={18} color="#e11d48" />
+                        <Package size={18} color="#56494c" />
                       </View>
                       <View>
                         <Text className="font-sans-bold text-primary">
@@ -623,7 +640,7 @@ export default function DisasterDetails() {
                         </Text>
                       </View>
                     </View>
-                    <ExternalLink size={20} color="#666" />
+                    <ExternalLink size={20} color="#847e89" />
                   </Pressable>
                 ))}
               </View>
@@ -634,7 +651,7 @@ export default function DisasterDetails() {
             <View className="bg-card rounded-2xl p-5 mb-6 border border-border">
               <View className="flex-row items-center justify-between mb-4">
                 <View className="flex-row items-center">
-                  <MessageSquareIcon size={20} color="#666" />
+                  <MessageSquareIcon size={20} color="#847e89" />
                   <Text className="text-lg font-sans-extrabold text-primary ml-2">
                     Comments ({comments.length})
                   </Text>
@@ -643,14 +660,17 @@ export default function DisasterDetails() {
                   onPress={() => setIsCommenting(true)}
                   className="bg-accent px-4 py-2 rounded-lg active:opacity-80"
                 >
-                  <Text className="text-white font-sans-bold text-sm">
+                  <Text className="text-background font-sans-bold text-sm">
                     Add Comment
                   </Text>
                 </Pressable>
               </View>
 
               {comments.map((comment, index) => (
-                <View key={index} className="bg-background p-4 rounded-xl mb-3 border border-border">
+                <View
+                  key={index}
+                  className="bg-background p-4 rounded-xl mb-3 border border-border"
+                >
                   <View className="flex-row items-center mb-2">
                     <View className="w-8 h-8 bg-accent/20 rounded-full items-center justify-center mr-3">
                       <Text className="text-accent font-sans-bold text-sm">
@@ -662,7 +682,9 @@ export default function DisasterDetails() {
                         {comment.authorId}
                       </Text>
                       <Text className="text-xs text-muted-foreground font-sans-medium">
-                        {formatSubscriptionDateTime(comment.createdAt.toString())}
+                        {formatSubscriptionDateTime(
+                          comment.createdAt.toString(),
+                        )}
                       </Text>
                     </View>
                   </View>
@@ -670,7 +692,11 @@ export default function DisasterDetails() {
                     {comment.content}
                   </Text>
                   {comment.attachments && comment.attachments.length > 0 && (
-                    <ScrollView horizontal showsHorizontalScrollIndicator={false} className="mt-3">
+                    <ScrollView
+                      horizontal
+                      showsHorizontalScrollIndicator={false}
+                      className="mt-3"
+                    >
                       {comment.attachments.slice(0, 3).map((image, idx) => (
                         <Image
                           source={{ uri: image }}
@@ -701,7 +727,7 @@ export default function DisasterDetails() {
       >
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
-          className="flex-1 justify-end bg-black/60"
+          className="flex-1 justify-end bg-foreground/60"
         >
           {/* Tapping the backdrop now dismisses the keyboard AND closes the modal */}
           <TouchableWithoutFeedback
@@ -735,7 +761,7 @@ export default function DisasterDetails() {
                   onPress={() => setIsDonating(false)}
                   className="bg-muted p-2 rounded-full"
                 >
-                  <X color="#888" size={20} />
+                  <X color="#847e89" size={20} />
                 </Pressable>
               </View>
 
@@ -778,7 +804,7 @@ export default function DisasterDetails() {
                     onChangeText={setDonationAmount}
                     keyboardType="numeric"
                     placeholder="0"
-                    placeholderTextColor="#888"
+                    placeholderTextColor="#847e89"
                     className="flex-1 py-3 font-sans-bold text-lg text-primary"
                   />
                 </View>
@@ -793,7 +819,7 @@ export default function DisasterDetails() {
                   value={donorName}
                   onChangeText={setDonorName}
                   placeholder="e.g. Abebe Kebede"
-                  placeholderTextColor="#888"
+                  placeholderTextColor="#847e89"
                   className="bg-background border border-border/80 rounded-xl px-4 py-3.5 font-sans-medium text-primary"
                 />
                 <Text className="text-xs text-muted-foreground mt-1.5 font-sans-medium">
@@ -810,7 +836,7 @@ export default function DisasterDetails() {
                   value={donationMessage}
                   onChangeText={setDonationMessage}
                   placeholder="Leave a few words of encouragement..."
-                  placeholderTextColor="#888"
+                  placeholderTextColor="#847e89"
                   multiline
                   className="bg-background border border-border/80 rounded-xl px-4 py-3.5 font-sans-medium text-primary h-24 text-top"
                   style={{ textAlignVertical: "top" }}
@@ -839,7 +865,7 @@ export default function DisasterDetails() {
                     isNaN(Number(donationAmount)) ||
                     Number(donationAmount) <= 0
                       ? "text-muted-foreground"
-                      : "text-white"
+                      : "text-background"
                   }`}
                 >
                   {donationAmount &&

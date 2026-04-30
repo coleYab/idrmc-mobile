@@ -4,22 +4,22 @@ import { getStatusColor } from "@/lib/mockData";
 import { formatStatusLabel, formatSubscriptionDateTime } from "@/lib/utils";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import {
-  AlertTriangle,
-  CheckCircle2,
-  Clock,
-  MapPin,
-  Package,
-  UserCircle
+    AlertTriangle,
+    CheckCircle2,
+    Clock,
+    MapPin,
+    Package,
+    UserCircle,
 } from "lucide-react-native";
 import React, { useEffect, useState } from "react";
 import {
-  ActivityIndicator,
-  Image,
-  Pressable,
-  RefreshControl,
-  ScrollView,
-  Text,
-  View,
+    ActivityIndicator,
+    Image,
+    Pressable,
+    RefreshControl,
+    ScrollView,
+    Text,
+    View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -27,7 +27,12 @@ export default function IncidentDetails() {
   const { id } = useLocalSearchParams();
   const router = useRouter();
 
-  const { data: incident, isLoading, isError, refetch } = useIncidentById(id as string);
+  const {
+    data: incident,
+    isLoading,
+    isError,
+    refetch,
+  } = useIncidentById(id as string);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [refreshing, setRefreshing] = useState(false);
 
@@ -71,7 +76,7 @@ export default function IncidentDetails() {
           onPress={() => router.back()}
           className="mt-4 px-6 py-3 bg-accent rounded-xl"
         >
-          <Text className="text-white font-sans-bold">Go Back</Text>
+          <Text className="text-background font-sans-bold">Go Back</Text>
         </Pressable>
       </SafeAreaView>
     );
@@ -115,7 +120,7 @@ export default function IncidentDetails() {
               style={{ backgroundColor: color }}
               className="px-3 py-1 rounded-full"
             >
-              <Text className="text-white font-sans-bold text-xs">
+              <Text className="text-background font-sans-bold text-xs">
                 {status ? formatStatusLabel(status) : "Unknown"}
               </Text>
             </View>
@@ -126,7 +131,7 @@ export default function IncidentDetails() {
             </View>
             {requiresUrgentMedical && (
               <View className="bg-destructive px-3 py-1 rounded-full">
-                <Text className="text-white font-sans-bold text-xs">
+                <Text className="text-background font-sans-bold text-xs">
                   Medical Emergency
                 </Text>
               </View>
@@ -138,7 +143,7 @@ export default function IncidentDetails() {
           </Text>
 
           <View className="flex-row items-center mb-4">
-            <MapPin size={18} color="#666" />
+            <MapPin size={18} color="#847e89" />
             <Text className="text-base font-sans-medium text-muted-foreground ml-2">
               {location}
             </Text>
@@ -155,7 +160,7 @@ export default function IncidentDetails() {
             />
           ) : (
             <View className="w-full h-full bg-muted justify-center items-center rounded-2xl">
-              <AlertTriangle size={48} color="#999" />
+              <AlertTriangle size={48} color="#9fa4a9" />
             </View>
           )}
         </View>
@@ -192,13 +197,18 @@ export default function IncidentDetails() {
 
         {/* Location Map */}
         <View className="px-5 pt-4">
-          <LocationMap location={location} radiusMeters={3000} height={220} label="Reported Location" />
+          <LocationMap
+            location={location}
+            radiusMeters={3000}
+            height={220}
+            label="Reported Location"
+          />
         </View>
 
         <View className="px-5 pt-2">
           {requiresUrgentMedical && (
             <View className="bg-destructive/10 px-3 py-2 rounded-lg mb-4 flex-row items-center">
-              <AlertTriangle size={16} color="#dc2626" />
+              <AlertTriangle size={16} color="#56494c" />
               <Text className="text-destructive font-sans-bold text-sm ml-2">
                 Medical Emergency - Urgent assistance required
               </Text>
@@ -245,12 +255,15 @@ export default function IncidentDetails() {
             <View className="gap-4">
               <View className="flex-row justify-between items-center">
                 <View className="flex-row items-center flex-1">
-                  <UserCircle size={18} color="#666" />
+                  <UserCircle size={18} color="#847e89" />
                   <View className="flex-1 flex-row justify-between">
                     <Text className="text-sm font-sans-medium text-muted-foreground ml-2">
                       Reported By
                     </Text>
-                    <Text className="text-base font-sans-bold text-primary" numberOfLines={1}>
+                    <Text
+                      className="text-base font-sans-bold text-primary"
+                      numberOfLines={1}
+                    >
                       {reportedBy.slice(0, 10) + "..." || "N/A"}
                     </Text>
                   </View>
@@ -260,7 +273,7 @@ export default function IncidentDetails() {
 
               <View className="flex-row justify-between items-center">
                 <View className="flex-row items-center">
-                  <Clock size={18} color="#666" />
+                  <Clock size={18} color="#847e89" />
                   <Text className="text-sm font-sans-medium text-muted-foreground ml-2">
                     Reported On
                   </Text>
@@ -275,7 +288,7 @@ export default function IncidentDetails() {
 
               <View className="flex-row justify-between items-center">
                 <View className="flex-row items-center">
-                  <Clock size={18} color="#666" />
+                  <Clock size={18} color="#847e89" />
                   <Text className="text-sm font-sans-medium text-muted-foreground ml-2">
                     Last Updated
                   </Text>
@@ -292,7 +305,7 @@ export default function IncidentDetails() {
                   <View className="h-[1px] bg-border" />
                   <View className="flex-row justify-between items-center">
                     <View className="flex-row items-center">
-                      <CheckCircle2 size={18} color="#16a34a" />
+                      <CheckCircle2 size={18} color="#847e89" />
                       <Text className="text-sm font-sans-medium text-muted-foreground ml-2">
                         Resolved By
                       </Text>
@@ -309,7 +322,7 @@ export default function IncidentDetails() {
                   <View className="h-[1px] bg-border" />
                   <View className="flex-row justify-between items-center">
                     <View className="flex-row items-center">
-                      <CheckCircle2 size={18} color="#16a34a" />
+                      <CheckCircle2 size={18} color="#847e89" />
                       <Text className="text-sm font-sans-medium text-muted-foreground ml-2">
                         Resolved On
                       </Text>
@@ -326,15 +339,20 @@ export default function IncidentDetails() {
           {infrastructureDamage && infrastructureDamage.length > 0 && (
             <View className="bg-card rounded-2xl p-5 mb-6 border border-border">
               <View className="flex-row items-center mb-4">
-                <Package size={20} color="#666" />
+                <Package size={20} color="#847e89" />
                 <Text className="text-lg font-sans-extrabold text-primary ml-2">
                   Infrastructure Damage
                 </Text>
               </View>
               <View className="flex-row flex-wrap gap-2">
                 {infrastructureDamage.map((item, idx) => (
-                  <View key={idx} className="bg-muted px-4 py-2 rounded-full border border-border">
-                    <Text className="text-sm font-sans-medium text-primary">{item}</Text>
+                  <View
+                    key={idx}
+                    className="bg-muted px-4 py-2 rounded-full border border-border"
+                  >
+                    <Text className="text-sm font-sans-medium text-primary">
+                      {item}
+                    </Text>
                   </View>
                 ))}
               </View>

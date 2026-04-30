@@ -5,47 +5,47 @@
 @import "nativewind/theme";
 
 :root {
-  --app-background: #fff36a;
-  --app-foreground: #111111;
-  --app-card: #91e9ff;
-  --app-muted: #ffd8f8;
-  --app-muted-foreground: #2a2a2a;
-  --app-primary: #111111;
-  --app-accent: #ff5a36;
-  --app-border: #111111;
-  --app-success: #00c853;
-  --app-destructive: #ff204e;
-  --app-subscription: #9cff57;
+  --app-background: #c2d3cd;
+  --app-foreground: #56494c;
+  --app-card: #afbfc0;
+  --app-muted: #9fa4a9;
+  --app-muted-foreground: #847e89;
+  --app-primary: #56494c;
+  --app-accent: #847e89;
+  --app-border: #9fa4a9;
+  --app-success: #847e89;
+  --app-destructive: #56494c;
+  --app-subscription: #c2d3cd;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --app-background: #171717;
-    --app-foreground: #f7f7f7;
-    --app-card: #2a2a2a;
-    --app-muted: #3a2958;
-    --app-muted-foreground: #e3dcff;
-    --app-primary: #f7f7f7;
-    --app-accent: #ff7a59;
-    --app-border: #f7f7f7;
-    --app-success: #00e676;
-    --app-destructive: #ff5e7e;
-    --app-subscription: #4b7f20;
+    --app-background: #56494c;
+    --app-foreground: #c2d3cd;
+    --app-card: #847e89;
+    --app-muted: #9fa4a9;
+    --app-muted-foreground: #afbfc0;
+    --app-primary: #c2d3cd;
+    --app-accent: #afbfc0;
+    --app-border: #9fa4a9;
+    --app-success: #afbfc0;
+    --app-destructive: #c2d3cd;
+    --app-subscription: #847e89;
   }
 }
 
 @theme {
-  --color-background: #fff9e3;
-  --color-foreground: #081126;
-  --color-card: #fff8e7;
-  --color-muted: #f6eecf;
-  --color-muted-foreground: rgba(0, 0, 0, 0.6);
-  --color-primary: #081126;
-  --color-accent: #ea7a53;
-  --color-border: rgba(0, 0, 0, 0.1);
-  --color-success: #16a34a;
-  --color-destructive: #dc2626;
-  --color-subscription: #8fd1bd;
+  --color-background: #c2d3cd;
+  --color-foreground: #56494c;
+  --color-card: #afbfc0;
+  --color-muted: #9fa4a9;
+  --color-muted-foreground: #847e89;
+  --color-primary: #56494c;
+  --color-accent: #847e89;
+  --color-border: #9fa4a9;
+  --color-success: #847e89;
+  --color-destructive: #56494c;
+  --color-subscription: #c2d3cd;
 
   --spacing-0: 0px;
   --spacing-1: 4px;
@@ -117,7 +117,7 @@
   }
 
   .home-balance-label {
-    @apply text-xl font-sans-semibold text-white/80;
+    @apply text-xl font-sans-semibold text-background/85;
   }
 
   .home-balance-row {
@@ -125,11 +125,11 @@
   }
 
   .home-balance-amount {
-    @apply text-4xl font-sans-extrabold text-white;
+    @apply text-4xl font-sans-extrabold text-background;
   }
 
   .home-balance-date {
-    @apply text-xl font-sans-medium text-white;
+    @apply text-xl font-sans-medium text-background;
   }
 
   .list-head {
@@ -141,7 +141,7 @@
   }
 
   .list-action {
-    @apply rounded-full border border-black/20 px-4 py-1;
+    @apply rounded-full border border-border px-4 py-1;
   }
 
   .list-action-text {
@@ -149,7 +149,7 @@
   }
 
   .upcoming-card {
-    @apply mr-4 w-44 rounded-2xl border border-black/10 bg-background p-4;
+    @apply mr-4 w-44 rounded-2xl border border-border bg-background p-4;
   }
 
   .upcoming-row {

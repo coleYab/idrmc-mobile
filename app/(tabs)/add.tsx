@@ -5,15 +5,15 @@ import { useRouter } from "expo-router";
 import { styled } from "nativewind";
 import { useState } from "react";
 import {
-  ActivityIndicator,
-  Image,
-  Modal,
-  Pressable,
-  ScrollView,
-  Switch,
-  Text,
-  TextInput,
-  View,
+    ActivityIndicator,
+    Image,
+    Modal,
+    Pressable,
+    ScrollView,
+    Switch,
+    Text,
+    TextInput,
+    View,
 } from "react-native";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 
@@ -61,7 +61,7 @@ export default function CreateReport() {
   const [dropdownTitle, setDropdownTitle] = useState("");
   const [onSelectDropdown, setOnSelectDropdown] = useState<
     (val: string) => void
-  >(() => () => { });
+  >(() => () => {});
 
   const openDropdown = (
     title: string,
@@ -329,7 +329,7 @@ export default function CreateReport() {
                 disabled={isLoadingLocation}
               >
                 {isLoadingLocation ? (
-                  <ActivityIndicator color="#111" />
+                  <ActivityIndicator color="#56494c" />
                 ) : (
                   <Text className="font-sans-bold text-primary text-sm">
                     GPS
@@ -361,7 +361,7 @@ export default function CreateReport() {
                 <Switch
                   value={requiresUrgentMedical}
                   onValueChange={setRequiresUrgentMedical}
-                  trackColor={{ false: "#ccc", true: "#ff5a36" }}
+                  trackColor={{ false: "#9fa4a9", true: "#847e89" }}
                 />
               </View>
             </View>
@@ -426,7 +426,7 @@ export default function CreateReport() {
                   <Image
                     key={idx}
                     source={{ uri }}
-                    className="w-24 h-24 rounded-xl mr-3 border border-black/10 bg-black/5"
+                    className="w-24 h-24 rounded-xl mr-3 border border-border/70 bg-muted/30"
                   />
                 ))}
               </ScrollView>
@@ -437,7 +437,7 @@ export default function CreateReport() {
               disabled={isUploading}
             >
               {isUploading ? (
-                <ActivityIndicator color="#111" />
+                <ActivityIndicator color="#56494c" />
               ) : (
                 <Text className="auth-secondary-button-text font-sans-bold">
                   + Upload Image
@@ -454,7 +454,7 @@ export default function CreateReport() {
               disabled={isSubmitting}
             >
               {isSubmitting ? (
-                <ActivityIndicator color="#111" />
+                <ActivityIndicator color="#56494c" />
               ) : (
                 <Text className="auth-button-text">Submit Report</Text>
               )}
@@ -503,7 +503,7 @@ export default function CreateReport() {
       {isUploading && (
         <View className="absolute inset-0 bg-primary/60 items-center justify-center flex-1 z-50">
           <View className="p-6 bg-background rounded-3xl items-center border border-border">
-            <ActivityIndicator color="#081126" size="large" />
+            <ActivityIndicator color="#56494c" size="large" />
             <Text className="mt-4 text-base font-sans-semibold text-primary">
               Uploading image...
             </Text>

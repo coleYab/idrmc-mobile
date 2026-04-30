@@ -307,9 +307,9 @@ const IncidentsTab = () => {
           }
           ListFooterComponent={
             !isLoading && filteredIncidents.length > 0 ? (
-              <View className="flex-row items-center justify-between mt-6 pt-4 border-t border-black/10">
+              <View className="flex-row items-center justify-between mt-6 pt-4 border-t border-border/70">
                 <Pressable
-                  className={`px-4 py-2 rounded-xl border border-border ${currentPage === 1 ? "opacity-50" : "bg-white"}`}
+                  className={`px-4 py-2 rounded-xl border border-border ${currentPage === 1 ? "opacity-50" : "bg-card"}`}
                   disabled={currentPage === 1}
                   onPress={() => setCurrentPage((p) => Math.max(1, p - 1))}
                 >
@@ -319,7 +319,7 @@ const IncidentsTab = () => {
                   Page {currentPage} of {totalPages}
                 </Text>
                 <Pressable
-                  className={`px-4 py-2 rounded-xl border border-border ${currentPage === totalPages ? "opacity-50" : "bg-white"}`}
+                  className={`px-4 py-2 rounded-xl border border-border ${currentPage === totalPages ? "opacity-50" : "bg-card"}`}
                   disabled={currentPage === totalPages}
                   onPress={() =>
                     setCurrentPage((p) => Math.min(totalPages, p + 1))

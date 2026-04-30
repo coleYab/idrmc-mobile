@@ -229,8 +229,8 @@ const Settings = () => {
               onValueChange={(value) =>
                 setColorScheme(value ? "dark" : "light")
               }
-              trackColor={{ false: "#c7c9d1", true: "#ea7a53" }}
-              thumbColor="#ffffff"
+              trackColor={{ false: "#9fa4a9", true: "#847e89" }}
+              thumbColor="#c2d3cd"
             />
           </View>
 
@@ -264,7 +264,7 @@ const Settings = () => {
           className="auth-button bg-destructive"
           onPress={handleSignOut}
         >
-          <Text className="auth-button-text text-white">Sign Out</Text>
+          <Text className="auth-button-text text-background">Sign Out</Text>
         </Pressable>
       </ScrollView>
 
