@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "IDRMC",
-    "slug": "idrmc-users-application",
+    "slug": "idrmc-lmar0csuo0hew8t29-uph",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/idrmc-logo.png",
@@ -62,8 +62,9 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "f10404ce-3155-4382-b68b-afbb5cada53c"
+        "projectId": "2db678b4-7002-4739-8122-643d5cde711f"
       }
-    }
+    },
+    "owner": "nbayeabisras-organization"
   }
 }
