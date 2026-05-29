@@ -101,12 +101,14 @@ export default function LocationMap({
             initialRegion={{
               latitude: coords.latitude,
               longitude: coords.longitude,
-              // Zoom to fit the full circle with comfortable padding
-              latitudeDelta: (radiusMeters / 111_320) * 2.5,
-              longitudeDelta:
+              // Keep the map tightly focused on the reported point.
+              latitudeDelta: Math.max((radiusMeters / 111_320) * 1.15, 0.0025),
+              longitudeDelta: Math.max(
                 (radiusMeters /
                   (111_320 * Math.cos((coords.latitude * Math.PI) / 180))) *
-                2.5,
+                  1.15,
+                0.0025,
+              ),
             }}
             scrollEnabled={false}
             zoomEnabled={false}

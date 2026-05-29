@@ -72,16 +72,16 @@
       "source_file": "/home/nba/Programming/IDRMC/lib/mockData.ts",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_lib_mockdata_ts",
-      "community": 11,
+      "community": 12,
       "norm_label": "mockdata.ts"
     },
     {
       "label": "getStatusColor()",
       "file_type": "code",
       "source_file": "/home/nba/Programming/IDRMC/lib/mockData.ts",
-      "source_location": "L175",
+      "source_location": "L178",
       "id": "mockdata_getstatuscolor",
-      "community": 11,
+      "community": 12,
       "norm_label": "getstatuscolor()"
     },
     {
@@ -153,7 +153,7 @@
       "source_file": "/home/nba/Programming/IDRMC/components/ListHeading.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_components_listheading_tsx",
-      "community": 12,
+      "community": 13,
       "norm_label": "listheading.tsx"
     },
     {
@@ -162,7 +162,7 @@
       "source_file": "/home/nba/Programming/IDRMC/components/ListHeading.tsx",
       "source_location": "L3",
       "id": "listheading_listheading",
-      "community": 12,
+      "community": 13,
       "norm_label": "listheading()"
     },
     {
@@ -171,7 +171,7 @@
       "source_file": "/home/nba/Programming/IDRMC/components/UpcomingSubscriptionCard.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_components_upcomingsubscriptioncard_tsx",
-      "community": 13,
+      "community": 14,
       "norm_label": "upcomingsubscriptioncard.tsx"
     },
     {
@@ -180,7 +180,7 @@
       "source_file": "/home/nba/Programming/IDRMC/components/UpcomingSubscriptionCard.tsx",
       "source_location": "L5",
       "id": "upcomingsubscriptioncard_upcomingsubscriptioncard",
-      "community": 13,
+      "community": 14,
       "norm_label": "upcomingsubscriptioncard()"
     },
     {
@@ -225,7 +225,7 @@
       "source_file": "/home/nba/Programming/IDRMC/components/LatestNotificationCard.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_components_latestnotificationcard_tsx",
-      "community": 14,
+      "community": 15,
       "norm_label": "latestnotificationcard.tsx"
     },
     {
@@ -234,7 +234,7 @@
       "source_file": "/home/nba/Programming/IDRMC/components/LatestNotificationCard.tsx",
       "source_location": "L5",
       "id": "latestnotificationcard_geticonfortype",
-      "community": 14,
+      "community": 15,
       "norm_label": "geticonfortype()"
     },
     {
@@ -243,7 +243,7 @@
       "source_file": "/home/nba/Programming/IDRMC/components/Skeleton.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_components_skeleton_tsx",
-      "community": 15,
+      "community": 16,
       "norm_label": "skeleton.tsx"
     },
     {
@@ -252,7 +252,7 @@
       "source_file": "/home/nba/Programming/IDRMC/components/Skeleton.tsx",
       "source_location": "L11",
       "id": "skeleton_skeleton",
-      "community": 15,
+      "community": 16,
       "norm_label": "skeleton()"
     },
     {
@@ -286,7 +286,7 @@
       "label": "pickImages()",
       "file_type": "code",
       "source_file": "/home/nba/Programming/IDRMC/components/comment/CreateComment.tsx",
-      "source_location": "L28",
+      "source_location": "L37",
       "id": "createcomment_pickimages",
       "community": 5,
       "norm_label": "pickimages()"
@@ -295,7 +295,7 @@
       "label": "removeAttachment()",
       "file_type": "code",
       "source_file": "/home/nba/Programming/IDRMC/components/comment/CreateComment.tsx",
-      "source_location": "L48",
+      "source_location": "L57",
       "id": "createcomment_removeattachment",
       "community": 5,
       "norm_label": "removeattachment()"
@@ -304,7 +304,7 @@
       "label": "onSubmit()",
       "file_type": "code",
       "source_file": "/home/nba/Programming/IDRMC/components/comment/CreateComment.tsx",
-      "source_location": "L52",
+      "source_location": "L63",
       "id": "createcomment_onsubmit",
       "community": 5,
       "norm_label": "onsubmit()"
@@ -315,7 +315,7 @@
       "source_file": "/home/nba/Programming/IDRMC/components/map/LocationMap.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_components_map_locationmap_tsx",
-      "community": 16,
+      "community": 17,
       "norm_label": "locationmap.tsx"
     },
     {
@@ -324,7 +324,7 @@
       "source_file": "/home/nba/Programming/IDRMC/components/map/LocationMap.tsx",
       "source_location": "L23",
       "id": "locationmap_geocode",
-      "community": 16,
+      "community": 17,
       "norm_label": "geocode()"
     },
     {
@@ -472,12 +472,21 @@
       "norm_label": "incidents.ts"
     },
     {
+      "label": "users.ts",
+      "file_type": "code",
+      "source_file": "/home/nba/Programming/IDRMC/api/services/users.ts",
+      "source_location": "L1",
+      "id": "home_nba_programming_idrmc_api_services_users_ts",
+      "community": 42,
+      "norm_label": "users.ts"
+    },
+    {
       "label": "disasters.ts",
       "file_type": "code",
       "source_file": "/home/nba/Programming/IDRMC/api/services/disasters.ts",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_api_services_disasters_ts",
-      "community": 42,
+      "community": 43,
       "norm_label": "disasters.ts"
     },
     {
@@ -486,16 +495,16 @@
       "source_file": "/home/nba/Programming/IDRMC/app/notifications.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_app_notifications_tsx",
-      "community": 17,
+      "community": 18,
       "norm_label": "notifications.tsx"
     },
     {
       "label": "formatLabel()",
       "file_type": "code",
       "source_file": "/home/nba/Programming/IDRMC/app/notifications.tsx",
-      "source_location": "L45",
+      "source_location": "L30",
       "id": "notifications_formatlabel",
-      "community": 17,
+      "community": 18,
       "norm_label": "formatlabel()"
     },
     {
@@ -504,7 +513,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/onboarding.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_app_onboarding_tsx",
-      "community": 18,
+      "community": 19,
       "norm_label": "onboarding.tsx"
     },
     {
@@ -513,7 +522,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/onboarding.tsx",
       "source_location": "L7",
       "id": "onboarding_onboarding",
-      "community": 18,
+      "community": 19,
       "norm_label": "onboarding()"
     },
     {
@@ -522,16 +531,25 @@
       "source_file": "/home/nba/Programming/IDRMC/app/_layout.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_app_layout_tsx",
-      "community": 19,
+      "community": 8,
       "norm_label": "_layout.tsx"
+    },
+    {
+      "label": "MissingConfigScreen()",
+      "file_type": "code",
+      "source_file": "/home/nba/Programming/IDRMC/app/_layout.tsx",
+      "source_location": "L17",
+      "id": "layout_missingconfigscreen",
+      "community": 8,
+      "norm_label": "missingconfigscreen()"
     },
     {
       "label": "RootLayout()",
       "file_type": "code",
       "source_file": "/home/nba/Programming/IDRMC/app/_layout.tsx",
-      "source_location": "L19",
+      "source_location": "L33",
       "id": "layout_rootlayout",
-      "community": 19,
+      "community": 8,
       "norm_label": "rootlayout()"
     },
     {
@@ -576,7 +594,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(tabs)/disasters.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_app_tabs_disasters_tsx",
-      "community": 8,
+      "community": 9,
       "norm_label": "disasters.tsx"
     },
     {
@@ -585,7 +603,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(tabs)/disasters.tsx",
       "source_location": "L56",
       "id": "disasters_formatlabel",
-      "community": 8,
+      "community": 9,
       "norm_label": "formatlabel()"
     },
     {
@@ -594,7 +612,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(tabs)/disasters.tsx",
       "source_location": "L64",
       "id": "disasters_severityvalue",
-      "community": 8,
+      "community": 9,
       "norm_label": "severityvalue()"
     },
     {
@@ -621,7 +639,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(tabs)/incidents.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_app_tabs_incidents_tsx",
-      "community": 9,
+      "community": 10,
       "norm_label": "incidents.tsx"
     },
     {
@@ -630,7 +648,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(tabs)/incidents.tsx",
       "source_location": "L56",
       "id": "incidents_formatlabel",
-      "community": 9,
+      "community": 10,
       "norm_label": "formatlabel()"
     },
     {
@@ -639,7 +657,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(tabs)/incidents.tsx",
       "source_location": "L64",
       "id": "incidents_severityvalue",
-      "community": 9,
+      "community": 10,
       "norm_label": "severityvalue()"
     },
     {
@@ -774,7 +792,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(auth)/sign-up.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_app_auth_sign_up_tsx",
-      "community": 10,
+      "community": 11,
       "norm_label": "sign-up.tsx"
     },
     {
@@ -783,7 +801,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(auth)/sign-up.tsx",
       "source_location": "L46",
       "id": "sign_up_handlesubmit",
-      "community": 10,
+      "community": 11,
       "norm_label": "handlesubmit()"
     },
     {
@@ -792,7 +810,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(auth)/sign-up.tsx",
       "source_location": "L66",
       "id": "sign_up_handleverify",
-      "community": 10,
+      "community": 11,
       "norm_label": "handleverify()"
     },
     {
@@ -855,7 +873,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/nba/Programming/IDRMC/lib/mockData.ts",
-      "source_location": "L175",
+      "source_location": "L178",
       "weight": 1.0,
       "_src": "home_nba_programming_idrmc_lib_mockdata_ts",
       "_tgt": "mockdata_getstatuscolor",
@@ -999,7 +1017,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/nba/Programming/IDRMC/components/comment/CreateComment.tsx",
-      "source_location": "L28",
+      "source_location": "L37",
       "weight": 1.0,
       "_src": "home_nba_programming_idrmc_components_comment_createcomment_tsx",
       "_tgt": "createcomment_pickimages",
@@ -1011,7 +1029,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/nba/Programming/IDRMC/components/comment/CreateComment.tsx",
-      "source_location": "L48",
+      "source_location": "L57",
       "weight": 1.0,
       "_src": "home_nba_programming_idrmc_components_comment_createcomment_tsx",
       "_tgt": "createcomment_removeattachment",
@@ -1023,7 +1041,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/nba/Programming/IDRMC/components/comment/CreateComment.tsx",
-      "source_location": "L52",
+      "source_location": "L63",
       "weight": 1.0,
       "_src": "home_nba_programming_idrmc_components_comment_createcomment_tsx",
       "_tgt": "createcomment_onsubmit",
@@ -1167,7 +1185,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/nba/Programming/IDRMC/app/notifications.tsx",
-      "source_location": "L45",
+      "source_location": "L30",
       "weight": 1.0,
       "_src": "home_nba_programming_idrmc_app_notifications_tsx",
       "_tgt": "notifications_formatlabel",
@@ -1191,7 +1209,19 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/nba/Programming/IDRMC/app/_layout.tsx",
-      "source_location": "L19",
+      "source_location": "L17",
+      "weight": 1.0,
+      "_src": "home_nba_programming_idrmc_app_layout_tsx",
+      "_tgt": "layout_missingconfigscreen",
+      "source": "home_nba_programming_idrmc_app_layout_tsx",
+      "target": "layout_missingconfigscreen",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/home/nba/Programming/IDRMC/app/_layout.tsx",
+      "source_location": "L33",
       "weight": 1.0,
       "_src": "home_nba_programming_idrmc_app_layout_tsx",
       "_tgt": "layout_rootlayout",

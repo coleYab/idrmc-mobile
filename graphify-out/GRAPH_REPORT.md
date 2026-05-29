@@ -1,11 +1,11 @@
-# Graph Report - /home/nba/Programming/IDRMC  (2026-04-30)
+# Graph Report - /home/nba/Programming/IDRMC  (2026-05-29)
 
 ## Corpus Check
-- 46 files · ~144,163 words
+- 47 files · ~144,440 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 94 nodes · 55 edges · 43 communities detected
+- 96 nodes · 56 edges · 44 communities detected
 - Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 4 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
@@ -53,6 +53,7 @@
 - [[_COMMUNITY_Community 40|Community 40]]
 - [[_COMMUNITY_Community 41|Community 41]]
 - [[_COMMUNITY_Community 42|Community 42]]
+- [[_COMMUNITY_Community 43|Community 43]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `App()` - 3 edges
@@ -123,7 +124,7 @@ Cohesion: 0.67
 Nodes (0): 
 
 ### Community 11 - "Community 11"
-Cohesion: 1.0
+Cohesion: 0.67
 Nodes (0): 
 
 ### Community 12 - "Community 12"
@@ -250,24 +251,26 @@ Nodes (0):
 Cohesion: 1.0
 Nodes (0): 
 
+### Community 43 - "Community 43"
+Cohesion: 1.0
+Nodes (0): 
+
 ## Knowledge Gaps
-- **Thin community `Community 11`** (2 nodes): `mockData.ts`, `getStatusColor()`
+- **Thin community `Community 12`** (2 nodes): `mockData.ts`, `getStatusColor()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 12`** (2 nodes): `ListHeading.tsx`, `ListHeading()`
+- **Thin community `Community 13`** (2 nodes): `ListHeading.tsx`, `ListHeading()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 13`** (2 nodes): `UpcomingSubscriptionCard.tsx`, `UpcomingSubscriptionCard()`
+- **Thin community `Community 14`** (2 nodes): `UpcomingSubscriptionCard.tsx`, `UpcomingSubscriptionCard()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 14`** (2 nodes): `LatestNotificationCard.tsx`, `getIconForType()`
+- **Thin community `Community 15`** (2 nodes): `LatestNotificationCard.tsx`, `getIconForType()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 15`** (2 nodes): `Skeleton.tsx`, `Skeleton()`
+- **Thin community `Community 16`** (2 nodes): `Skeleton.tsx`, `Skeleton()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 16`** (2 nodes): `LocationMap.tsx`, `geocode()`
+- **Thin community `Community 17`** (2 nodes): `LocationMap.tsx`, `geocode()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 17`** (2 nodes): `notifications.tsx`, `formatLabel()`
+- **Thin community `Community 18`** (2 nodes): `notifications.tsx`, `formatLabel()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 18`** (2 nodes): `onboarding.tsx`, `Onboarding()`
-  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 19`** (2 nodes): `_layout.tsx`, `RootLayout()`
+- **Thin community `Community 19`** (2 nodes): `onboarding.tsx`, `Onboarding()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 - **Thin community `Community 20`** (2 nodes): `index.tsx`, `Index()`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
@@ -313,13 +316,15 @@ Nodes (0):
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 - **Thin community `Community 41`** (1 nodes): `incidents.ts`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
-- **Thin community `Community 42`** (1 nodes): `disasters.ts`
+- **Thin community `Community 42`** (1 nodes): `users.ts`
+  Too small to be a meaningful cluster - may be noise or needs more connections extracted.
+- **Thin community `Community 43`** (1 nodes): `disasters.ts`
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `useIncidents()` connect `Community 0` to `Community 2`?**
-  _High betweenness centrality (0.010) - this node is a cross-community bridge._
+  _High betweenness centrality (0.009) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `App()` (e.g. with `useIncidents()` and `useDisasters()`) actually correct?**
   _`App()` has 2 INFERRED edges - model-reasoned connections that need verification._

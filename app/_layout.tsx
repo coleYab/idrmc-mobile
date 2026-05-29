@@ -1,42 +1,61 @@
-import {SplashScreen, Stack} from "expo-router";
-import '@/global.css';
-import {useFonts} from "expo-font";
-import {useEffect} from "react";
-import { ClerkProvider } from '@clerk/expo';
-import { tokenCache } from '@clerk/expo/token-cache';
-
-SplashScreen.preventAutoHideAsync();
+import PushTokenRegistration from "@/components/PushTokenRegistration";
+import "@/global.css";
+import { ClerkProvider } from "@clerk/expo";
+import { tokenCache } from "@clerk/expo/token-cache";
+import { useFonts } from "expo-font";
+import { SplashScreen, Stack } from "expo-router";
+import { useEffect } from "react";
+import { SafeAreaView, Text, View } from "react-native";
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+SplashScreen.preventAutoHideAsync();
 
 const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY!;
 const queryClient = new QueryClient();
 
-if (!publishableKey) {
-  throw new Error('Add your Clerk Publishable Key to the .env file');
-}
+const MissingConfigScreen = () => (
+  <SafeAreaView className="flex-1 items-center justify-center bg-background px-6">
+    <View className="w-full max-w-md rounded-3xl bg-card px-6 py-8">
+      <Text className="text-center text-2xl font-sans-bold text-primary">
+        App configuration required
+      </Text>
+      <Text className="mt-3 text-center text-base font-sans-medium text-foreground/80">
+        The Clerk publishable key is missing, so the app cannot finish startup.
+      </Text>
+      <Text className="mt-4 text-center text-sm font-sans-regular text-foreground/70">
+        Set EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY in the build environment and rebuild the Android app.
+      </Text>
+    </View>
+  </SafeAreaView>
+);
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
-    'sans-regular': require('../assets/fonts/PlusJakartaSans-Regular.ttf'),
-    'sans-bold': require('../assets/fonts/PlusJakartaSans-Bold.ttf'),
-    'sans-medium': require('../assets/fonts/PlusJakartaSans-Medium.ttf'),
-    'sans-semibold': require('../assets/fonts/PlusJakartaSans-SemiBold.ttf'),
-    'sans-extrabold': require('../assets/fonts/PlusJakartaSans-ExtraBold.ttf'),
-    'sans-light': require('../assets/fonts/PlusJakartaSans-Light.ttf')
-  })
+    "sans-regular": require("../assets/fonts/PlusJakartaSans-Regular.ttf"),
+    "sans-bold": require("../assets/fonts/PlusJakartaSans-Bold.ttf"),
+    "sans-medium": require("../assets/fonts/PlusJakartaSans-Medium.ttf"),
+    "sans-semibold": require("../assets/fonts/PlusJakartaSans-SemiBold.ttf"),
+    "sans-extrabold": require("../assets/fonts/PlusJakartaSans-ExtraBold.ttf"),
+    "sans-light": require("../assets/fonts/PlusJakartaSans-Light.ttf"),
+  });
 
   useEffect(() => {
-    if(fontsLoaded) {
-      SplashScreen.hideAsync()
+    if (fontsLoaded) {
+      SplashScreen.hideAsync();
     }
-  }, [fontsLoaded])
+  }, [fontsLoaded]);
 
   if (!fontsLoaded) return null;
+
+  if (!publishableKey) {
+    return <MissingConfigScreen />;
+  }
 
   return (
     <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
       <QueryClientProvider client={queryClient}>
+        <PushTokenRegistration />
         <Stack screenOptions={{ headerShown: false }} />
       </QueryClientProvider>
     </ClerkProvider>
