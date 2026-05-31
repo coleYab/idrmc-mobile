@@ -1,15 +1,17 @@
 export const colors = {
-  background: "#c2d3cd",
-  foreground: "#56494c",
-  card: "#afbfc0",
-  muted: "#9fa4a9",
-  mutedForeground: "#847e89",
-  primary: "#56494c",
-  accent: "#847e89",
-  border: "#9fa4a9",
-  success: "#847e89",
-  destructive: "#56494c",
-  subscription: "#c2d3cd",
+  // Light / primary palette (mint/green family) chosen for strong contrast
+  background: "#d8f3dc",
+  foreground: "#081c15",
+  card: "#b7e4c7",
+  muted: "#95d5b2",
+  mutedForeground: "#2d6a4f",
+  primary: "#40916c",
+  accent: "#52b788",
+  border: "#2d6a4f",
+  success: "#52b788",
+  // use a clear red for destructive actions for accessibility
+  destructive: "#e53e3e",
+  subscription: "#95d5b2",
 } as const;
 
 export const spacing = {

@@ -28,10 +28,14 @@ const TabIcon = ({ focused, iconType }: TabIconProps) => {
                   ? "Bell"
                   : "Home"
     ];
+  const { colorScheme } = useColorScheme();
+  const isDark = colorScheme === "dark";
+  const glyphColor = isDark ? colors.primary : colors.background;
+
   return (
     <View className="tabs-icon">
       <View className={clsx("tabs-pill", focused && "tabs-active")}>
-        {IconComponent && <IconComponent size={24} color="#c2d3cd" />}
+        {IconComponent && <IconComponent size={24} color={glyphColor} />}
       </View>
     </View>
   );

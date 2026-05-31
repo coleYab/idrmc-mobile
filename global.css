@@ -5,47 +5,47 @@
 @import "nativewind/theme";
 
 :root {
-  --app-background: #c2d3cd;
-  --app-foreground: #56494c;
-  --app-card: #afbfc0;
-  --app-muted: #9fa4a9;
-  --app-muted-foreground: #847e89;
-  --app-primary: #56494c;
-  --app-accent: #847e89;
-  --app-border: #9fa4a9;
-  --app-success: #847e89;
-  --app-destructive: #56494c;
-  --app-subscription: #c2d3cd;
+  --app-background: #d8f3dc;
+  --app-foreground: #081c15;
+  --app-card: #b7e4c7;
+  --app-muted: #95d5b2;
+  --app-muted-foreground: #2d6a4f;
+  --app-primary: #40916c;
+  --app-accent: #52b788;
+  --app-border: #2d6a4f;
+  --app-success: #52b788;
+  --app-destructive: #e53e3e;
+  --app-subscription: #95d5b2;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --app-background: #56494c;
-    --app-foreground: #c2d3cd;
-    --app-card: #847e89;
-    --app-muted: #9fa4a9;
-    --app-muted-foreground: #afbfc0;
-    --app-primary: #c2d3cd;
-    --app-accent: #afbfc0;
-    --app-border: #9fa4a9;
-    --app-success: #afbfc0;
-    --app-destructive: #c2d3cd;
-    --app-subscription: #847e89;
+    --app-background: #081c15; /* dark */
+    --app-foreground: #d8f3dc; /* light text */
+    --app-card: #1b4332;
+    --app-muted: #2d6a4f;
+    --app-muted-foreground: #95d5b2;
+    --app-primary: #52b788;
+    --app-accent: #40916c;
+    --app-border: #2d6a4f;
+    --app-success: #52b788;
+    --app-destructive: #e53e3e;
+    --app-subscription: #2d6a4f;
   }
 }
 
 @theme {
-  --color-background: #c2d3cd;
-  --color-foreground: #56494c;
-  --color-card: #afbfc0;
-  --color-muted: #9fa4a9;
-  --color-muted-foreground: #847e89;
-  --color-primary: #56494c;
-  --color-accent: #847e89;
-  --color-border: #9fa4a9;
-  --color-success: #847e89;
-  --color-destructive: #56494c;
-  --color-subscription: #c2d3cd;
+  --color-background: #d8f3dc;
+  --color-foreground: #081c15;
+  --color-card: #b7e4c7;
+  --color-muted: #95d5b2;
+  --color-muted-foreground: #2d6a4f;
+  --color-primary: #40916c;
+  --color-accent: #52b788;
+  --color-border: #2d6a4f;
+  --color-success: #52b788;
+  --color-destructive: #e53e3e;
+  --color-subscription: #95d5b2;
 
   --spacing-0: 0px;
   --spacing-1: 4px;

@@ -2,6 +2,7 @@ import { MapPin } from "lucide-react-native";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import MapView, { Circle, Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import { colors } from "@/constants/theme";
 
 interface LocationMapProps {
   /** Free-text location string, e.g. "Addis Ababa, Ethiopia" */
@@ -78,19 +79,19 @@ export default function LocationMap({
     <View style={[styles.card, { height: height + 56 }]}>
       {/* Section header */}
       <View style={styles.header}>
-        <MapPin size={18} color="#56494c" />
+        <MapPin size={18} color={colors.foreground} />
         <Text style={styles.headerText}>{label}</Text>
       </View>
 
       <View style={[styles.mapContainer, { height }]}>
         {loading ? (
           <View style={styles.center}>
-            <ActivityIndicator size="small" color="#56494c" />
+            <ActivityIndicator size="small" color={colors.foreground} />
             <Text style={styles.statusText}>Locating on map…</Text>
           </View>
         ) : error || !coords ? (
           <View style={styles.center}>
-            <MapPin size={32} color="#9fa4a9" />
+            <MapPin size={32} color={colors.muted} />
             <Text style={styles.statusText}>Location unavailable</Text>
             <Text style={styles.subText}>{location}</Text>
           </View>
@@ -119,8 +120,8 @@ export default function LocationMap({
             <Circle
               center={coords}
               radius={radiusMeters}
-              fillColor="rgba(86,73,76,0.18)"
-              strokeColor="rgba(86,73,76,0.7)"
+              fillColor="rgba(8,28,21,0.12)"
+              strokeColor="rgba(8,28,21,0.6)"
               strokeWidth={2}
             />
 
@@ -135,7 +136,7 @@ export default function LocationMap({
                 <View style={styles.markerPulse} />
                 {/* Inner dot */}
                 <View style={styles.markerDot}>
-                  <MapPin size={14} color="#c2d3cd" fill="#c2d3cd" />
+                  <MapPin size={14} color={colors.background} fill={colors.background} />
                 </View>
               </View>
             </Marker>
@@ -146,7 +147,7 @@ export default function LocationMap({
       {/* Location label below map */}
       {!loading && !error && coords && (
         <View style={styles.footer}>
-          <MapPin size={12} color="#56494c" />
+          <MapPin size={12} color={colors.foreground} />
           <Text style={styles.footerText} numberOfLines={1}>
             {location}
           </Text>
@@ -161,10 +162,10 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     overflow: "hidden",
     borderWidth: 1,
-    borderColor: "rgba(159,164,169,0.8)",
-    backgroundColor: "#afbfc0",
+    borderColor: "rgba(45,106,79,0.8)",
+    backgroundColor: colors.card,
     marginBottom: 24,
-    shadowColor: "#56494c",
+    shadowColor: colors.foreground,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.07,
     shadowRadius: 8,
@@ -176,7 +177,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 10,
     gap: 6,
-    backgroundColor: "#c2d3cd",
+    backgroundColor: colors.background,
   },
   headerText: {
     fontSize: 15,
@@ -186,7 +187,7 @@ const styles = StyleSheet.create({
   },
   mapContainer: {
     width: "100%",
-    backgroundColor: "#9fa4a9",
+    backgroundColor: colors.muted,
     overflow: "hidden",
     position: "relative",
   },
@@ -199,12 +200,12 @@ const styles = StyleSheet.create({
   statusText: {
     fontSize: 13,
     fontWeight: "600",
-    color: "#847e89",
+    color: colors.mutedForeground,
     marginTop: 4,
   },
   subText: {
     fontSize: 12,
-    color: "#847e89",
+    color: colors.mutedForeground,
     textAlign: "center",
     paddingHorizontal: 12,
   },
@@ -215,11 +216,11 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     gap: 5,
     borderTopWidth: 1,
-    borderTopColor: "rgba(159,164,169,0.8)",
+    borderTopColor: "rgba(45,106,79,0.8)",
   },
   footerText: {
     fontSize: 12,
-    color: "#847e89",
+    color: colors.mutedForeground,
     fontWeight: "500",
     flex: 1,
   },
@@ -234,18 +235,18 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: "rgba(86,73,76,0.25)",
+    backgroundColor: "rgba(8,28,21,0.25)",
     borderWidth: 1.5,
-    borderColor: "rgba(86,73,76,0.5)",
+    borderColor: "rgba(8,28,21,0.5)",
   },
   markerDot: {
     width: 26,
     height: 26,
     borderRadius: 13,
-    backgroundColor: "#56494c",
+    backgroundColor: colors.foreground,
     alignItems: "center",
     justifyContent: "center",
-    shadowColor: "#56494c",
+    shadowColor: colors.foreground,
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.5,
     shadowRadius: 6,
