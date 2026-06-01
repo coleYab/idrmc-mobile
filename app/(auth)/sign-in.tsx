@@ -198,13 +198,10 @@ const SignIn = () => {
   return (
     <SafeAreaView className="auth-safe-area">
       <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        className="auth-screen"
+        behavior={Platform.OS === "ios" ? "padding" : "height"} className="auth-screen"
       >
         <ScrollView
-          className="auth-scroll"
-          keyboardShouldPersistTaps="handled"
-          showsVerticalScrollIndicator={false}
+          className="auth-scroll" keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}
         >
           <View className="auth-content">
             {/* Branding */}
@@ -228,15 +225,9 @@ const SignIn = () => {
                 <View className="auth-field">
                   <Text className="auth-label">Email Address</Text>
                   <TextInput
-                    className={`auth-input ${emailTouched && !emailValid && "auth-input-error"}`}
-                    autoCapitalize="none"
-                    value={emailAddress}
-                    placeholder="name@example.com"
-                    placeholderTextColor="rgba(0, 0, 0, 0.4)"
-                    onChangeText={setEmailAddress}
-                    onBlur={() => setEmailTouched(true)}
-                    keyboardType="email-address"
-                    autoComplete="email"
+                    className={`auth-input ${emailTouched && !emailValid && "auth-input-error"}`} autoCapitalize="none"
+                    value={emailAddress} placeholder="name@example.com" placeholderTextColor="rgba(0, 0, 0, 0.4)"
+                    onChangeText={setEmailAddress} onBlur={() => setEmailTouched(true)} keyboardType="email-address" autoComplete="email"
                   />
                   {emailTouched && !emailValid && (
                     <Text className="auth-error">
@@ -253,14 +244,9 @@ const SignIn = () => {
                 <View className="auth-field">
                   <Text className="auth-label">Password</Text>
                   <TextInput
-                    className={`auth-input ${passwordTouched && !passwordValid && "auth-input-error"}`}
-                    value={password}
-                    placeholder="Enter your password"
-                    placeholderTextColor="rgba(0, 0, 0, 0.4)"
-                    secureTextEntry
-                    onChangeText={setPassword}
-                    onBlur={() => setPasswordTouched(true)}
-                    autoComplete="password"
+                    className={`auth-input ${passwordTouched && !passwordValid && "auth-input-error"}`} value={password}
+                    placeholder="Enter your password" placeholderTextColor="rgba(0, 0, 0, 0.4)" secureTextEntry
+                    onChangeText={setPassword} onBlur={() => setPasswordTouched(true)} autoComplete="password"
                   />
                   {passwordTouched && !passwordValid && (
                     <Text className="auth-error">Password is required</Text>

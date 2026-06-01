@@ -1,3 +1,4 @@
+import ApiAuthTokenBridge from "@/components/ApiAuthTokenBridge";
 import PushTokenRegistration from "@/components/PushTokenRegistration";
 import "@/global.css";
 import { ClerkProvider } from "@clerk/expo";
@@ -55,6 +56,7 @@ export default function RootLayout() {
   return (
     <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
       <QueryClientProvider client={queryClient}>
+        <ApiAuthTokenBridge />
         <PushTokenRegistration />
         <Stack screenOptions={{ headerShown: false }} />
       </QueryClientProvider>

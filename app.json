@@ -21,10 +21,7 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.nba_yeabisra.idrmc",
-      "minSdkVersion": 24,
-      "targetSdkVersion": 35,
-      "compileSdkVersion": 35
+      "package": "com.nba_yeabisra.idrmc"
     },
     "web": {
       "output": "static",

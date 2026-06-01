@@ -9,7 +9,7 @@
       "source_file": "/home/nba/Programming/IDRMC/type.d.ts",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_type_d_ts",
-      "community": 24,
+      "community": 25,
       "norm_label": "type.d.ts"
     },
     {
@@ -18,7 +18,7 @@
       "source_file": "/home/nba/Programming/IDRMC/expo-env.d.ts",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_expo_env_d_ts",
-      "community": 25,
+      "community": 26,
       "norm_label": "expo-env.d.ts"
     },
     {
@@ -27,7 +27,7 @@
       "source_file": "/home/nba/Programming/IDRMC/postcss.config.mjs",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_postcss_config_mjs",
-      "community": 26,
+      "community": 27,
       "norm_label": "postcss.config.mjs"
     },
     {
@@ -36,7 +36,7 @@
       "source_file": "/home/nba/Programming/IDRMC/nativewind-env.d.ts",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_nativewind_env_d_ts",
-      "community": 27,
+      "community": 28,
       "norm_label": "nativewind-env.d.ts"
     },
     {
@@ -45,7 +45,7 @@
       "source_file": "/home/nba/Programming/IDRMC/image.d.ts",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_image_d_ts",
-      "community": 28,
+      "community": 29,
       "norm_label": "image.d.ts"
     },
     {
@@ -54,7 +54,7 @@
       "source_file": "/home/nba/Programming/IDRMC/eslint.config.js",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_eslint_config_js",
-      "community": 29,
+      "community": 30,
       "norm_label": "eslint.config.js"
     },
     {
@@ -63,7 +63,7 @@
       "source_file": "/home/nba/Programming/IDRMC/metro.config.js",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_metro_config_js",
-      "community": 30,
+      "community": 31,
       "norm_label": "metro.config.js"
     },
     {
@@ -72,7 +72,7 @@
       "source_file": "/home/nba/Programming/IDRMC/lib/mockData.ts",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_lib_mockdata_ts",
-      "community": 12,
+      "community": 13,
       "norm_label": "mockdata.ts"
     },
     {
@@ -81,7 +81,7 @@
       "source_file": "/home/nba/Programming/IDRMC/lib/mockData.ts",
       "source_location": "L178",
       "id": "mockdata_getstatuscolor",
-      "community": 12,
+      "community": 13,
       "norm_label": "getstatuscolor()"
     },
     {
@@ -153,7 +153,7 @@
       "source_file": "/home/nba/Programming/IDRMC/components/ListHeading.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_components_listheading_tsx",
-      "community": 13,
+      "community": 14,
       "norm_label": "listheading.tsx"
     },
     {
@@ -162,7 +162,7 @@
       "source_file": "/home/nba/Programming/IDRMC/components/ListHeading.tsx",
       "source_location": "L3",
       "id": "listheading_listheading",
-      "community": 13,
+      "community": 14,
       "norm_label": "listheading()"
     },
     {
@@ -171,7 +171,7 @@
       "source_file": "/home/nba/Programming/IDRMC/components/UpcomingSubscriptionCard.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_components_upcomingsubscriptioncard_tsx",
-      "community": 14,
+      "community": 15,
       "norm_label": "upcomingsubscriptioncard.tsx"
     },
     {
@@ -180,7 +180,7 @@
       "source_file": "/home/nba/Programming/IDRMC/components/UpcomingSubscriptionCard.tsx",
       "source_location": "L5",
       "id": "upcomingsubscriptioncard_upcomingsubscriptioncard",
-      "community": 14,
+      "community": 15,
       "norm_label": "upcomingsubscriptioncard()"
     },
     {
@@ -216,7 +216,7 @@
       "source_file": "/home/nba/Programming/IDRMC/components/SubscriptionCard.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_components_subscriptioncard_tsx",
-      "community": 31,
+      "community": 32,
       "norm_label": "subscriptioncard.tsx"
     },
     {
@@ -225,7 +225,7 @@
       "source_file": "/home/nba/Programming/IDRMC/components/LatestNotificationCard.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_components_latestnotificationcard_tsx",
-      "community": 15,
+      "community": 16,
       "norm_label": "latestnotificationcard.tsx"
     },
     {
@@ -234,7 +234,7 @@
       "source_file": "/home/nba/Programming/IDRMC/components/LatestNotificationCard.tsx",
       "source_location": "L5",
       "id": "latestnotificationcard_geticonfortype",
-      "community": 15,
+      "community": 16,
       "norm_label": "geticonfortype()"
     },
     {
@@ -243,7 +243,7 @@
       "source_file": "/home/nba/Programming/IDRMC/components/Skeleton.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_components_skeleton_tsx",
-      "community": 16,
+      "community": 17,
       "norm_label": "skeleton.tsx"
     },
     {
@@ -252,7 +252,7 @@
       "source_file": "/home/nba/Programming/IDRMC/components/Skeleton.tsx",
       "source_location": "L11",
       "id": "skeleton_skeleton",
-      "community": 16,
+      "community": 17,
       "norm_label": "skeleton()"
     },
     {
@@ -261,7 +261,7 @@
       "source_file": "/home/nba/Programming/IDRMC/components/DisasterCard.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_components_disastercard_tsx",
-      "community": 32,
+      "community": 33,
       "norm_label": "disastercard.tsx"
     },
     {
@@ -270,7 +270,7 @@
       "source_file": "/home/nba/Programming/IDRMC/components/IncidentCard.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_components_incidentcard_tsx",
-      "community": 33,
+      "community": 34,
       "norm_label": "incidentcard.tsx"
     },
     {
@@ -315,16 +315,16 @@
       "source_file": "/home/nba/Programming/IDRMC/components/map/LocationMap.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_components_map_locationmap_tsx",
-      "community": 17,
+      "community": 18,
       "norm_label": "locationmap.tsx"
     },
     {
       "label": "geocode()",
       "file_type": "code",
       "source_file": "/home/nba/Programming/IDRMC/components/map/LocationMap.tsx",
-      "source_location": "L23",
+      "source_location": "L24",
       "id": "locationmap_geocode",
-      "community": 17,
+      "community": 18,
       "norm_label": "geocode()"
     },
     {
@@ -333,7 +333,7 @@
       "source_file": "/home/nba/Programming/IDRMC/hooks/queries/keys.ts",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_hooks_queries_keys_ts",
-      "community": 34,
+      "community": 35,
       "norm_label": "keys.ts"
     },
     {
@@ -414,7 +414,7 @@
       "source_file": "/home/nba/Programming/IDRMC/constants/filterOptions.ts",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_constants_filteroptions_ts",
-      "community": 35,
+      "community": 36,
       "norm_label": "filteroptions.ts"
     },
     {
@@ -423,7 +423,7 @@
       "source_file": "/home/nba/Programming/IDRMC/constants/theme.ts",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_constants_theme_ts",
-      "community": 36,
+      "community": 37,
       "norm_label": "theme.ts"
     },
     {
@@ -432,7 +432,7 @@
       "source_file": "/home/nba/Programming/IDRMC/constants/icons.ts",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_constants_icons_ts",
-      "community": 37,
+      "community": 38,
       "norm_label": "icons.ts"
     },
     {
@@ -441,7 +441,7 @@
       "source_file": "/home/nba/Programming/IDRMC/constants/images.ts",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_constants_images_ts",
-      "community": 38,
+      "community": 39,
       "norm_label": "images.ts"
     },
     {
@@ -450,8 +450,35 @@
       "source_file": "/home/nba/Programming/IDRMC/constants/data.ts",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_constants_data_ts",
-      "community": 39,
+      "community": 40,
       "norm_label": "data.ts"
+    },
+    {
+      "label": "auth.ts",
+      "file_type": "code",
+      "source_file": "/home/nba/Programming/IDRMC/api/auth.ts",
+      "source_location": "L1",
+      "id": "home_nba_programming_idrmc_api_auth_ts",
+      "community": 8,
+      "norm_label": "auth.ts"
+    },
+    {
+      "label": "setAuthTokenProvider()",
+      "file_type": "code",
+      "source_file": "/home/nba/Programming/IDRMC/api/auth.ts",
+      "source_location": "L5",
+      "id": "auth_setauthtokenprovider",
+      "community": 8,
+      "norm_label": "setauthtokenprovider()"
+    },
+    {
+      "label": "getAuthToken()",
+      "file_type": "code",
+      "source_file": "/home/nba/Programming/IDRMC/api/auth.ts",
+      "source_location": "L9",
+      "id": "auth_getauthtoken",
+      "community": 8,
+      "norm_label": "getauthtoken()"
     },
     {
       "label": "client.ts",
@@ -459,7 +486,7 @@
       "source_file": "/home/nba/Programming/IDRMC/api/client.ts",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_api_client_ts",
-      "community": 40,
+      "community": 41,
       "norm_label": "client.ts"
     },
     {
@@ -468,7 +495,7 @@
       "source_file": "/home/nba/Programming/IDRMC/api/services/incidents.ts",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_api_services_incidents_ts",
-      "community": 41,
+      "community": 42,
       "norm_label": "incidents.ts"
     },
     {
@@ -477,7 +504,7 @@
       "source_file": "/home/nba/Programming/IDRMC/api/services/users.ts",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_api_services_users_ts",
-      "community": 42,
+      "community": 43,
       "norm_label": "users.ts"
     },
     {
@@ -486,7 +513,7 @@
       "source_file": "/home/nba/Programming/IDRMC/api/services/disasters.ts",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_api_services_disasters_ts",
-      "community": 43,
+      "community": 44,
       "norm_label": "disasters.ts"
     },
     {
@@ -495,7 +522,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/notifications.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_app_notifications_tsx",
-      "community": 18,
+      "community": 19,
       "norm_label": "notifications.tsx"
     },
     {
@@ -504,7 +531,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/notifications.tsx",
       "source_location": "L30",
       "id": "notifications_formatlabel",
-      "community": 18,
+      "community": 19,
       "norm_label": "formatlabel()"
     },
     {
@@ -513,7 +540,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/onboarding.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_app_onboarding_tsx",
-      "community": 19,
+      "community": 20,
       "norm_label": "onboarding.tsx"
     },
     {
@@ -522,7 +549,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/onboarding.tsx",
       "source_location": "L7",
       "id": "onboarding_onboarding",
-      "community": 19,
+      "community": 20,
       "norm_label": "onboarding()"
     },
     {
@@ -531,25 +558,25 @@
       "source_file": "/home/nba/Programming/IDRMC/app/_layout.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_app_layout_tsx",
-      "community": 8,
+      "community": 9,
       "norm_label": "_layout.tsx"
     },
     {
       "label": "MissingConfigScreen()",
       "file_type": "code",
       "source_file": "/home/nba/Programming/IDRMC/app/_layout.tsx",
-      "source_location": "L17",
+      "source_location": "L18",
       "id": "layout_missingconfigscreen",
-      "community": 8,
+      "community": 9,
       "norm_label": "missingconfigscreen()"
     },
     {
       "label": "RootLayout()",
       "file_type": "code",
       "source_file": "/home/nba/Programming/IDRMC/app/_layout.tsx",
-      "source_location": "L33",
+      "source_location": "L34",
       "id": "layout_rootlayout",
-      "community": 8,
+      "community": 9,
       "norm_label": "rootlayout()"
     },
     {
@@ -558,7 +585,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/index.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_app_index_tsx",
-      "community": 20,
+      "community": 21,
       "norm_label": "index.tsx"
     },
     {
@@ -567,7 +594,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/index.tsx",
       "source_location": "L4",
       "id": "index_index",
-      "community": 20,
+      "community": 21,
       "norm_label": "index()"
     },
     {
@@ -594,7 +621,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(tabs)/disasters.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_app_tabs_disasters_tsx",
-      "community": 9,
+      "community": 10,
       "norm_label": "disasters.tsx"
     },
     {
@@ -603,7 +630,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(tabs)/disasters.tsx",
       "source_location": "L56",
       "id": "disasters_formatlabel",
-      "community": 9,
+      "community": 10,
       "norm_label": "formatlabel()"
     },
     {
@@ -612,7 +639,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(tabs)/disasters.tsx",
       "source_location": "L64",
       "id": "disasters_severityvalue",
-      "community": 9,
+      "community": 10,
       "norm_label": "severityvalue()"
     },
     {
@@ -621,7 +648,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(tabs)/_layout.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_app_tabs_layout_tsx",
-      "community": 21,
+      "community": 22,
       "norm_label": "_layout.tsx"
     },
     {
@@ -630,7 +657,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(tabs)/_layout.tsx",
       "source_location": "L14",
       "id": "layout_tabicon",
-      "community": 21,
+      "community": 22,
       "norm_label": "tabicon()"
     },
     {
@@ -639,7 +666,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(tabs)/incidents.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_app_tabs_incidents_tsx",
-      "community": 10,
+      "community": 11,
       "norm_label": "incidents.tsx"
     },
     {
@@ -648,7 +675,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(tabs)/incidents.tsx",
       "source_location": "L56",
       "id": "incidents_formatlabel",
-      "community": 10,
+      "community": 11,
       "norm_label": "formatlabel()"
     },
     {
@@ -657,7 +684,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(tabs)/incidents.tsx",
       "source_location": "L64",
       "id": "incidents_severityvalue",
-      "community": 10,
+      "community": 11,
       "norm_label": "severityvalue()"
     },
     {
@@ -666,7 +693,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(tabs)/settings.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_app_tabs_settings_tsx",
-      "community": 22,
+      "community": 23,
       "norm_label": "settings.tsx"
     },
     {
@@ -675,7 +702,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(tabs)/settings.tsx",
       "source_location": "L34",
       "id": "settings_handlesignout",
-      "community": 22,
+      "community": 23,
       "norm_label": "handlesignout()"
     },
     {
@@ -792,7 +819,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(auth)/sign-up.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_app_auth_sign_up_tsx",
-      "community": 11,
+      "community": 12,
       "norm_label": "sign-up.tsx"
     },
     {
@@ -801,7 +828,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(auth)/sign-up.tsx",
       "source_location": "L46",
       "id": "sign_up_handlesubmit",
-      "community": 11,
+      "community": 12,
       "norm_label": "handlesubmit()"
     },
     {
@@ -810,7 +837,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(auth)/sign-up.tsx",
       "source_location": "L66",
       "id": "sign_up_handleverify",
-      "community": 11,
+      "community": 12,
       "norm_label": "handleverify()"
     },
     {
@@ -819,7 +846,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(auth)/_layout.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_app_auth_layout_tsx",
-      "community": 23,
+      "community": 24,
       "norm_label": "_layout.tsx"
     },
     {
@@ -828,7 +855,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(auth)/_layout.tsx",
       "source_location": "L5",
       "id": "layout_authlayout",
-      "community": 23,
+      "community": 24,
       "norm_label": "authlayout()"
     },
     {
@@ -1053,7 +1080,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/nba/Programming/IDRMC/components/map/LocationMap.tsx",
-      "source_location": "L23",
+      "source_location": "L24",
       "weight": 1.0,
       "_src": "home_nba_programming_idrmc_components_map_locationmap_tsx",
       "_tgt": "locationmap_geocode",
@@ -1184,6 +1211,30 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "/home/nba/Programming/IDRMC/api/auth.ts",
+      "source_location": "L5",
+      "weight": 1.0,
+      "_src": "home_nba_programming_idrmc_api_auth_ts",
+      "_tgt": "auth_setauthtokenprovider",
+      "source": "home_nba_programming_idrmc_api_auth_ts",
+      "target": "auth_setauthtokenprovider",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/home/nba/Programming/IDRMC/api/auth.ts",
+      "source_location": "L9",
+      "weight": 1.0,
+      "_src": "home_nba_programming_idrmc_api_auth_ts",
+      "_tgt": "auth_getauthtoken",
+      "source": "home_nba_programming_idrmc_api_auth_ts",
+      "target": "auth_getauthtoken",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "/home/nba/Programming/IDRMC/app/notifications.tsx",
       "source_location": "L30",
       "weight": 1.0,
@@ -1209,7 +1260,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/nba/Programming/IDRMC/app/_layout.tsx",
-      "source_location": "L17",
+      "source_location": "L18",
       "weight": 1.0,
       "_src": "home_nba_programming_idrmc_app_layout_tsx",
       "_tgt": "layout_missingconfigscreen",
@@ -1221,7 +1272,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "/home/nba/Programming/IDRMC/app/_layout.tsx",
-      "source_location": "L33",
+      "source_location": "L34",
       "weight": 1.0,
       "_src": "home_nba_programming_idrmc_app_layout_tsx",
       "_tgt": "layout_rootlayout",

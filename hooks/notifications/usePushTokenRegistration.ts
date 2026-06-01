@@ -14,7 +14,7 @@ type PushTokenRegistrationStatus =
   | "error";
 
 export const usePushTokenRegistration = () => {
-  const { isLoaded, isSignedIn, getToken } = useAuth();
+  const { isLoaded, isSignedIn } = useAuth();
   const { user } = useUser();
   const [status, setStatus] = useState<PushTokenRegistrationStatus>("idle");
   const [error, setError] = useState<string | null>(null);
@@ -84,18 +84,11 @@ export const usePushTokenRegistration = () => {
           return;
         }
 
-        const accessToken = await getToken();
-
-        if (!accessToken) {
-          throw new Error("Unable to resolve the current user access token.");
-        }
-
         if (!user?.id) {
           throw new Error("Unable to resolve the current user ID.");
         }
 
         await usersService.registerPushToken({
-          accessToken,
           pushToken,
           clerkUserId: user.id,
         });
@@ -131,7 +124,7 @@ export const usePushTokenRegistration = () => {
       isActive = false;
       subscription.remove();
     };
-  }, [getToken, isLoaded, isSignedIn, user?.id]);
+  }, [isLoaded, isSignedIn, user?.id]);
 
   return {
     error,
