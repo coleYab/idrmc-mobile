@@ -79,6 +79,13 @@ export default function ForgotPassword() {
     }
   };
 
+  const handleBackFromVerification = () => {
+    setCodeSent(false);
+    setCode("");
+    setErrorMessage("");
+    signIn.reset();
+  };
+
   const onResetPassword = async () => {
     setErrorMessage("");
     try {
@@ -219,6 +226,14 @@ export default function ForgotPassword() {
                           ? "Verifying..."
                           : "Verify Code"}
                       </Text>
+                    </Pressable>
+
+                    <Pressable
+                      className="auth-secondary-button"
+                      onPress={handleBackFromVerification}
+                      disabled={fetchStatus === "fetching"}
+                    >
+                      <Text className="auth-secondary-button-text">Back</Text>
                     </Pressable>
                   </>
                 )}

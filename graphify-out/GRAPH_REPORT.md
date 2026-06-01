@@ -1,11 +1,11 @@
-# Graph Report - /home/nba/Programming/IDRMC  (2026-05-31)
+# Graph Report - /home/nba/Programming/IDRMC  (2026-06-01)
 
 ## Corpus Check
-- 48 files · ~144,577 words
+- 48 files · ~144,776 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 99 nodes · 58 edges · 45 communities detected
+- 101 nodes · 60 edges · 45 communities detected
 - Extraction: 93% EXTRACTED · 7% INFERRED · 0% AMBIGUOUS · INFERRED: 4 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
@@ -89,12 +89,12 @@ Cohesion: 0.29
 Nodes (0): 
 
 ### Community 2 - "Community 2"
-Cohesion: 0.33
-Nodes (2): IncidentDetails(), useIncidentById()
+Cohesion: 0.53
+Nodes (4): completeSignIn(), handleSubmit(), handleVerify(), sendVerificationCode()
 
 ### Community 3 - "Community 3"
-Cohesion: 0.7
-Nodes (4): completeSignIn(), handleSubmit(), handleVerify(), sendVerificationCode()
+Cohesion: 0.33
+Nodes (2): IncidentDetails(), useIncidentById()
 
 ### Community 4 - "Community 4"
 Cohesion: 0.5
@@ -105,7 +105,7 @@ Cohesion: 0.5
 Nodes (0): 
 
 ### Community 6 - "Community 6"
-Cohesion: 0.67
+Cohesion: 0.5
 Nodes (0): 
 
 ### Community 7 - "Community 7"
@@ -329,7 +329,7 @@ Nodes (0):
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `useIncidents()` connect `Community 0` to `Community 2`?**
-  _High betweenness centrality (0.009) - this node is a cross-community bridge._
+- **Why does `useIncidents()` connect `Community 0` to `Community 3`?**
+  _High betweenness centrality (0.008) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `App()` (e.g. with `useIncidents()` and `useDisasters()`) actually correct?**
   _`App()` has 2 INFERRED edges - model-reasoned connections that need verification._

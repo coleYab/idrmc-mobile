@@ -126,7 +126,7 @@
       "source_file": "/home/nba/Programming/IDRMC/utils/format.ts",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_utils_format_ts",
-      "community": 6,
+      "community": 7,
       "norm_label": "format.ts"
     },
     {
@@ -135,7 +135,7 @@
       "source_file": "/home/nba/Programming/IDRMC/utils/format.ts",
       "source_location": "L1",
       "id": "format_formatlabel",
-      "community": 6,
+      "community": 7,
       "norm_label": "formatlabel()"
     },
     {
@@ -144,7 +144,7 @@
       "source_file": "/home/nba/Programming/IDRMC/utils/format.ts",
       "source_location": "L6",
       "id": "format_severityvalue",
-      "community": 6,
+      "community": 7,
       "norm_label": "severityvalue()"
     },
     {
@@ -189,7 +189,7 @@
       "source_file": "/home/nba/Programming/IDRMC/components/NotificationCard.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_components_notificationcard_tsx",
-      "community": 7,
+      "community": 8,
       "norm_label": "notificationcard.tsx"
     },
     {
@@ -198,7 +198,7 @@
       "source_file": "/home/nba/Programming/IDRMC/components/NotificationCard.tsx",
       "source_location": "L12",
       "id": "notificationcard_geticonfortype",
-      "community": 7,
+      "community": 8,
       "norm_label": "geticonfortype()"
     },
     {
@@ -207,7 +207,7 @@
       "source_file": "/home/nba/Programming/IDRMC/components/NotificationCard.tsx",
       "source_location": "L23",
       "id": "notificationcard_getstatuscolor",
-      "community": 7,
+      "community": 8,
       "norm_label": "getstatuscolor()"
     },
     {
@@ -369,7 +369,7 @@
       "source_file": "/home/nba/Programming/IDRMC/hooks/queries/useIncidents.ts",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_hooks_queries_useincidents_ts",
-      "community": 2,
+      "community": 3,
       "norm_label": "useincidents.ts"
     },
     {
@@ -387,7 +387,7 @@
       "source_file": "/home/nba/Programming/IDRMC/hooks/queries/useIncidents.ts",
       "source_location": "L12",
       "id": "useincidents_useincidentbyid",
-      "community": 2,
+      "community": 3,
       "norm_label": "useincidentbyid()"
     },
     {
@@ -396,7 +396,7 @@
       "source_file": "/home/nba/Programming/IDRMC/hooks/queries/useIncidents.ts",
       "source_location": "L20",
       "id": "useincidents_usecreateincident",
-      "community": 2,
+      "community": 3,
       "norm_label": "usecreateincident()"
     },
     {
@@ -405,7 +405,7 @@
       "source_file": "/home/nba/Programming/IDRMC/hooks/queries/useIncidents.ts",
       "source_location": "L32",
       "id": "useincidents_useupdateincident",
-      "community": 2,
+      "community": 3,
       "norm_label": "useupdateincident()"
     },
     {
@@ -459,7 +459,7 @@
       "source_file": "/home/nba/Programming/IDRMC/api/auth.ts",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_api_auth_ts",
-      "community": 8,
+      "community": 9,
       "norm_label": "auth.ts"
     },
     {
@@ -468,7 +468,7 @@
       "source_file": "/home/nba/Programming/IDRMC/api/auth.ts",
       "source_location": "L5",
       "id": "auth_setauthtokenprovider",
-      "community": 8,
+      "community": 9,
       "norm_label": "setauthtokenprovider()"
     },
     {
@@ -477,7 +477,7 @@
       "source_file": "/home/nba/Programming/IDRMC/api/auth.ts",
       "source_location": "L9",
       "id": "auth_getauthtoken",
-      "community": 8,
+      "community": 9,
       "norm_label": "getauthtoken()"
     },
     {
@@ -558,7 +558,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/_layout.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_app_layout_tsx",
-      "community": 9,
+      "community": 10,
       "norm_label": "_layout.tsx"
     },
     {
@@ -567,7 +567,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/_layout.tsx",
       "source_location": "L18",
       "id": "layout_missingconfigscreen",
-      "community": 9,
+      "community": 10,
       "norm_label": "missingconfigscreen()"
     },
     {
@@ -576,7 +576,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/_layout.tsx",
       "source_location": "L34",
       "id": "layout_rootlayout",
-      "community": 9,
+      "community": 10,
       "norm_label": "rootlayout()"
     },
     {
@@ -621,7 +621,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(tabs)/disasters.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_app_tabs_disasters_tsx",
-      "community": 10,
+      "community": 11,
       "norm_label": "disasters.tsx"
     },
     {
@@ -630,7 +630,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(tabs)/disasters.tsx",
       "source_location": "L56",
       "id": "disasters_formatlabel",
-      "community": 10,
+      "community": 11,
       "norm_label": "formatlabel()"
     },
     {
@@ -639,7 +639,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(tabs)/disasters.tsx",
       "source_location": "L64",
       "id": "disasters_severityvalue",
-      "community": 10,
+      "community": 11,
       "norm_label": "severityvalue()"
     },
     {
@@ -666,7 +666,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(tabs)/incidents.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_app_tabs_incidents_tsx",
-      "community": 11,
+      "community": 12,
       "norm_label": "incidents.tsx"
     },
     {
@@ -675,7 +675,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(tabs)/incidents.tsx",
       "source_location": "L56",
       "id": "incidents_formatlabel",
-      "community": 11,
+      "community": 12,
       "norm_label": "formatlabel()"
     },
     {
@@ -684,7 +684,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(tabs)/incidents.tsx",
       "source_location": "L64",
       "id": "incidents_severityvalue",
-      "community": 11,
+      "community": 12,
       "norm_label": "severityvalue()"
     },
     {
@@ -774,7 +774,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(auth)/sign-in.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_app_auth_sign_in_tsx",
-      "community": 3,
+      "community": 2,
       "norm_label": "sign-in.tsx"
     },
     {
@@ -783,7 +783,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(auth)/sign-in.tsx",
       "source_location": "L44",
       "id": "sign_in_completesignin",
-      "community": 3,
+      "community": 2,
       "norm_label": "completesignin()"
     },
     {
@@ -792,7 +792,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(auth)/sign-in.tsx",
       "source_location": "L62",
       "id": "sign_in_sendverificationcode",
-      "community": 3,
+      "community": 2,
       "norm_label": "sendverificationcode()"
     },
     {
@@ -801,7 +801,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(auth)/sign-in.tsx",
       "source_location": "L72",
       "id": "sign_in_handlesubmit",
-      "community": 3,
+      "community": 2,
       "norm_label": "handlesubmit()"
     },
     {
@@ -810,8 +810,17 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(auth)/sign-in.tsx",
       "source_location": "L95",
       "id": "sign_in_handleverify",
-      "community": 3,
+      "community": 2,
       "norm_label": "handleverify()"
+    },
+    {
+      "label": "handleBackFromVerification()",
+      "file_type": "code",
+      "source_file": "/home/nba/Programming/IDRMC/app/(auth)/sign-in.tsx",
+      "source_location": "L105",
+      "id": "sign_in_handlebackfromverification",
+      "community": 2,
+      "norm_label": "handlebackfromverification()"
     },
     {
       "label": "sign-up.tsx",
@@ -819,7 +828,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(auth)/sign-up.tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_app_auth_sign_up_tsx",
-      "community": 12,
+      "community": 6,
       "norm_label": "sign-up.tsx"
     },
     {
@@ -828,7 +837,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(auth)/sign-up.tsx",
       "source_location": "L46",
       "id": "sign_up_handlesubmit",
-      "community": 12,
+      "community": 6,
       "norm_label": "handlesubmit()"
     },
     {
@@ -837,8 +846,17 @@
       "source_file": "/home/nba/Programming/IDRMC/app/(auth)/sign-up.tsx",
       "source_location": "L66",
       "id": "sign_up_handleverify",
-      "community": 12,
+      "community": 6,
       "norm_label": "handleverify()"
+    },
+    {
+      "label": "handleBackFromVerification()",
+      "file_type": "code",
+      "source_file": "/home/nba/Programming/IDRMC/app/(auth)/sign-up.tsx",
+      "source_location": "L92",
+      "id": "sign_up_handlebackfromverification",
+      "community": 6,
+      "norm_label": "handlebackfromverification()"
     },
     {
       "label": "_layout.tsx",
@@ -882,7 +900,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/incidents/[id].tsx",
       "source_location": "L1",
       "id": "home_nba_programming_idrmc_app_incidents_id_tsx",
-      "community": 2,
+      "community": 3,
       "norm_label": "[id].tsx"
     },
     {
@@ -891,7 +909,7 @@
       "source_file": "/home/nba/Programming/IDRMC/app/incidents/[id].tsx",
       "source_location": "L26",
       "id": "id_incidentdetails",
-      "community": 2,
+      "community": 3,
       "norm_label": "incidentdetails()"
     }
   ],
@@ -1497,6 +1515,18 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/home/nba/Programming/IDRMC/app/(auth)/sign-in.tsx",
+      "source_location": "L105",
+      "weight": 1.0,
+      "_src": "home_nba_programming_idrmc_app_auth_sign_in_tsx",
+      "_tgt": "sign_in_handlebackfromverification",
+      "source": "home_nba_programming_idrmc_app_auth_sign_in_tsx",
+      "target": "sign_in_handlebackfromverification",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "/home/nba/Programming/IDRMC/app/(auth)/sign-in.tsx",
@@ -1554,6 +1584,18 @@
       "_tgt": "sign_up_handleverify",
       "source": "home_nba_programming_idrmc_app_auth_sign_up_tsx",
       "target": "sign_up_handleverify",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "/home/nba/Programming/IDRMC/app/(auth)/sign-up.tsx",
+      "source_location": "L92",
+      "weight": 1.0,
+      "_src": "home_nba_programming_idrmc_app_auth_sign_up_tsx",
+      "_tgt": "sign_up_handlebackfromverification",
+      "source": "home_nba_programming_idrmc_app_auth_sign_up_tsx",
+      "target": "sign_up_handlebackfromverification",
       "confidence_score": 1.0
     },
     {

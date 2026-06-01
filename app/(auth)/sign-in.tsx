@@ -102,6 +102,11 @@ const SignIn = () => {
     }
   };
 
+  const handleBackFromVerification = () => {
+    setCode("");
+    signIn.reset();
+  };
+
   // Show verification screen if client trust is needed
   if (isVerificationStep) {
     return (
@@ -184,6 +189,14 @@ const SignIn = () => {
                     <Text className="auth-secondary-button-text">
                       Start Over
                     </Text>
+                  </Pressable>
+
+                  <Pressable
+                    className="auth-secondary-button"
+                    onPress={handleBackFromVerification}
+                    disabled={fetchStatus === "fetching"}
+                  >
+                    <Text className="auth-secondary-button-text">Back</Text>
                   </Pressable>
                 </View>
               </View>

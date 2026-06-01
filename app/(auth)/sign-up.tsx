@@ -89,6 +89,11 @@ const SignUp = () => {
     }
   };
 
+  const handleBackFromVerification = () => {
+    setCode("");
+    signUp.reset();
+  };
+
   // Don't show anything if already signed in or sign-up is complete
   if (signUp.status === "complete" || isSignedIn) {
     return null;
@@ -172,6 +177,14 @@ const SignUp = () => {
                     <Text className="auth-secondary-button-text">
                       Resend Code
                     </Text>
+                  </Pressable>
+
+                  <Pressable
+                    className="auth-secondary-button"
+                    onPress={handleBackFromVerification}
+                    disabled={fetchStatus === "fetching"}
+                  >
+                    <Text className="auth-secondary-button-text">Back</Text>
                   </Pressable>
                 </View>
               </View>
