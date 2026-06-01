@@ -23,12 +23,15 @@ export const usePushTokenRegistration = () => {
 
   useEffect(() => {
     if (!isLoaded || !isSignedIn || Platform.OS === "web") {
+      console.log("usePushTokenRegistration: skipped (isLoaded=", isLoaded, "isSignedIn=", isSignedIn, "platform=", Platform.OS, ")");
       return;
     }
 
     const projectId =
       Constants.easConfig?.projectId ??
       Constants.expoConfig?.extra?.eas?.projectId;
+
+    console.log("usePushTokenRegistration: projectId →", projectId);
 
     if (!projectId) {
       console.warn("Skipping push token registration: missing project ID.");
@@ -49,15 +52,30 @@ export const usePushTokenRegistration = () => {
       try {
         setStatus("requesting-permission");
 
+        // Android 8+ requires a notification channel
+        if (Platform.OS === "android") {
+          await Notifications.setNotificationChannelAsync("default", {
+            name: "Default",
+            importance: Notifications.AndroidImportance.HIGH,
+            vibrationPattern: [0, 250, 250, 250],
+            lightColor: "#FF231F7A",
+          });
+          console.log("usePushTokenRegistration: Android channel created");
+        }
+
         const currentPermissions = await Notifications.getPermissionsAsync();
         let nextStatus = currentPermissions.status;
+
+        console.log("usePushTokenRegistration: current permission →", nextStatus);
 
         if (currentPermissions.status !== "granted") {
           const requestedPermissions = await Notifications.requestPermissionsAsync();
           nextStatus = requestedPermissions.status;
+          console.log("usePushTokenRegistration: requested permission →", nextStatus);
         }
 
         if (nextStatus !== "granted") {
+          console.log("usePushTokenRegistration: permission denied, skipping");
           if (isActive) {
             setStatus("skipped");
           }
@@ -76,7 +94,11 @@ export const usePushTokenRegistration = () => {
         });
         const pushToken = pushTokenResponse.data;
 
+        console.log("usePushTokenRegistration: pushToken →", pushToken);
+
         if (lastRegisteredTokenRef.current === pushToken) {
+          console.log("usePushTokenRegistration: token unchanged, skipping");
+
           if (isActive) {
             setStatus("registered");
           }
@@ -88,11 +110,13 @@ export const usePushTokenRegistration = () => {
           throw new Error("Unable to resolve the current user ID.");
         }
 
+        console.log("usePushTokenRegistration: registering token for user", user.id);
         await usersService.registerPushToken({
           pushToken,
           clerkUserId: user.id,
         });
 
+        console.log("usePushTokenRegistration: POST /push-token → success");
         lastRegisteredTokenRef.current = pushToken;
 
         if (isActive) {
@@ -117,6 +141,7 @@ export const usePushTokenRegistration = () => {
     void syncPushToken();
 
     const subscription = Notifications.addPushTokenListener(() => {
+      console.log("usePushTokenRegistration: push token changed, re-registering");
       void syncPushToken();
     });
 
