@@ -22,6 +22,7 @@ import {
     Image,
     Keyboard,
     KeyboardAvoidingView,
+    Linking,
     Modal,
     Platform,
     Pressable,
@@ -225,30 +226,14 @@ export default function DisasterDetails() {
     )
       return;
 
-    const donationPayload = {
-      amount: Number(donationAmount),
-      currency: "ETB",
-      donor: {
-        fullName: donorName.trim() || "Anonymous",
-        email: "abebe@example.com", // Mocked for payload constraints
-        phoneNumber: "+251911223344", // Mocked for payload constraints
-        isAnonymous: !donorName.trim(),
-      },
-      message: donationMessage.trim(),
-    };
-
-    console.log("Processing Donation Payload:", donationPayload);
-
-    // Reset and close modal
     setIsDonating(false);
     setDonationAmount("");
     setDonorName("");
     setDonationMessage("");
-    showSuccessToast(
-      "Donation received",
-      "Thank you for supporting this relief fund.",
+
+    Linking.openURL(
+      "https://checkout.chapa.co/checkout/web/payment/SC-0jnZQJSSsQAr",
     );
-    // Here you would trigger your payment gateway or API mutation
   };
 
   // --- Loading/Error States ---
